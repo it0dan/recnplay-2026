@@ -1,0 +1,14 @@
+/* Slide capa: autor e marcas do evento.
+   Escopo: #slide-capa (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-capa{
+  & .evlogo{height:64px;width:auto;display:block}
+  & .evword{font-family:'Montserrat',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.01em;line-height:1;display:inline-flex;align-items:baseline;gap:10px}
+  & .evword i{font-style:normal;font-family:'Roboto Mono',monospace;font-weight:500;font-size:15px;letter-spacing:.24em;color:var(--ref)}
+  & .evword.tdc{color:var(--text)}
+  & .evword.rnp{color:var(--warn)}
+  & .cmeta{display:flex;gap:56px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}
+  & .cmeta .ml{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.24em;color:var(--ref);text-transform:uppercase;margin-bottom:8px}
+  & .cmeta .mv{font-size:19px;font-weight:600}
+  & .evlogos{display:flex;align-items:center;gap:34px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+  & .evlogos .x{font-family:'Roboto Mono',monospace;color:var(--ref);font-size:20px}
+}

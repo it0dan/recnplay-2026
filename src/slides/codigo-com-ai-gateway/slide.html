@@ -1,0 +1,48 @@
+<section class="slide" id="slide-codigo-com-ai-gateway" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">05 · NFRs E AI GATEWAY &nbsp;<span class="dim">// o adapter com ai gateway</span></div>
+    <h2>Mesma porta, novo adapter: <span class="a">tudo atrás da borda</span></h2>
+    <div class="split">
+      <script type="text/plain" class="code" data-lang="ts" data-size="md" data-file="adapters/out/gateway-credit-evaluator.ts" data-hlg="1:3-5,16;2:7,12;3:8,13;4:18,20">
+// adapters/out — new adapter, same port: everything goes through the AI Gateway
+export class GatewayCreditEvaluator implements CreditEvaluator {
+  private readonly llm = new OpenAI({        // OpenAI-compatible API
+    baseURL: `${AI_GATEWAY_URL}/v1`,         // ① Model Gateway
+    apiKey: workloadToken(),                 // workload identity, no vendor key
+  });
+  private readonly bureau = mcpClient(`${AI_GATEWAY_URL}/mcp/credit-bureau`); // ②
+  private readonly fraud = a2aClient(`${AI_GATEWAY_URL}/a2a/fraud`);          // ③
+
+  async evaluate(proposal: Proposal): Promise<Assessment> {
+    const [score, fraudRisk] = await Promise.all([
+      this.bureau.callTool("get_score", { customerId: proposal.customerId }),
+      this.fraud.sendTask("transaction_score", { proposalId: proposal.id }),
+    ]);
+    const res = await this.llm.chat.completions.create({
+      model: "credit-deep",                  // ① alias: the gateway routes
+      messages: render(proposal, score, fraudRisk),
+      response_format: zodResponseFormat(AssessmentSchema, "assessment"), // ④
+    });
+    return AssessmentSchema.parse(JSON.parse(res.choices[0].message.content!)); // ④
+  }
+}
+</script>
+      <div class="side">
+        <svg class="gwd" viewBox="0 0 680 400" width="100%" aria-label="Caminho de cada chamada do adapter pelo AI Gateway: modelo, tool e agente"><rect x="0" y="160" width="162" height="76" rx="12" class="d-box2" stroke="var(--acc)" stroke-width="2"/><text x="81" y="192" text-anchor="middle" font-size="13" font-weight="700" class="m">GatewayCredit</text><text x="81" y="212" text-anchor="middle" font-size="13" font-weight="700" class="m">Evaluator</text><text x="81" y="256" text-anchor="middle" font-size="11" class="m" style="fill:var(--ok)">token do workload</text><text x="81" y="272" text-anchor="middle" font-size="11" class="m" style="fill:var(--ok)">sem chave de provedor</text><rect x="196" y="8" width="282" height="368" rx="16" fill="none" stroke="var(--warn)" stroke-width="2.5"/><text x="337" y="30" text-anchor="middle" font-size="13" font-weight="800" class="m t-warn" letter-spacing="2.5">AI GATEWAY</text><g class="lane l1 frag" data-f="1"><path d="M162 198 C180 198 186 92 210 92" fill="none" stroke="#AC54EB" stroke-width="2"/><rect x="210" y="40" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#AC54EB" stroke-width="2"/><text x="224" y="67" font-size="13" font-weight="800" class="m" style="fill:#AC54EB" letter-spacing="1">① MODEL GATEWAY</text><text x="224" y="96" font-size="12" class="m">credit-deep → anthropic</text><text x="224" y="120" font-size="11.5" class="m t-mut">fallback · PII · 2M tokens/dia</text><path d="M464 92 C482 92 486 58 500 58" fill="none" stroke="#AC54EB" stroke-width="1.6" /><rect x="500" y="44" width="180" height="28" rx="7" class="d-box" /><text x="590" y="63" text-anchor="middle" font-size="11.5" class="m">Anthropic · primário</text><path d="M464 92 C482 92 486 92 500 92" fill="none" stroke="#AC54EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="500" y="78" width="180" height="28" rx="7" class="d-box" stroke-dasharray="5 4"/><text x="590" y="97" text-anchor="middle" font-size="11.5" class="m">OpenAI · fallback</text><path d="M464 92 C482 92 486 126 500 126" fill="none" stroke="#AC54EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="500" y="112" width="180" height="28" rx="7" class="d-box" stroke-dasharray="5 4"/><text x="590" y="131" text-anchor="middle" font-size="11.5" class="m">Self-hosted · fallback</text><circle class="pk mpath" r="6" style="fill:#AC54EB;offset-path:path('M162 198 C180 198 186 92 210 92 L222 135 H452 L464 92 C482 92 486 58 500 58');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#AC54EB;offset-path:path('M162 198 C180 198 186 92 210 92 L222 135 H452 L464 92 C482 92 486 58 500 58');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><g class="lane l2 frag" data-f="2"><path d="M162 198 C180 198 186 204 210 204" fill="none" stroke="#0E94FF" stroke-width="2"/><rect x="210" y="152" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#0E94FF" stroke-width="2"/><text x="224" y="179" font-size="13" font-weight="800" class="m" style="fill:#0E94FF" letter-spacing="1">② MCP GATEWAY</text><text x="224" y="208" font-size="12" class="m">tool get_score</text><text x="224" y="232" font-size="11.5" class="m t-mut">scope credit.read · auditada</text><path d="M464 204 H500" fill="none" stroke="#0E94FF" stroke-width="2"/><rect x="500" y="174" width="180" height="60" rx="10" class="d-box"/><text x="590" y="200" text-anchor="middle" font-size="12.5" font-weight="700" class="m">bureau de crédito</text><text x="590" y="220" text-anchor="middle" font-size="11" class="m t-mut">MCP server</text><circle class="pk mpath" r="6" style="fill:#0E94FF;offset-path:path('M162 198 C180 198 186 204 210 204 L222 247 H452 L464 204 C482 204 486 204 500 204');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#0E94FF;offset-path:path('M162 198 C180 198 186 204 210 204 L222 247 H452 L464 204 C482 204 486 204 500 204');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><g class="lane l3 frag" data-f="3"><path d="M162 198 C180 198 186 316 210 316" fill="none" stroke="#FF7D4A" stroke-width="2"/><rect x="210" y="264" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#FF7D4A" stroke-width="2"/><text x="224" y="291" font-size="13" font-weight="800" class="m" style="fill:#FF7D4A" letter-spacing="1">③ AGENT GATEWAY</text><text x="224" y="320" font-size="12" class="m">skill transaction_score</text><text x="224" y="344" font-size="11.5" class="m t-mut">identidade · 100 req/min</text><path d="M464 316 H500" fill="none" stroke="#FF7D4A" stroke-width="2"/><rect x="500" y="286" width="180" height="60" rx="10" class="d-box"/><text x="590" y="312" text-anchor="middle" font-size="12.5" font-weight="700" class="m">agente de fraude</text><text x="590" y="332" text-anchor="middle" font-size="11" class="m t-mut">A2A</text><circle class="pk mpath" r="6" style="fill:#FF7D4A;offset-path:path('M162 198 C180 198 186 316 210 316 L222 359 H452 L464 316 C482 316 486 316 500 316');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#FF7D4A;offset-path:path('M162 198 C180 198 186 316 210 316 L222 359 H452 L464 316 C482 316 486 316 500 316');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><text x="337" y="396" text-anchor="middle" font-size="11" class="m t-ref">políticas ilustrativas</text></svg>
+        <div class="keepp frag frag-ghost" data-f="4">
+          <div class="kt">④ fica no código</div>
+          <div class="ks">depende do domínio, não é infraestrutura: o gateway não decide crédito</div>
+          <div class="kg">
+            <div class="kr"><b>contrato da resposta</b><code>AssessmentSchema.parse(…)</code></div>
+            <div class="kr"><b>decisão de crédito</b><code>policy.decide(proposal, assessment)</code></div>
+            <div class="kr"><b>efeito uma vez</b><span>idempotência por intenção</span></div>
+            <div class="kr"><b>contexto isolado</b><span>uma janela por agente</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// CÓDIGO COM AI GATEWAY</span><span class="hb-idx"></span></div>
+  <aside class="notes">Fecho do hexagonal: a porta CreditEvaluator é a mesma do hexagonal, o caso de uso EvaluateProposal não mudou uma linha, e entra um adapter novo, GatewayCreditEvaluator, que manda tudo pela borda. Quatro cliques; cada um acende um trecho do código e o caminho correspondente no desenho. (1) Model Gateway: o cliente aponta para AI_GATEWAY_URL e se autentica com a identidade do workload, sem chave de provedor; o código pede o alias credit-deep e a política decide o modelo primário, o fallback, o mascaramento de PII e o budget de tokens. (2) MCP Gateway: a consulta ao bureau de crédito é uma tool MCP (get_score) que passa pela borda, com escopo mínimo e auditoria por chamada. (3) Agent Gateway: o pedido de score de fraude é uma tarefa A2A para o agente de outro domínio, com identidade e limite entre agentes. (4) O que fica no código, porque depende do domínio: o contrato da resposta (schema validado na fronteira), a decisão de crédito pela CreditPolicy, a idempotência por intenção e o contexto isolado por agente. O gateway governa o tráfego; ele não decide crédito. As políticas no desenho são ilustrativas. Se perguntarem do apiKey: workloadToken() é um bearer token de vida curta que representa o workload (OIDC, SPIFFE); o gateway valida esse token e usa a credencial do provedor que ele mesmo guarda. Nenhuma credencial de provedor mora no serviço.</aside>
+</section>

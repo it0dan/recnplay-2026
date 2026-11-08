@@ -1,0 +1,13 @@
+{
+  "title": "Do Monolítico ao Agente Autônomo — TDC Stage @ REC'n'Play 2026",
+  "minutes": 40,
+  "sections": [
+    { "title": "ABERTURA",                    "slides": ["capa"] },
+    { "title": "01 · FORMAS MODERNAS",        "slides": ["linha-do-tempo", "microsservicos-eda", "monolito-modular", "30-11-2022"] },
+    { "title": "02 · DESENVOLVENDO COM GENAI", "slides": ["linha-do-tempo-agentica", "ai-sdlc"] },
+    { "title": "03 · APLICAÇÕES AGÊNTICAS",   "slides": ["hexagonal-para-llm"] },
+    { "title": "04 · MULTIAGENTES",           "slides": ["contexto-por-agente", "harness", "loop"] },
+    { "title": "05 · NFRs E AI GATEWAY",      "slides": ["codigo-com-ai-gateway", "sistema-com-ai-gateway"] },
+    { "title": "ENCERRAMENTO",                "slides": ["obrigado"] }
+  ]
+}

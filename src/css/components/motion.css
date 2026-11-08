@@ -1,0 +1,19 @@
+/* Animações utilitárias: traço em fluxo (.flow), giro (.spin), entrada (.rise + atrasos .d1–.d5),
+   linhas que surgem em sequência (.tline, com --i) e pacotes ao longo de um caminho (.mpath).
+   .mpath usa CSS motion path: o pacote começa a andar no instante em que o slide aparece.
+   Uso: <circle class="mpath" style="offset-path:path('…');animation-duration:3s;animation-delay:.5s"/> */
+.flow{stroke-dasharray:7 7;animation:dash 1.2s linear infinite}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 6s linear infinite}
+.slide.active .rise{animation:rise .7s cubic-bezier(.2,1.2,.35,1) both}
+.d1{animation-delay:.15s!important}
+.d2{animation-delay:.35s!important}
+.d3{animation-delay:.55s!important}
+.d4{animation-delay:.75s!important}
+.d5{animation-delay:.95s!important}
+.slide.active .tline{opacity:0;animation:tIn .25s ease forwards;animation-delay:calc(var(--i) * .07s + .2s)}
+@keyframes dash{to{stroke-dashoffset:-28}}
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes tIn{to{opacity:1}}
+.mpath{offset-rotate:0deg;animation-name:mpath;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes mpath{from{offset-distance:0%}to{offset-distance:100%}}

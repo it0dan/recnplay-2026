@@ -1,0 +1,4 @@
+/* Cartões e callouts. */
+.card{background:var(--surf-2);border-radius:14px;padding:20px 22px;border-top:3px solid var(--acc-strong)}
+.callout{border-left:4px solid var(--warn);background:var(--surf-2);border-radius:0 12px 12px 0;padding:14px 20px;font-size:19px;line-height:1.45;font-weight:500}
+.callout b{color:var(--warn)}

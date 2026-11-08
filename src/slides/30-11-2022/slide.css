@@ -1,0 +1,16 @@
+/* Slide 30.11.2022: a data que muda o eixo da linha do tempo.
+   Escopo: #slide-30-11-2022 (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-30-11-2022{
+  & .dbig{font-family:'Montserrat',sans-serif;font-weight:800;font-size:190px;letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline}
+  & .dbig span{display:inline-block}
+  & .dbig i{font-style:normal;color:var(--warn)}
+  &.active .dbig span{animation:rise .8s cubic-bezier(.2,1.1,.35,1) both}
+  &.active .dbig span:nth-of-type(2){animation-delay:.25s}
+  &.active .dbig span:nth-of-type(3){animation-delay:.5s;color:var(--acc)}
+  &.active .dbig i{animation:tIn .3s ease both;animation-delay:.9s}
+  & .dline{height:3px;width:760px;margin-top:28px;background:linear-gradient(90deg,transparent,var(--acc),var(--warn),transparent);transform-origin:center}
+  &.active .dline{animation:clineIn 1.1s cubic-bezier(.3,.8,.3,1) 1s both}
+  &.active .dfade{animation:tIn .6s ease 1.4s both}
+  & .body{align-items:center;justify-content:center}
+}
+@keyframes clineIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}

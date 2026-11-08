@@ -1,0 +1,11 @@
+/* Primitivas dos diagramas SVG: caixas, linhas, setas e cores de texto. */
+svg text{font-family:'Montserrat',sans-serif;fill:var(--text)}
+svg .m{font-family:'Roboto Mono',monospace}
+.d-box{fill:var(--surf-2);stroke:var(--line2);stroke-width:1.5}
+.d-box2{fill:var(--surf);stroke:var(--acc-strong);stroke-width:2}
+.d-ln{stroke:var(--line2);stroke-width:2;fill:none}
+.d-arr{stroke:var(--acc);stroke-width:2;fill:none}
+.t-acc{fill:var(--acc)!important}
+.t-warn{fill:var(--warn)!important}
+.t-mut{fill:var(--muted)!important}
+.t-ref{fill:var(--ref)!important}

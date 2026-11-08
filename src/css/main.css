@@ -1,0 +1,24 @@
+/* Ponto de entrada dos estilos compartilhados. A ordem é a da cascata: fundação → componentes → chrome.
+   Os estilos de cada slide ficam ao lado do markup, em src/slides/<nome>/slide.css, escopados por #slide-<nome>,
+   e o tools/build.py os inclui depois deste arquivo, na ordem do src/deck.json. */
+
+@import url("foundation/fonts.css");
+@import url("foundation/tokens.css");
+@import url("foundation/reset.css");
+@import url("foundation/stage.css");
+@import url("foundation/typography.css");
+@import url("foundation/reduced-motion.css");
+
+@import url("components/hud.css");
+@import url("components/layout.css");
+@import url("components/card.css");
+@import url("components/motion.css");
+@import url("components/arrow.css");
+@import url("components/diagram.css");
+@import url("components/codebox.css");
+@import url("components/fragments.css");
+@import url("components/cases.css");
+
+@import url("chrome/notes.css");
+@import url("chrome/blackout.css");
+@import url("chrome/panels.css");

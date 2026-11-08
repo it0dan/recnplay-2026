@@ -1,0 +1,29 @@
+<section class="slide" id="slide-ai-sdlc" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">02 · DESENVOLVENDO COM IA GENERATIVA &nbsp;<span class="dim">// ai-sdlc</span></div>
+    <h2>AI-SDLC: <span class="a">agentes em todo o ciclo, humanos no loop</span></h2>
+    <div class="pipe5 rise">
+      <div class="node h">intenção<small>issue</small></div><div class="arw"></div>
+      <div class="node">spec<small>SDD · SPDD</small></div><div class="arw"></div>
+      <div class="gate">gate<br/>humano</div><div class="arw"></div>
+      <div class="node ai">agentes de código<small>guiados por AGENTS.md · skills</small></div><div class="arw"></div>
+      <div class="node ai">review · evals<small>testes · LLM-as-judge</small></div><div class="arw"></div>
+      <div class="gate">gate<br/>humano</div><div class="arw"></div>
+      <div class="node">deploy<small>CI/CD</small></div><div class="arw"></div>
+      <div class="node ai">agente SRE<small>incidente → intenção</small></div>
+    </div>
+    <div class="split">
+      <div class="spdd-col">
+        <div class="era-k">spdd · do intento ao prompt</div>
+        <div class="spdd"><div class="sp-r rise d1"><span class="sp-f">proposal.md</span><span class="sp-d">o porquê · problema e objetivo</span></div><div class="sp-a">↓</div><div class="sp-r rise d2"><span class="sp-f">design.md</span><span class="sp-d">como · decisões e ADRs</span></div><div class="sp-a">↓</div><div class="sp-r rise d3"><span class="sp-f">spec.md</span><span class="sp-d">contrato verificável · critérios de aceite</span></div><div class="sp-a">↓</div><div class="sp-r rise d4"><span class="sp-f">tasks.md</span><span class="sp-d">passos pequenos e ordenados</span></div><div class="sp-a">↓</div><div class="sp-r rise d5"><span class="sp-f">prompt.md</span><span class="sp-d">instrução pronta para o agente</span></div></div>
+      </div>
+      <div>
+        <div class="era-k">o repositório como contexto</div>
+        <div class="codebox"><div class="cbh"><i></i><i></i><i></i><span>~/credit-analysis</span><span class="lang">terminal</span></div><pre><span class="ln tline" style="--i:0"><span class="tk-s">$ tree -a -L 3</span></span><span class="ln tline" style="--i:1"><span class="">.</span></span><span class="ln tline" style="--i:2"><span class="tree">├── </span><span class="tk-t">AGENTS.md</span><span class="tk-c">  # convenções canônicas</span></span><span class="ln tline" style="--i:3"><span class="tree">├── </span><span class="tk-t">CLAUDE.md</span><span class="tk-c">  # @AGENTS.md + específicos</span></span><span class="ln tline" style="--i:4"><span class="tree">├── </span><span class="tk-p">.agents/skills/</span></span><span class="ln tline" style="--i:5"><span class="tree">│   ├── </span><span class="tk-t">gerar-adr/SKILL.md</span></span><span class="ln tline" style="--i:6"><span class="tree">│   └── </span><span class="tk-t">criar-adapter/SKILL.md</span></span><span class="ln tline" style="--i:7"><span class="tree">├── </span><span class="tk-p">specs/evaluate-proposal/</span></span><span class="ln tline" style="--i:8"><span class="tree">│   ├── </span><span class="tk-t">proposal.md</span></span><span class="ln tline" style="--i:9"><span class="tree">│   ├── </span><span class="tk-t">design.md</span></span><span class="ln tline" style="--i:10"><span class="tree">│   ├── </span><span class="tk-t">spec.md</span></span><span class="ln tline" style="--i:11"><span class="tree">│   ├── </span><span class="tk-t">tasks.md</span></span><span class="ln tline" style="--i:12"><span class="tree">│   └── </span><span class="tk-t">prompt.md</span></span><span class="ln tline" style="--i:13"><span class="tree">└── </span><span class="">src/modules/ …</span></span></pre></div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// AI-SDLC</span><span class="hb-idx"></span></div>
+  <aside class="notes">AI-SDLC é a última fase da linha do tempo, a esteira agêntica, olhada de perto. Uma intenção vira spec antes de virar código: spec-driven development (SDD, como no Spec Kit e no OpenSpec). A variação que usamos, SPDD, encadeia cinco artefatos: proposal (o porquê), design (como, com ADRs), spec (contrato verificável, critérios de aceite), tasks (passos pequenos) e, por fim, o prompt pronto para o agente. Nenhuma implementação começa sem essa cadeia. Do lado direito, o repositório vira contexto versionado: AGENTS.md é a fonte canônica de convenções, padrão aberto e agnóstico de ferramenta; o CLAUDE.md, ou equivalente, só importa o AGENTS.md e acrescenta o específico; e as skills (cada uma uma pasta com SKILL.md) são procedimentos carregados sob demanda, como gerar um ADR ou criar um adapter. Humanos ficam nos gates: aprovar a spec e aprovar o merge. E é aqui que hexagonal e clean pagam dividendos: fronteiras claras cabem numa janela de contexto, e testes por porta viram sensores do agente.</aside>
+</section>

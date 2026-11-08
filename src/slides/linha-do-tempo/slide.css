@@ -1,0 +1,22 @@
+/* Slide linha do tempo da arquitetura de software (um marco por passo; --step move a barra de progresso).
+   Escopo: #slide-linha-do-tempo (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-linha-do-tempo{
+  & .tlx{position:relative;margin-top:22px}
+  & .tlx-grid{display:grid;grid-template-columns:repeat(var(--n,6),1fr);gap:16px;position:relative;z-index:1}
+  & .tlx-track{position:absolute;left:0;right:0;top:146px;height:3px;background:repeating-linear-gradient(90deg,var(--line2) 0 10px,transparent 10px 18px)}
+  & .tlx-prog{height:3px;width:max(0%, calc((var(--step,0) - 0.5) / var(--n,6) * 100%));background:linear-gradient(90deg,var(--acc-strong),var(--acc) 66%,var(--warn));transition:width .7s cubic-bezier(.3,.8,.3,1);box-shadow:0 0 12px var(--acc)}
+  & .tlx-ic{height:120px;display:flex;align-items:flex-end;justify-content:flex-start}
+  & .tlx-ic svg{width:170px;height:110px}
+  & .tlx-dot{width:20px;height:20px;border-radius:50%;background:var(--acc-strong);margin:16px 0 16px;box-shadow:0 0 0 6px var(--bg)}
+  & .tlx-n.ai .tlx-dot{background:var(--warn)}
+  & .tlx-n.on .tlx-dot{animation:dotPop .6s ease}
+  & .tlx-y{font-family:'Roboto Mono',monospace;font-size:14px;letter-spacing:.14em;color:var(--ref);margin-bottom:6px}
+  & .tlx-t{font-size:25px;font-weight:800;line-height:1.15;margin-bottom:10px;min-height:58px}
+  & .tlx-n.ai .tlx-t{color:var(--warn)}
+  & .tlx-k{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ref);margin-bottom:4px}
+  & .tlx-d{font-size:16.5px;line-height:1.45;margin-bottom:10px}
+  & .tlx-p{font-family:'Roboto Mono',monospace;font-size:13.5px;line-height:1.6;color:var(--acc)}
+  & .tlx-n.ai .tlx-p{color:var(--warn)}
+  & h2{margin-bottom:6px}
+}
+@keyframes dotPop{0%{transform:scale(.3)}60%{transform:scale(1.5)}100%{transform:scale(1)}}

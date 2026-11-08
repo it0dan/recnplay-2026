@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<!-- GERADO por tools/build.py a partir de src/. Não edite aqui: edite src/ e rode "python3 tools/build.py". -->
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Do Monolítico ao Agente Autônomo — TDC Stage @ REC'n'Play 2026</title>
+<link rel="stylesheet" href="src/css/main.css"/>
+<link rel="stylesheet" href="src/slides/capa/slide.css"/>
+<link rel="stylesheet" href="src/slides/linha-do-tempo/slide.css"/>
+<link rel="stylesheet" href="src/slides/microsservicos-eda/slide.css"/>
+<link rel="stylesheet" href="src/slides/monolito-modular/slide.css"/>
+<link rel="stylesheet" href="src/slides/30-11-2022/slide.css"/>
+<link rel="stylesheet" href="src/slides/linha-do-tempo-agentica/slide.css"/>
+<link rel="stylesheet" href="src/slides/ai-sdlc/slide.css"/>
+<link rel="stylesheet" href="src/slides/hexagonal-para-llm/slide.css"/>
+<link rel="stylesheet" href="src/slides/contexto-por-agente/slide.css"/>
+<link rel="stylesheet" href="src/slides/harness/slide.css"/>
+<link rel="stylesheet" href="src/slides/loop/slide.css"/>
+<link rel="stylesheet" href="src/slides/codigo-com-ai-gateway/slide.css"/>
+<link rel="stylesheet" href="src/slides/sistema-com-ai-gateway/slide.css"/>
+<link rel="stylesheet" href="src/slides/obrigado/slide.css"/>
+</head>
+<body>
+<canvas id="dotgrid"></canvas>
+<div id="blackout"><span class="bc">Pausa</span><span class="bt" id="breakClock">00:00</span></div>
+<div id="notesbar"><div class="nh" id="notesHead">notas</div><div id="notesText"></div></div>
+
+<!-- Painel de fontes e referências (tecla S). Mantenha em sincronia com docs/REFERENCIAS.md. -->
+<div class="bkp" id="refpanel">
+  <div class="bkp-head"><span class="bkh-l">// FONTES &amp; REFERÊNCIAS</span><span>tudo que é citado no palco ou nas notas · links abrem em nova aba</span></div>
+  <div class="bkp-body">
+    <div class="rgrp"><div class="rh">ARQUITETURA · FUNDAMENTOS</div><div class="rlist">
+      <div class="rentry"><span class="rn">Hexagonal Architecture (Ports &amp; Adapters)</span><span class="rd">Alistair Cockburn · 2005</span><a href="https://alistair.cockburn.us/hexagonal-architecture" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">The Onion Architecture</span><span class="rd">Jeffrey Palermo · 2008</span><a href="https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">The Clean Architecture</span><span class="rd">Robert C. Martin · 2012</span><a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Domain-Driven Design (bounded context, ACL)</span><span class="rd">Eric Evans · 2003</span><a href="https://www.domainlanguage.com/ddd/" target="_blank" rel="noopener noreferrer">site ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">MONOLITO MODULAR · MICROSSERVIÇOS · EDA</div><div class="rlist">
+      <div class="rentry"><span class="rn">Spring Modulith</span><span class="rd">Spring · VMware Tanzu</span><a href="https://spring.io/projects/spring-modulith/" target="_blank" rel="noopener noreferrer">projeto ↗</a></div>
+      <div class="rentry"><span class="rn">ArchUnit</span><span class="rd">testes de arquitetura em Java</span><a href="https://www.archunit.org/" target="_blank" rel="noopener noreferrer">site ↗</a></div>
+      <div class="rentry"><span class="rn">Nx · Enforce module boundaries</span><span class="rd">Nx docs</span><a href="https://nx.dev/docs/platform-features/code-organization/enforce-module-boundaries" target="_blank" rel="noopener noreferrer">docs ↗</a></div>
+      <div class="rentry"><span class="rn">Packwerk</span><span class="rd">Shopify</span><a href="https://github.com/Shopify/packwerk" target="_blank" rel="noopener noreferrer">repo ↗</a></div>
+      <div class="rentry"><span class="rn">Microservices</span><span class="rd">James Lewis &amp; Martin Fowler · 2014</span><a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Sagas</span><span class="rd">Garcia-Molina &amp; Salem · SIGMOD 1987</span><a href="https://doi.org/10.1145/38713.38742" target="_blank" rel="noopener noreferrer">paper (DOI) ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">CASES DA INDÚSTRIA · SLIDES 02–03</div><div class="rlist">
+      <div class="rentry"><span class="rn">Prime Video: de serverless distribuído a um processo</span><span class="rd">InfoQ · mai/2023</span><a href="https://www.infoq.com/news/2023/05/prime-ec2-ecs-saves-costs/" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Goodbye Microservices</span><span class="rd">Alexandra Noonan · Segment · jul/2018</span><a href="https://twilio.com/en-us/blog/developers/best-practices/goodbye-microservices" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Deconstructing the Monolith</span><span class="rd">Kirsten Westeinde · Shopify Engineering · 2019</span><a href="https://shopify.engineering/deconstructing-monolith-designing-software-maximizes-developer-productivity" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Completing the Netflix Cloud Migration</span><span class="rd">Netflix · fev/2016</span><a href="https://about.netflix.com/en/news/completing-the-netflix-cloud-migration" target="_blank" rel="noopener noreferrer">post ↗</a></div>
+      <div class="rentry"><span class="rn">A Conversation with Werner Vogels</span><span class="rd">ACM Queue vol. 4 nº 4 · 2006</span><a href="https://queue.acm.org/detail.cfm?id=1142065" target="_blank" rel="noopener noreferrer">entrevista ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">IA NO CICLO DE DESENVOLVIMENTO · AI-SDLC</div><div class="rlist">
+      <div class="rentry"><span class="rn">Introducing ChatGPT</span><span class="rd">OpenAI · 30/nov/2022</span><a href="https://openai.com/index/chatgpt/" target="_blank" rel="noopener noreferrer">post ↗</a></div>
+      <div class="rentry"><span class="rn">Spec Kit (spec-driven development)</span><span class="rd">GitHub</span><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener noreferrer">repo ↗</a></div>
+      <div class="rentry"><span class="rn">OpenSpec</span><span class="rd">Fission AI</span><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreferrer">repo ↗</a></div>
+      <div class="rentry"><span class="rn">Structured-Prompt-Driven Development (SPDD)</span><span class="rd">martinfowler.com</span><a href="https://martinfowler.com/articles/structured-prompt-driven/" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">AGENTS.md</span><span class="rd">formato aberto</span><a href="https://agents.md/" target="_blank" rel="noopener noreferrer">site ↗</a></div>
+      <div class="rentry"><span class="rn">Agent Skills (SKILL.md)</span><span class="rd">formato aberto</span><a href="https://agentskills.io/" target="_blank" rel="noopener noreferrer">site ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">AGENTES · CONTEXTO</div><div class="rlist">
+      <div class="rentry"><span class="rn">Effective context engineering for AI agents</span><span class="rd">Anthropic</span><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Context Engineering (write · select · compress · isolate)</span><span class="rd">LangChain</span><a href="https://www.langchain.com/blog/context-engineering-for-agents" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">HARNESS · LOOP · EVALS</div><div class="rlist">
+      <div class="rentry"><span class="rn">Harness engineering for coding agent users</span><span class="rd">Birgitta Böckeler · martinfowler.com</span><a href="https://martinfowler.com/articles/harness-engineering.html" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Demystifying evals for AI agents</span><span class="rd">Anthropic</span><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">Getting started with loops</span><span class="rd">Claude blog · jun/2026</span><a href="https://claude.com/blog/getting-started-with-loops" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+      <div class="rentry"><span class="rn">The Art of Loop Engineering</span><span class="rd">LangChain · jun/2026</span><a href="https://www.langchain.com/blog/the-art-of-loop-engineering" target="_blank" rel="noopener noreferrer">artigo ↗</a></div>
+    </div></div>
+    <div class="rgrp"><div class="rh">PROTOCOLOS &amp; PADRÕES ABERTOS</div><div class="rlist">
+      <div class="rentry"><span class="rn">Model Context Protocol (MCP)</span><span class="rd">especificação aberta</span><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer">spec ↗</a></div>
+      <div class="rentry"><span class="rn">Agent2Agent Protocol (A2A)</span><span class="rd">Linux Foundation</span><a href="https://a2a-protocol.org/latest/specification/" target="_blank" rel="noopener noreferrer">spec ↗</a></div>
+      <div class="rentry"><span class="rn">Semantic conventions · Gen AI</span><span class="rd">OpenTelemetry</span><a href="https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/" target="_blank" rel="noopener noreferrer">spec ↗</a></div>
+      <div class="rentry"><span class="rn">RFC 8693 · OAuth 2.0 Token Exchange</span><span class="rd">IETF · 2020</span><a href="https://www.rfc-editor.org/rfc/rfc8693.html" target="_blank" rel="noopener noreferrer">rfc ↗</a></div>
+      <div class="rentry"><span class="rn">SPIFFE (identidade de workload)</span><span class="rd">CNCF</span><a href="https://spiffe.io/" target="_blank" rel="noopener noreferrer">site ↗</a></div>
+    </div></div>
+  </div>
+  <div class="bkp-foot"><span>links verificados em nov/2026</span><span>esc fecha · s fontes · g glossário</span></div>
+</div>
+
+<!-- Painel de glossário (tecla G): termos exatamente como usados nos slides. -->
+<div class="bkp" id="glosspanel">
+  <div class="bkp-head"><span class="bkh-l">// GLOSSÁRIO</span><span>termos exatamente como usados nos slides</span></div>
+  <div class="bkp-body"><div class="gl-grid">
+    <div class="gl"><div class="gw">Bounded context</div><div class="gd">Fronteira onde um modelo de domínio tem significado único.</div></div>
+    <div class="gl"><div class="gw">Contrato do módulo</div><div class="gd">Facade, DTOs e eventos: a única parte de um módulo visível aos outros.</div></div>
+    <div class="gl"><div class="gw">Port</div><div class="gd">Contrato definido pelo domínio, na linguagem do negócio.</div></div>
+    <div class="gl"><div class="gw">Adapter</div><div class="gd">Implementação do port para uma tecnologia ou provedor.</div></div>
+    <div class="gl"><div class="gw">Anti-Corruption Layer (ACL)</div><div class="gd">Camada que traduz o modelo externo para o modelo do domínio.</div></div>
+    <div class="gl"><div class="gw">Saga</div><div class="gd">Sequência de passos com compensação para transações distribuídas.</div></div>
+    <div class="gl"><div class="gw">Idempotência</div><div class="gd">Repetir a mesma operação não produz efeito duplicado.</div></div>
+    <div class="gl"><div class="gw">Structured output</div><div class="gd">Saída do modelo validada contra um schema: formato como contrato.</div></div>
+    <div class="gl"><div class="gw">Spec-driven development</div><div class="gd">A spec aprovada é a entrada do agente; código é derivado dela.</div></div>
+    <div class="gl"><div class="gw">AGENTS.md · SKILL.md</div><div class="gd">Instruções de repositório e pacotes de habilidade lidos pelo agente.</div></div>
+    <div class="gl"><div class="gw">Orquestrador</div><div class="gd">Agente que decompõe a tarefa e delega a agentes especialistas.</div></div>
+    <div class="gl"><div class="gw">Handoff</div><div class="gd">Transferência de tarefa entre agentes, com contrato de tamanho.</div></div>
+    <div class="gl"><div class="gw">Context engineering</div><div class="gd">Escolher o que entra na janela: write · select · compress · isolate.</div></div>
+    <div class="gl"><div class="gw">Harness</div><div class="gd">Tudo em volta do modelo: ferramentas, guardas, sensores, verificação.</div></div>
+    <div class="gl"><div class="gw">Loop</div><div class="gd">Ciclo agir → verificar → corrigir até um critério de parada.</div></div>
+    <div class="gl"><div class="gw">Evals</div><div class="gd">Testes do comportamento do agente sobre casos e critérios definidos.</div></div>
+    <div class="gl"><div class="gw">Budget</div><div class="gd">Teto de tokens e iterações por tarefa: para o loop sem progresso.</div></div>
+    <div class="gl"><div class="gw">Bulkhead</div><div class="gd">Compartimentos isolados: a falha de um não contamina os outros.</div></div>
+    <div class="gl"><div class="gw">HITL</div><div class="gd">Humano no loop: aprovação antes de ação sensível.</div></div>
+    <div class="gl"><div class="gw">MCP</div><div class="gd">Protocolo aberto que conecta agentes a ferramentas e dados.</div></div>
+    <div class="gl"><div class="gw">A2A · Agent Card</div><div class="gd">Protocolo agente↔agente; o card descreve skills, endpoint e segurança.</div></div>
+    <div class="gl"><div class="gw">On-behalf-of</div><div class="gd">Token que permite ao agente agir em nome do usuário, com escopo mínimo.</div></div>
+    <div class="gl"><div class="gw">AI Gateway</div><div class="gd">Borda única para tráfego de IA: credenciais, políticas, custo, traces.</div></div>
+  </div></div>
+  <div class="bkp-foot"><span>definições resumidas · aprofundamento na tela de fontes (S)</span><span>esc fecha · s fontes · g glossário</span></div>
+</div>
+
+<div class="stage" id="stage">
+<!-- ═════════════ ABERTURA ═════════════ -->
+<!-- 00-capa -->
+<section class="slide active" id="slide-capa" data-t="0:45">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">TDC STAGE @ REC'N'PLAY 2026</div>
+    <h1>Do Monolítico<br/>ao <span class="a">Agente Autônomo</span></h1>
+    <div class="lead">Padrões arquiteturais para sistemas baseados em IA.</div>
+    <div class="cmeta">
+      <div><div class="ml">Arquiteto de Soluções</div><div class="mv">Danilo Amaral · Sensedia</div></div>
+    </div>
+    <div class="evlogos"><!-- logo oficial: troque por <img class="evlogo" src="assets/brand/tdc.svg" alt="TDC"> --><span class="evword tdc">TDC<i>STAGE</i></span><span class="x">×</span><!-- logo oficial: troque por <img class="evlogo" src="assets/brand/recnplay.svg" alt="REC'n'Play"> --><span class="evword rnp">REC'N'PLAY<i>2026</i></span></div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// CAPA</span><span class="hb-idx"></span></div>
+  <aside class="notes">Boa tarde, Recife! Hoje vou contar uma história de 30 anos de arquitetura em 35 minutos. Spoiler: ela se repete.</aside>
+</section>
+
+<!-- ═════════════ 01 · FORMAS MODERNAS ═════════════ -->
+<!-- 01-linha-do-tempo -->
+<section class="slide" id="slide-linha-do-tempo" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">LINHA DO TEMPO &nbsp;<span class="dim">// evolução da arquitetura e da engenharia de sistemas</span></div>
+    <h2>Cada era atacou um <span class="a">acoplamento</span></h2>
+    <div class="tlx">
+      <div class="tlx-track"><div class="tlx-prog"></div></div>
+      <div class="tlx-grid">
+        <div class="tlx-n frag frag-ghost" data-f="1"><div class="tlx-ic"><svg viewBox="0 0 170 110"><rect x="20" y="12" width="120" height="92" rx="10" class="d-box2"/>
+<rect x="34" y="24" width="92" height="20" rx="4" class="d-box"/><rect x="34" y="50" width="92" height="20" rx="4" class="d-box"/><rect x="34" y="76" width="92" height="20" rx="4" class="d-box"/></svg></div><div class="tlx-dot"></div><div class="tlx-y">ANOS 90</div><div class="tlx-t">Monolito</div><div class="tlx-k">acoplamento</div><div class="tlx-d">código, dados e deploy num único artefato</div><div class="tlx-k">resposta</div><div class="tlx-p">camadas<br/>ports &amp; adapters</div></div>
+        <div class="tlx-n frag frag-ghost" data-f="2"><div class="tlx-ic"><svg viewBox="0 0 170 110"><rect x="4" y="6" width="34" height="22" rx="4" class="d-box2"/><rect x="46" y="6" width="34" height="22" rx="4" class="d-box2"/><rect x="88" y="6" width="34" height="22" rx="4" class="d-box2"/><rect x="130" y="6" width="34" height="22" rx="4" class="d-box2"/>
+<path d="M21 28 V48 M63 28 V48 M105 28 V48 M147 28 V48 M50 70 V86 M120 70 V86" class="d-ln"/>
+<rect x="4" y="48" width="160" height="22" rx="8" fill="var(--surf-3)" stroke="var(--warn)" stroke-width="2.5"/>
+<rect x="30" y="86" width="40" height="20" rx="4" class="d-box2"/><rect x="100" y="86" width="40" height="20" rx="4" class="d-box2"/>
+<circle r="4" style="fill:var(--warn);offset-path:path('M21 28 V59 H120 V86');animation-duration:2.4s;animation-delay:-0.3s" class="mpath"></circle><circle r="4" style="fill:var(--warn);offset-path:path('M147 28 V59 H50 V86');animation-duration:2.4s;animation-delay:-1.4s" class="mpath"></circle></svg></div><div class="tlx-dot"></div><div class="tlx-y">ANOS 2000</div><div class="tlx-t">SOA · ESB</div><div class="tlx-k">acoplamento</div><div class="tlx-d">integração ponto a ponto entre sistemas heterogêneos</div><div class="tlx-k">resposta</div><div class="tlx-p">contratos (WSDL)<br/>barramento · ACL</div></div>
+        <div class="tlx-n frag frag-ghost" data-f="3"><div class="tlx-ic"><svg viewBox="0 0 170 110"><rect x="4" y="30" width="34" height="52" rx="6" fill="var(--surf-3)" stroke="var(--warn)" stroke-width="2"/>
+<path d="M38 56 L74 18 M38 56 H74 M38 56 L74 94" class="d-arr flow"/>
+<rect x="74" y="6" width="56" height="24" rx="5" class="d-box2"/><rect x="74" y="44" width="56" height="24" rx="5" class="d-box2"/><rect x="74" y="82" width="56" height="24" rx="5" class="d-box2"/>
+<ellipse cx="150" cy="18" rx="10" ry="7" class="d-box"/><ellipse cx="150" cy="56" rx="10" ry="7" class="d-box"/><ellipse cx="150" cy="94" rx="10" ry="7" class="d-box"/></svg></div><div class="tlx-dot"></div><div class="tlx-y">ANOS 2010</div><div class="tlx-t">Microsserviços · APIs</div><div class="tlx-k">acoplamento</div><div class="tlx-d">deploy e times presos ao mesmo ciclo</div><div class="tlx-k">resposta</div><div class="tlx-p">API gateway<br/>database-per-service</div></div>
+        <div class="tlx-n frag frag-ghost" data-f="4"><div class="tlx-ic"><svg viewBox="0 0 170 110"><rect x="4" y="44" width="162" height="22" rx="11" fill="var(--surf-3)" stroke="var(--blue)" stroke-width="2"/>
+<rect x="8" y="4" width="40" height="22" rx="4" class="d-box2"/><rect x="66" y="84" width="40" height="22" rx="4" class="d-box2"/><rect x="122" y="84" width="40" height="22" rx="4" class="d-box2"/>
+<text x="142" y="22" text-anchor="middle" font-size="22" font-weight="800" class="t-warn">λ</text>
+<path d="M28 26 V44 M86 66 V84 M142 66 V84 M142 26 V44" stroke="var(--blue)" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle r="4" style="fill:var(--blue);offset-path:path('M10 55 H160');animation-duration:2s;animation-delay:0s" class="mpath"></circle><circle r="4" style="fill:var(--blue);offset-path:path('M10 55 H160');animation-duration:2s;animation-delay:-0.7s" class="mpath"></circle><circle r="4" style="fill:var(--blue);offset-path:path('M10 55 H160');animation-duration:2s;animation-delay:-1.4s" class="mpath"></circle></svg></div><div class="tlx-dot"></div><div class="tlx-y">2015+</div><div class="tlx-t">Event-driven · Serverless</div><div class="tlx-k">acoplamento</div><div class="tlx-d">temporal: produtor esperando consumidor</div><div class="tlx-k">resposta</div><div class="tlx-p">pub/sub · saga<br/>idempotência · λ</div></div>
+        <div class="tlx-n frag frag-ghost ai" data-f="5"><div class="tlx-ic"><svg viewBox="0 0 170 110"><circle cx="26" cy="44" r="14" class="d-box2"/><path d="M8 92 C8 68 44 68 44 92" class="d-box2"/>
+<path d="M66 18 H158 A8 8 0 0 1 166 26 V66 A8 8 0 0 1 158 74 H96 L80 90 L82 74 H66 A8 8 0 0 1 58 66 V26 A8 8 0 0 1 66 18 Z" fill="var(--surf-3)" stroke="var(--warn)" stroke-width="2"/>
+<text x="112" y="52" text-anchor="middle" font-size="18" font-weight="800" class="t-warn">LLM</text>
+<path d="M44 46 H56" class="d-arr flow"/></svg></div><div class="tlx-dot"></div><div class="tlx-y">2023</div><div class="tlx-t">IA generativa</div><div class="tlx-k">o que muda</div><div class="tlx-d">entra um componente probabilístico; o humano executa</div><div class="tlx-k">na prática</div><div class="tlx-p">assistentes e copilotos<br/>LLM via API</div></div>
+        <div class="tlx-n frag frag-ghost ai" data-f="6"><div class="tlx-ic"><svg viewBox="0 0 170 110"><g class="spin"><circle cx="85" cy="55" r="40" fill="none" stroke="var(--warn)" stroke-width="3" stroke-dasharray="40 14"/>
+<circle cx="85" cy="15" r="6" style="fill:var(--warn)"/><circle cx="125" cy="55" r="6" style="fill:var(--warn)"/><circle cx="85" cy="95" r="6" style="fill:var(--warn)"/><circle cx="45" cy="55" r="6" style="fill:var(--warn)"/></g>
+<text x="85" y="60" text-anchor="middle" font-size="14" font-weight="800" class="t-warn">loop</text></svg></div><div class="tlx-dot"></div><div class="tlx-y">2025</div><div class="tlx-t">Agentes</div><div class="tlx-k">o que muda</div><div class="tlx-d">o modelo passa a decidir e agir: tools, loop, delegação</div><div class="tlx-k">na prática</div><div class="tlx-p">autonomia<br/>multiagentes</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// LINHA DO TEMPO</span><span class="hb-idx"></span></div>
+  <aside class="notes">Slide interativo: cada → acende uma era (6 cliques antes de avançar). Para cada uma, uma frase: qual acoplamento ela atacou e o que deixou de padrão. Monolito: tudo num artefato, resposta foi camadas e depois ports &amp; adapters. SOA: integração ponto a ponto, resposta foi contrato e barramento. Microsserviços: times e deploys presos ao mesmo ciclo, resposta foi API gateway e estado por serviço. Event-driven e serverless: acoplamento temporal, resposta foi pub/sub, saga e consumidores idempotentes. Depois, IA generativa (2023): entra um componente probabilístico, mas o humano ainda executa, via assistentes e copilotos. Por fim, agentes (2025): o modelo passa a decidir e agir. A partir daqui, a palestra percorre essas formas de construir software e chega aos agentes.</aside>
+</section>
+<!-- 02-microsservicos-eda -->
+<section class="slide" id="slide-microsservicos-eda" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">01 · FORMAS MODERNAS &nbsp;<span class="dim">// microsserviços e event-driven</span></div>
+    <h2>Domínios com serviços autônomos, <span class="a">integrados por evento</span></h2>
+    <div class="split">
+      <div>
+        <div class="grid3">
+          <div class="dom2 rise d1"><div class="dl">originação · core</div><div class="svcrow"><div class="r1"><b>proposal-svc</b><span class="ver"><span class="a">v2.3</span><span class="b">v2.4</span></span></div><div class="r2">proposta e status na esteira</div><div class="pipe" style="--d:4.2s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>customer-svc</b><span class="ver"><span class="a">v1.1</span><span class="b">v1.2</span></span></div><div class="r2">dados do cliente e KYC</div><div class="pipe" style="--d:5.8s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>document-svc</b><span class="ver"><span class="a">v4.2</span><span class="b">v4.3</span></span></div><div class="r2">upload e OCR de comprovantes</div><div class="pipe" style="--d:5.1s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco s3"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">s3</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>simulation-svc</b><span class="ver"><span class="a">v0.7</span><span class="b">v0.8</span></span></div><div class="r2">parcelas, juros e CET</div><div class="pipe" style="--d:6.9s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco redis"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">redis</text></svg></span></div></div></div>
+          <div class="dom2 rise d2"><div class="dl">análise · risco</div><div class="svcrow"><div class="r1"><b>score-svc</b><span class="ver"><span class="a">v1.8</span><span class="b">v1.9</span></span></div><div class="r2">consulta a bureaus e SCR</div><div class="pipe" style="--d:6.5s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>income-svc</b><span class="ver"><span class="a">v3.0</span><span class="b">v3.1</span></span></div><div class="r2">renda via Open Finance</div><div class="pipe" style="--d:4.9s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco mongo"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">mongo</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>fraud-svc</b><span class="ver"><span class="a">v2.0</span><span class="b">v2.1</span></span></div><div class="r2">risco de identidade e golpe</div><div class="pipe" style="--d:5.6s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco neo4j"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">neo4j</text></svg></span></div></div></div>
+          <div class="dom2 rise d3"><div class="dl">contratação · desembolso</div><div class="svcrow"><div class="r1"><b>contract-svc</b><span class="ver"><span class="a">v5.0</span><span class="b">v5.1</span></span></div><div class="r2">CCB e assinatura digital</div><div class="pipe" style="--d:5.3s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>disbursement-svc</b><span class="ver"><span class="a">v0.9</span><span class="b">v1.0</span></span></div><div class="r2">liberação do crédito via Pix</div><div class="pipe" style="--d:7.1s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div><div class="svcrow"><div class="r1"><b>collection-svc</b><span class="ver"><span class="a">v2.6</span><span class="b">v2.7</span></span></div><div class="r2">parcelas, boletos e atraso</div><div class="pipe" style="--d:4.6s"><span class="bar"><i></i></span><span class="db"><svg viewBox="0 0 64 36" aria-label="banco postgres"><path d="M2 7 V29 A30 6 0 0 0 62 29 V7" class="dbb"/><ellipse cx="32" cy="7" rx="30" ry="6" class="dbb"/><text x="32" y="25" text-anchor="middle">postgres</text></svg></span></div></div></div>
+        </div>
+        <svg viewBox="0 0 1472 100" width="1472" height="100" aria-label="Domínios conectados por broker de eventos">
+          <path d="M241 0 V40" stroke="var(--blue)" stroke-width="2" stroke-dasharray="5 4"/><path d="M736 0 V40" stroke="var(--blue)" stroke-width="2" stroke-dasharray="5 4"/><path d="M1231 0 V40" stroke="var(--blue)" stroke-width="2" stroke-dasharray="5 4"/><circle r="7" style="fill:var(--blue);offset-path:path('M241 0 V62 H1231 V0');animation-duration:4.2s;animation-delay:0s" class="mpath"></circle><circle r="6" style="fill:var(--blue);offset-path:path('M241 0 V62 H736 V0');animation-duration:3s;animation-delay:-1.0s" class="mpath"></circle><circle r="6" style="fill:var(--warn);offset-path:path('M1231 0 V62 H241 V0');animation-duration:4.2s;animation-delay:-2.1s" class="mpath"></circle>
+          <rect x="10" y="40" width="1452" height="44" rx="22" fill="var(--surf-3)" stroke="var(--blue)" stroke-width="2"/>
+          <text x="32" y="68" font-size="15" font-weight="800" style="fill:var(--blue)">broker</text>
+          <text x="1440" y="68" text-anchor="end" font-size="14" class="m" style="fill:var(--blue)">ProposalReceived → ScoreCalculated → ProposalApproved → CreditDisbursed</text>
+        </svg>
+      </div>
+    </div>
+    <div class="cases"><div class="cl rise d1"><b>cases</b><i>a confirmação</i><span>quando separar destravou escala</span></div><div class="case rise d2"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/netflix.svg" alt="Netflix"><span class="cy">2008–2016</span></div><div class="ct">Do monolito em data center a centenas de microsserviços na AWS, depois de 3 dias sem enviar DVDs</div></div><div class="cm"><b>~1.000×</b><span>de audiência</span></div></div><div class="case rise d3"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/amazon.png" alt="Amazon"><span class="cy">2001–2006</span></div><div class="ct">De um monolito em duas camadas a uma plataforma de serviços com times donos de ponta a ponta</div></div><div class="cm q"><b>“you build it,<br/>you run it”</b><span>Werner Vogels</span></div></div></div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// MICROSSERVIÇOS · EDA</span><span class="hb-idx"></span></div>
+  <aside class="notes">Daqui até o fim, um único domínio: análise de crédito. Uma fintech de crédito em três domínios. Originação cuida da entrada: proposta e status na esteira, cadastro e KYC do cliente, documentos com OCR e simulação de parcelas e CET. Análise de risco consulta bureaus e o SCR, comprova renda via Open Finance e avalia risco de identidade e golpe. Contratação e desembolso emite a CCB com assinatura digital, libera o crédito via Pix e acompanha a cobrança. Cada serviço tem time, pipeline e banco próprios: repare nas versões avançando de forma independente e, ao lado de cada pipeline, o banco que só aquele serviço acessa. Database-per-service: ninguém faz join no banco do outro; a integração é por evento ou API. E cada time escolhe o banco que serve ao seu problema: relacional para proposta e contrato, documento para extratos de renda, objeto para comprovantes, grafo para fraude, cache para simulação. Guardem essa imagem: é ela que volta adiante, quando cada agente for dono da sua janela de contexto. Entre domínios, eventos: ProposalReceived, ScoreCalculated, ProposalApproved, CreditDisbursed. Quando o proposal-svc publica ProposalReceived, o score-svc consome e, antes de consultar o bureau, verifica se aquele eventId já foi processado, porque a entrega é at-least-once e consultar o bureau duas vezes custa dinheiro. Guardem essa ideia: idempotência volta no fim, quando o modelo passar a decidir e a regra de negócio precisar garantir efeito uma vez só. Dois cases da confirmação. Netflix: depois de uma corrupção de banco em 2008 que parou o envio de DVDs por três dias, migrou de um monolito em data center próprio para centenas de microsserviços na AWS, concluindo em janeiro de 2016; no período, a audiência cresceu cerca de mil vezes. Amazon: entre 2001 e 2006, saiu de um monolito em duas camadas para uma plataforma de serviços descentralizada, com times donos do serviço de ponta a ponta, o "you build it, you run it" do Werner Vogels. O ponto em comum: microsserviço é uma decisão organizacional e de escala, não de moda.</aside>
+</section>
+<!-- 03-monolito-modular -->
+<section class="slide" id="slide-monolito-modular" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">01 · FORMAS MODERNAS &nbsp;<span class="dim">// monolito modular</span></div>
+    <h2>Monolito modular: <span class="a">módulos com contrato, um único deploy</span></h2>
+    <div class="split">
+      <svg viewBox="0 0 900 520" width="770" height="445" aria-label="Monolito modular: host, módulos com contrato e internos encapsulados, eventos in-process e schema por módulo">
+  <text x="450" y="22" text-anchor="middle" font-size="13" class="m t-ref" letter-spacing="2">1 unidade de deploy · 1 processo · cada módulo = 1 bounded context</text>
+  <rect x="10" y="34" width="880" height="366" rx="18" class="d-box"/>
+  <rect x="30" y="50" width="840" height="40" rx="10" style="fill:var(--surf-2)" stroke="var(--line2)"/>
+  <text x="450" y="76" text-anchor="middle" font-size="13" class="m">host · HTTP, filas, jobs, injeção de dependência</text>
+  <path d="M160 90 V156 M450 90 V156 M740 90 V156" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <rect x="40" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="58" y="144" font-size="18" font-weight="800">Propostas</text>
+      <rect x="54" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="160" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="160" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="54" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="68" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M71 232 V227 A4 4 0 0 1 79 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="90" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="160" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="160" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text><rect x="330" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="348" y="144" font-size="18" font-weight="800">Risco</text>
+      <rect x="344" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="450" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="450" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="344" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="358" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M361 232 V227 A4 4 0 0 1 369 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="380" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="450" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="450" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text><rect x="620" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="638" y="144" font-size="18" font-weight="800">Contratos</text>
+      <rect x="634" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="740" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="740" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="634" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="648" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M651 232 V227 A4 4 0 0 1 659 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="670" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="740" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="740" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text>
+  <path d="M254 181 H344" class="d-arr flow"/><path d="M336 175 L344 181 L336 187" class="d-arr"/>
+  <text x="299" y="111" text-anchor="middle" font-size="11.5" class="m t-acc">chamada in-process</text>
+  <path d="M634 258 H566" stroke="var(--warn)" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <g class="mm2-x"><circle cx="600" cy="258" r="13" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2.5"/><path d="M593 251 L607 265 M607 251 L593 265" stroke="var(--warn)" stroke-width="2.5"/></g>
+  <rect x="40" y="328" width="820" height="38" rx="19" fill="none" stroke="var(--acc)" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="450" y="352" text-anchor="middle" font-size="12.5" class="m t-acc">eventos de domínio in-process · ProposalApproved</text>
+  <circle r="7" style="fill:var(--warn);offset-path:path('M160 328 H740');animation-duration:3.4s;animation-delay:0s" class="mpath"></circle><circle r="7" style="fill:var(--warn);offset-path:path('M160 328 H740');animation-duration:3.4s;animation-delay:-1.7s" class="mpath"></circle>
+  <path d="M160 314 V328 M740 314 V328" class="d-ln"/>
+  <text x="450" y="390" text-anchor="middle" font-size="12.5" class="m t-warn mm2-x">acesso ao interno de outro módulo: barrado por teste de arquitetura</text>
+  <path d="M160 366 V438 M450 366 V438 M740 366 V438" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <rect x="60" y="420" width="780" height="90" rx="14" class="d-box"/>
+  <text x="80" y="442" font-size="12" class="m t-ref">1 banco · cada módulo só acessa o próprio schema</text>
+  <rect x="90" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="160" y="480" text-anchor="middle" font-size="13" class="m">proposals</text>
+  <rect x="380" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="450" y="480" text-anchor="middle" font-size="13" class="m">risk</text>
+  <rect x="670" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="740" y="480" text-anchor="middle" font-size="13" class="m">contracts</text>
+</svg>
+      <div class="codebox"><div class="cbh"><i></i><i></i><i></i><span>~/credit-analysis</span><span class="lang">terminal</span></div><pre><span class="ln tline" style="--i:0"><span class="tk-s">$ tree src</span></span><span class="ln tline" style="--i:1"><span class="tk-p">src/</span></span><span class="ln tline" style="--i:2"><span class="tree">├── </span><span class="tk-p">host/</span><span class="tk-c">  # HTTP, filas, jobs, DI</span></span><span class="ln tline" style="--i:3"><span class="tree">├── </span><span class="tk-p">modules/</span></span><span class="ln tline" style="--i:4"><span class="tree">│   ├── </span><span class="tk-p">proposals/</span></span><span class="ln tline" style="--i:5"><span class="tree">│   │   ├── </span><span class="tk-p">contract/</span><span class="tk-c">  # facade, DTOs, eventos</span></span><span class="ln tline" style="--i:6"><span class="tree">│   │   └── </span><span class="tk-p">internal/</span><span class="tk-c">  # domínio · aplicação · persistência</span></span><span class="ln tline" style="--i:7"><span class="tree">│   ├── </span><span class="tk-p">risk/</span></span><span class="ln tline" style="--i:8"><span class="tree">│   │   ├── </span><span class="tk-p">contract/</span></span><span class="ln tline" style="--i:9"><span class="tree">│   │   └── </span><span class="tk-p">internal/</span></span><span class="ln tline" style="--i:10"><span class="tree">│   └── </span><span class="tk-p">contracts/</span></span><span class="ln tline" style="--i:11"><span class="tree">│       ├── </span><span class="tk-p">contract/</span></span><span class="ln tline" style="--i:12"><span class="tree">│       └── </span><span class="tk-p">internal/</span></span><span class="ln tline" style="--i:13"><span class="tree">└── </span><span class="tk-p">shared-kernel/</span><span class="tk-c">  # tipos comuns, mínimo</span></span><span class="ln tline" style="--i:14"><span class="tk-p">test/</span></span><span class="ln tline" style="--i:15"><span class="tree">└── </span><span class="">architecture.test.ts</span><span class="tk-c">  # só contract/ é visível</span></span></pre></div>
+    </div>
+    <div class="cases"><div class="cl rise d1"><b>cases</b><i>o recuo</i><span>quando juntar foi a escolha certa</span></div><div class="case rise d2"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/primevideo.png" alt="Prime Video"><span class="cy">2023</span></div><div class="ct">Monitoramento de áudio e vídeo: de Step Functions + Lambda para um único processo no ECS</div></div><div class="cm"><b>−90%</b><span>de custo</span></div></div><div class="case rise d3"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/segment.svg" alt="Segment"><span class="cy">2018</span></div><div class="ct">Mais de 140 microsserviços de destinos consolidados em um serviço e um monorepo</div></div><div class="cm"><b>140+ → 1</b><span>serviços</span></div></div></div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// MONOLITO MODULAR</span><span class="hb-idx"></span></div>
+  <aside class="notes">Depois de distribuir, o movimento de volta. Monolito modular: uma unidade de deploy e um processo, mas dividido em módulos com fronteiras de verdade. Cada módulo é um bounded context e tem duas partes. O contrato do módulo (facade, DTOs e os eventos que ele publica) é a única parte visível para os outros módulos; "visível" aqui é visibilidade de código, dentro do mesmo processo, e não uma API HTTP pública. O resto (domínio, aplicação e persistência) fica encapsulado. A comunicação entre módulos acontece de duas formas: chamada in-process ao contrato (Propostas chamando Risco para pedir a análise) ou eventos de domínio in-process (ProposalApproved, que Contratos escuta para emitir a CCB), que mantêm os módulos desacoplados. Acessar o interno de outro módulo é barrado por teste de arquitetura no build (ArchUnit, Spring Modulith, regras de módulo do Nx ou Packwerk). Os dados seguem a mesma regra: um banco, mas cada módulo só acessa o próprio schema, sem joins entre módulos. O host é quem expõe HTTP, consome filas e roda jobs, e despacha para os contratos. No repositório, isso vira contract/ e internal/ por módulo, mais um shared kernel mínimo. Se um módulo precisar de escala ou deploy próprios, ele já nasce extraível para serviço: o contrato vira API e os eventos in-process viram eventos no broker. Dois cases do "recuo". Prime Video, 2023: o serviço de monitoramento de qualidade de áudio e vídeo rodava distribuído em Step Functions, Lambda e S3, não escalava e custava caro; juntaram os componentes num único processo no ECS e o custo caiu cerca de 90%. Atenção ao recorte: foi uma ferramenta, não o Prime Video inteiro, e a lição é granularidade errada, não "microsserviço é ruim". Segment, 2018: mais de 140 microsserviços, um por destino, viraram um serviço e um monorepo, porque o custo operacional por serviço tinha passado do benefício. E a Shopify é o exemplo de quem nunca saiu do monolito: tornou-o modular, com fronteiras verificadas por ferramenta (Packwerk).</aside>
+</section>
+<!-- 04-30-11-2022 -->
+<section class="slide" id="slide-30-11-2022" data-t="0:45">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag dfade">o dia em que a linha do tempo mudou de eixo</div>
+    <div class="dbig"><span>30</span><i>.</i><span>11</span><i>.</i><span>2022</span></div>
+    <div class="dline"></div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// 30.11.2022</span><span class="hb-idx"></span></div>
+  <aside class="notes">Pausa. Deixar a data na tela por alguns segundos antes de falar. 30 de novembro de 2022: o lançamento do ChatGPT. Em cinco dias, um milhão de usuários. É a data em que a IA generativa saiu do laboratório e entrou no cotidiano de quem desenvolve software. Daqui em diante, a linha do tempo muda de eixo: deixa de ser sobre como dividimos o sistema e passa a ser sobre quem executa o trabalho.</aside>
+</section>
+
+<!-- ═════════════ 02 · DESENVOLVENDO COM GENAI ═════════════ -->
+<!-- 05-linha-do-tempo-agentica -->
+<section class="slide" id="slide-linha-do-tempo-agentica" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">02 · DESENVOLVENDO COM IA GENERATIVA &nbsp;<span class="dim">// a linha do tempo agêntica</span></div>
+    <h2>Do assistente à <span class="a">esteira agêntica</span></h2>
+    <div class="aiph">
+      <div class="aiph-track"><div class="aiph-prog"></div></div>
+      <div class="phase frag frag-ghost" data-f="1"><svg viewBox="0 0 150 90"><path d="M14 8 H136 A8 8 0 0 1 144 16 V56 A8 8 0 0 1 136 64 H54 L36 82 L40 64 H14 A8 8 0 0 1 6 56 V16 A8 8 0 0 1 14 8 Z" fill="var(--surf-3)" stroke="var(--warn)" stroke-width="2"/><path d="M24 28 H110 M24 44 H86" stroke="var(--warn)" stroke-width="3" stroke-linecap="round"/></svg><div><div class="py">2022</div><div class="pt">Assistente</div></div><div class="pd">Chat fora da IDE: pergunta, copia, cola.</div><div class="px">ChatGPT · Claude.ai</div><div></div><div class="roles"><div class="h"><span>humano</span>faz tudo</div><div class="m"><span>modelo</span>responde</div></div></div>
+      <div class="phase frag frag-ghost" data-f="2"><svg viewBox="0 0 150 90"><rect x="4" y="4" width="142" height="82" rx="8" class="d-box2"/><path d="M4 20 H146" class="d-ln"/><path d="M16 36 H70 M16 52 H100 M16 68 H60" stroke="var(--line2)" stroke-width="3" stroke-linecap="round"/><path d="M64 68 H130" stroke="var(--warn)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 5" class="flow"/></svg><div><div class="py">2023</div><div class="pt">Copiloto</div></div><div class="pd">Autocomplete e chat dentro da IDE.</div><div class="px">GitHub Copilot · Cursor</div><div></div><div class="roles"><div class="h"><span>humano</span>aceita linha a linha</div><div class="m"><span>modelo</span>sugere</div></div></div>
+      <div class="phase frag frag-ghost" data-f="3"><svg viewBox="0 0 150 90"><rect x="4" y="4" width="142" height="82" rx="8" fill="var(--code-bg)" stroke="var(--warn)" stroke-width="2"/><text x="14" y="30" font-size="12.5" class="m" style="fill:#B9E58A">$ agent run</text><text x="14" y="52" font-size="11.5" class="m" style="fill:#F1EAFA">✓ 4 arquivos</text><text x="14" y="72" font-size="11.5" class="m" style="fill:#F1EAFA">✓ testes ok</text></svg><div><div class="py">2024–25</div><div class="pt">Agente de código</div></div><div class="pd">Lê o repositório, edita arquivos e roda os testes.</div><div class="px">Claude Code · Codex · Cursor</div><div></div><div class="roles"><div class="h"><span>humano</span>revisa o diff</div><div class="m"><span>modelo</span>executa a tarefa</div></div></div>
+      <div class="phase frag frag-ghost" data-f="4"><svg viewBox="0 0 150 90"><rect x="2" y="30" width="32" height="28" rx="6" class="d-box2"/><rect x="59" y="30" width="32" height="28" rx="6" style="fill:var(--surf-3)" stroke="var(--warn)" stroke-width="2"/><rect x="116" y="30" width="32" height="28" rx="6" class="d-box2"/><path d="M34 44 H59 M91 44 H116" class="d-arr"/><circle r="5" style="fill:var(--warn);offset-path:path('M18 44 H132');animation-duration:2.2s;animation-delay:0s" class="mpath"></circle><text x="75" y="80" text-anchor="middle" font-size="11" class="m" style="fill:var(--ok)">gate HITL</text></svg><div><div class="py">2025–26</div><div class="pt">Esteira agêntica</div></div><div class="pd">Agentes em background no SDLC, do issue ao PR.</div><div class="px">coding agents no CI · SDD</div><div></div><div class="roles"><div class="h"><span>humano</span>define e aprova</div><div class="m"><span>modelo</span>conduz o fluxo</div></div></div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// LINHA DO TEMPO AGÊNTICA</span><span class="hb-idx"></span></div>
+  <aside class="notes">Slide interativo: cada → acende uma fase. O eixo é quem executa. 2022, assistente: o humano faz tudo, o modelo só responde num chat. 2023, copiloto: o modelo sugere dentro da IDE e o humano aceita linha a linha. 2024 e 2025, agente de código: o modelo executa a tarefa inteira, lê o repositório, edita vários arquivos, roda os testes; o humano revisa o diff. 2025 e 2026, esteira agêntica: agentes rodam em background no SDLC, do issue ao PR, e o humano define a intenção e aprova nos gates. No produto, o mesmo movimento: primeiro o LLM entra como componente chamado por API, com o código decidindo o fluxo; depois o modelo passa a decidir. Cada passo transfere execução do humano para o modelo, e é isso que exige arquitetura.</aside>
+</section>
+<!-- 06-ai-sdlc -->
+<section class="slide" id="slide-ai-sdlc" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">02 · DESENVOLVENDO COM IA GENERATIVA &nbsp;<span class="dim">// ai-sdlc</span></div>
+    <h2>AI-SDLC: <span class="a">agentes em todo o ciclo, humanos no loop</span></h2>
+    <div class="pipe5 rise">
+      <div class="node h">intenção<small>issue</small></div><div class="arw"></div>
+      <div class="node">spec<small>SDD · SPDD</small></div><div class="arw"></div>
+      <div class="gate">gate<br/>humano</div><div class="arw"></div>
+      <div class="node ai">agentes de código<small>guiados por AGENTS.md · skills</small></div><div class="arw"></div>
+      <div class="node ai">review · evals<small>testes · LLM-as-judge</small></div><div class="arw"></div>
+      <div class="gate">gate<br/>humano</div><div class="arw"></div>
+      <div class="node">deploy<small>CI/CD</small></div><div class="arw"></div>
+      <div class="node ai">agente SRE<small>incidente → intenção</small></div>
+    </div>
+    <div class="split">
+      <div class="spdd-col">
+        <div class="era-k">spdd · do intento ao prompt</div>
+        <div class="spdd"><div class="sp-r rise d1"><span class="sp-f">proposal.md</span><span class="sp-d">o porquê · problema e objetivo</span></div><div class="sp-a">↓</div><div class="sp-r rise d2"><span class="sp-f">design.md</span><span class="sp-d">como · decisões e ADRs</span></div><div class="sp-a">↓</div><div class="sp-r rise d3"><span class="sp-f">spec.md</span><span class="sp-d">contrato verificável · critérios de aceite</span></div><div class="sp-a">↓</div><div class="sp-r rise d4"><span class="sp-f">tasks.md</span><span class="sp-d">passos pequenos e ordenados</span></div><div class="sp-a">↓</div><div class="sp-r rise d5"><span class="sp-f">prompt.md</span><span class="sp-d">instrução pronta para o agente</span></div></div>
+      </div>
+      <div>
+        <div class="era-k">o repositório como contexto</div>
+        <div class="codebox"><div class="cbh"><i></i><i></i><i></i><span>~/credit-analysis</span><span class="lang">terminal</span></div><pre><span class="ln tline" style="--i:0"><span class="tk-s">$ tree -a -L 3</span></span><span class="ln tline" style="--i:1"><span class="">.</span></span><span class="ln tline" style="--i:2"><span class="tree">├── </span><span class="tk-t">AGENTS.md</span><span class="tk-c">  # convenções canônicas</span></span><span class="ln tline" style="--i:3"><span class="tree">├── </span><span class="tk-t">CLAUDE.md</span><span class="tk-c">  # @AGENTS.md + específicos</span></span><span class="ln tline" style="--i:4"><span class="tree">├── </span><span class="tk-p">.agents/skills/</span></span><span class="ln tline" style="--i:5"><span class="tree">│   ├── </span><span class="tk-t">gerar-adr/SKILL.md</span></span><span class="ln tline" style="--i:6"><span class="tree">│   └── </span><span class="tk-t">criar-adapter/SKILL.md</span></span><span class="ln tline" style="--i:7"><span class="tree">├── </span><span class="tk-p">specs/evaluate-proposal/</span></span><span class="ln tline" style="--i:8"><span class="tree">│   ├── </span><span class="tk-t">proposal.md</span></span><span class="ln tline" style="--i:9"><span class="tree">│   ├── </span><span class="tk-t">design.md</span></span><span class="ln tline" style="--i:10"><span class="tree">│   ├── </span><span class="tk-t">spec.md</span></span><span class="ln tline" style="--i:11"><span class="tree">│   ├── </span><span class="tk-t">tasks.md</span></span><span class="ln tline" style="--i:12"><span class="tree">│   └── </span><span class="tk-t">prompt.md</span></span><span class="ln tline" style="--i:13"><span class="tree">└── </span><span class="">src/modules/ …</span></span></pre></div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// AI-SDLC</span><span class="hb-idx"></span></div>
+  <aside class="notes">AI-SDLC é a última fase da linha do tempo, a esteira agêntica, olhada de perto. Uma intenção vira spec antes de virar código: spec-driven development (SDD, como no Spec Kit e no OpenSpec). A variação que usamos, SPDD, encadeia cinco artefatos: proposal (o porquê), design (como, com ADRs), spec (contrato verificável, critérios de aceite), tasks (passos pequenos) e, por fim, o prompt pronto para o agente. Nenhuma implementação começa sem essa cadeia. Do lado direito, o repositório vira contexto versionado: AGENTS.md é a fonte canônica de convenções, padrão aberto e agnóstico de ferramenta; o CLAUDE.md, ou equivalente, só importa o AGENTS.md e acrescenta o específico; e as skills (cada uma uma pasta com SKILL.md) são procedimentos carregados sob demanda, como gerar um ADR ou criar um adapter. Humanos ficam nos gates: aprovar a spec e aprovar o merge. E é aqui que hexagonal e clean pagam dividendos: fronteiras claras cabem numa janela de contexto, e testes por porta viram sensores do agente.</aside>
+</section>
+
+<!-- ═════════════ 03 · APLICAÇÕES AGÊNTICAS ═════════════ -->
+<!-- 07-hexagonal-para-llm -->
+<section class="slide" id="slide-hexagonal-para-llm" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">03 · APLICAÇÕES E ESTEIRAS AGÊNTICAS &nbsp;<span class="dim">// hexagonal para llm</span></div>
+    <h2>Hexagonal para LLM: <span class="a">o modelo é um adapter</span></h2>
+    <div class="split">
+      <svg viewBox="0 0 800 500" width="820" height="512" aria-label="Arquitetura hexagonal com porta de raciocínio e adaptadores por provedor">
+        <text x="60" y="134" text-anchor="middle" font-size="12" class="m t-ref" letter-spacing="1.5">ADAPTERS IN</text>
+        <rect x="0" y="150" width="120" height="46" rx="9" class="d-box"/><text x="60" y="178" text-anchor="middle" font-size="14" class="m">REST</text>
+        <rect x="0" y="216" width="120" height="46" rx="9" class="d-box"/><text x="60" y="244" text-anchor="middle" font-size="14" class="m">evento / fila</text>
+        <rect x="0" y="282" width="120" height="46" rx="9" class="d-box"/><text x="60" y="310" text-anchor="middle" font-size="14" class="m">chat</text>
+        <path d="M120 173 L160 239 M120 239 L160 239 M120 305 L160 239" class="d-ln"/>
+        <polygon points="460,239 385,369 235,369 160,239 235,109 385,109" fill="var(--surf)" stroke="var(--acc-strong)" stroke-width="3"/>
+        <text x="310" y="200" text-anchor="middle" font-size="13" class="m t-acc" letter-spacing="2">NÚCLEO</text>
+        <text x="310" y="234" text-anchor="middle" font-size="22" font-weight="800">EvaluateProposal</text>
+        <text x="310" y="262" text-anchor="middle" font-size="13" class="m t-mut">CreditPolicy · Assessment</text>
+        <text x="310" y="296" text-anchor="middle" font-size="12" class="m t-ref">sem "messages",</text>
+        <text x="310" y="314" text-anchor="middle" font-size="12" class="m t-ref">sem "choices"</text>
+        <rect x="428" y="216" width="150" height="46" rx="8" fill="var(--acc-strong)"/>
+        <text x="503" y="244" text-anchor="middle" font-size="12" font-weight="700" class="m" style="fill:#fff">CreditEvaluator</text>
+        <rect x="610" y="42" width="188" height="400" rx="14" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="7 6"/>
+        <text x="704" y="30" text-anchor="middle" font-size="12" class="m t-warn" letter-spacing="1.5">ADAPTERS OUT · ACL</text>
+        <rect x="628" y="66"  width="152" height="50" rx="9" class="d-box"/><text x="704" y="96"  text-anchor="middle" font-size="13.5" class="m">Anthropic</text>
+        <rect x="628" y="146" width="152" height="50" rx="9" class="d-box"/><text x="704" y="176" text-anchor="middle" font-size="13.5" class="m">OpenAI</text>
+        <rect x="628" y="226" width="152" height="50" rx="9" class="d-box"/><text x="704" y="256" text-anchor="middle" font-size="13.5" class="m">Gemini</text>
+        <rect x="628" y="306" width="152" height="50" rx="9" class="d-box"/><text x="704" y="336" text-anchor="middle" font-size="13.5" class="m">Self-hosted</text>
+        <rect x="628" y="378" width="152" height="46" rx="9" class="d-box" stroke-dasharray="5 4"/><text x="704" y="406" text-anchor="middle" font-size="13" class="m t-ok" style="fill:var(--ok)">Fake · tests</text>
+        <path d="M578 239 C604 239 604 91 628 91 M578 239 C604 239 604 171 628 171 M578 239 L628 251 M578 239 C604 239 604 331 628 331 M578 239 C604 239 604 401 628 401" class="d-arr"/>
+        <text x="310" y="420" text-anchor="middle" font-size="13" class="m t-ref">dependências apontam para dentro</text>
+      </svg>
+      <div class="whw">
+        <div class="wc"><div class="wk">o que é</div><div class="wt">Hexagonal (Cockburn, 2005), Onion (Palermo, 2008) e Clean (Martin, 2012) são a mesma ideia: <b>o núcleo no centro</b>, domínio e casos de uso, e a infraestrutura na borda. <b>As dependências apontam para dentro.</b></div></div>
+        <div class="wc"><div class="wk">por que</div><div class="wt">Trocar o detalhe sem tocar a regra: provedor de LLM, banco ou framework. Testar o núcleo sem rede, com um Fake. E limitar o que um sistema externo consegue quebrar lá dentro.</div></div>
+        <div class="wc"><div class="wk">como</div><div class="wt">O núcleo define <b>portas</b> na língua do negócio, como <code>CreditEvaluator.evaluate(proposal)</code>. <b>Adapters</b> implementam a porta e traduzem o modelo externo (ACL). A composição injeta o adapter, e um teste de arquitetura barra SDK no núcleo.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// HEXAGONAL PARA LLM</span><span class="hb-idx"></span></div>
+  <aside class="notes">Hexagonal, Onion e Clean Architecture nasceram em momentos diferentes (Alistair Cockburn em 2005, Jeffrey Palermo em 2008, Robert Martin em 2012), mas dizem a mesma coisa: o que importa, o domínio e os casos de uso, fica no centro; o que muda, banco, framework, provedor, fica na borda; e as dependências apontam para dentro. Por quê: para trocar o detalhe sem tocar a regra, para testar o núcleo sem rede e para conter o raio de impacto de um sistema externo. Como: o núcleo declara portas na língua do negócio, e adapters implementam essas portas traduzindo o modelo de fora, que é a anti-corruption layer do DDD. No desenho, a análise de crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal; ele conversa só com a porta CreditEvaluator; e cada provedor de LLM é um adapter, inclusive um Fake para testes. O ponto para aplicações com LLM: o modelo é um detalhe de infraestrutura. Messages, choices e content blocks nunca cruzam a porta; o que entra no núcleo é um Assessment validado. E quem decide é a regra de negócio, não o modelo. É esse adapter que, no fim da palestra, a gente troca por um que passa pelo AI Gateway, sem mudar uma linha do núcleo.</aside>
+</section>
+
+<!-- ═════════════ 04 · MULTIAGENTES ═════════════ -->
+<!-- 08-contexto-por-agente -->
+<section class="slide" id="slide-contexto-por-agente" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">04 · MULTIAGENTES &nbsp;<span class="dim">// contexto isolado · pilar isolate de context engineering</span></div>
+    <h2>Cada serviço com seu banco, <span class="a">cada agente com seu contexto</span></h2>
+    <div class="pair">
+      <div class="card rise d1">
+        <div class="pair-l">database-per-service · análise de crédito</div>
+        <svg viewBox="0 0 600 300" width="100%" height="300" aria-label="Cada microsserviço com seu próprio banco"><rect x="20" y="20" width="160" height="56" rx="10" class="d-box2"/><text x="100" y="54" text-anchor="middle" font-size="15" class="m">proposal-svc</text><path d="M100 76 V116" class="d-arr flow"/><rect x="44" y="132" width="112" height="70" style="fill:var(--surf-2)"/><path d="M44 132 V202 M156 132 V202" stroke="var(--line2)" stroke-width="1.5"/><ellipse cx="100" cy="202" rx="56" ry="13" class="d-box"/><ellipse cx="100" cy="132" rx="56" ry="13" class="d-box"/><text x="100" y="176" text-anchor="middle" font-size="13" class="m t-mut">proposals</text><rect x="220" y="20" width="160" height="56" rx="10" class="d-box2"/><text x="300" y="54" text-anchor="middle" font-size="15" class="m">score-svc</text><path d="M300 76 V116" class="d-arr flow"/><rect x="244" y="132" width="112" height="70" style="fill:var(--surf-2)"/><path d="M244 132 V202 M356 132 V202" stroke="var(--line2)" stroke-width="1.5"/><ellipse cx="300" cy="202" rx="56" ry="13" class="d-box"/><ellipse cx="300" cy="132" rx="56" ry="13" class="d-box"/><text x="300" y="176" text-anchor="middle" font-size="13" class="m t-mut">scores</text><rect x="420" y="20" width="160" height="56" rx="10" class="d-box2"/><text x="500" y="54" text-anchor="middle" font-size="15" class="m">contract-svc</text><path d="M500 76 V116" class="d-arr flow"/><rect x="444" y="132" width="112" height="70" style="fill:var(--surf-2)"/><path d="M444 132 V202 M556 132 V202" stroke="var(--line2)" stroke-width="1.5"/><ellipse cx="500" cy="202" rx="56" ry="13" class="d-box"/><ellipse cx="500" cy="132" rx="56" ry="13" class="d-box"/><text x="500" y="176" text-anchor="middle" font-size="13" class="m t-mut">contracts</text><path d="M170 168 H230" stroke="var(--warn)" stroke-width="2" stroke-dasharray="4 4"/><g><circle cx="200" cy="168" r="11" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2"/><path d="M195 163 L205 173 M205 163 L195 173" stroke="var(--warn)" stroke-width="2"/></g><path d="M370 168 H430" stroke="var(--warn)" stroke-width="2" stroke-dasharray="4 4"/><g><circle cx="400" cy="168" r="11" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2"/><path d="M395 163 L405 173 M405 163 L395 173" stroke="var(--warn)" stroke-width="2"/></g><text x="300" y="250" text-anchor="middle" font-size="13" class="m t-warn">sem join entre bancos · só eventos e APIs</text></svg>
+        <div class="cd">o banco é privado do serviço</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="card warn rise d2">
+        <div class="pair-l w">context-per-agent · análise de crédito agêntica</div>
+        <svg viewBox="0 0 600 300" width="100%" height="300" aria-label="Cada agente com sua própria janela de contexto; só o handoff sobe ao orquestrador"><rect x="200" y="0" width="200" height="40" rx="10" fill="var(--acc-strong)"/><text x="300" y="26" text-anchor="middle" font-size="14" font-weight="700" style="fill:#fff">orquestrador</text><path d="M300 40 L100 64" class="d-ln"/><rect x="30" y="64" width="140" height="40" rx="9" class="d-box2"/><text x="100" y="89" text-anchor="middle" font-size="14" class="m">risco</text><path d="M100 104 V122" class="d-ln"/><rect x="20" y="122" width="160" height="96" rx="10" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="6 5"/><text x="30" y="140" font-size="10.5" class="m t-warn" letter-spacing=".5">JANELA · RISCO</text><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.070;0.080;0.700;0.710;1"/><rect x="32" y="150" width="136" height="17" rx="3" class="d-box"/><text x="100" y="163" text-anchor="middle" font-size="10.5" class="m t-mut">bureau</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.170;0.180;0.700;0.710;1"/><rect x="32" y="171" width="136" height="17" rx="3" class="d-box"/><text x="100" y="184" text-anchor="middle" font-size="10.5" class="m t-mut">SCR</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.270;0.280;0.700;0.710;1"/><rect x="32" y="192" width="136" height="17" rx="3" class="d-box"/><text x="100" y="205" text-anchor="middle" font-size="10.5" class="m t-mut">histórico</text></g><circle r="6" style="fill:var(--warn)" opacity="0"><animateMotion dur="8s" repeatCount="indefinite" path="M100 122 V104 M100 64 L300 40" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.72;0.86;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.710;0.720;0.860;0.870;1"/></circle><path d="M300 40 L300 64" class="d-ln"/><rect x="230" y="64" width="140" height="40" rx="9" class="d-box2"/><text x="300" y="89" text-anchor="middle" font-size="14" class="m">renda</text><path d="M300 104 V122" class="d-ln"/><rect x="220" y="122" width="160" height="96" rx="10" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="6 5"/><text x="230" y="140" font-size="10.5" class="m t-warn" letter-spacing=".5">JANELA · RENDA</text><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.100;0.110;0.700;0.710;1"/><rect x="232" y="150" width="136" height="17" rx="3" class="d-box"/><text x="300" y="163" text-anchor="middle" font-size="10.5" class="m t-mut">extratos</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.200;0.210;0.700;0.710;1"/><rect x="232" y="171" width="136" height="17" rx="3" class="d-box"/><text x="300" y="184" text-anchor="middle" font-size="10.5" class="m t-mut">Open Finance</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.300;0.310;0.700;0.710;1"/><rect x="232" y="192" width="136" height="17" rx="3" class="d-box"/><text x="300" y="205" text-anchor="middle" font-size="10.5" class="m t-mut">holerite</text></g><circle r="6" style="fill:var(--warn)" opacity="0"><animateMotion dur="8s" repeatCount="indefinite" path="M300 122 V104 M300 64 L300 40" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.72;0.86;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.710;0.720;0.860;0.870;1"/></circle><path d="M300 40 L500 64" class="d-ln"/><rect x="430" y="64" width="140" height="40" rx="9" class="d-box2"/><text x="500" y="89" text-anchor="middle" font-size="14" class="m">documentos</text><path d="M500 104 V122" class="d-ln"/><rect x="420" y="122" width="160" height="96" rx="10" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="6 5"/><text x="430" y="140" font-size="10.5" class="m t-warn" letter-spacing=".5">JANELA · DOCUMENTOS</text><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.130;0.140;0.700;0.710;1"/><rect x="432" y="150" width="136" height="17" rx="3" class="d-box"/><text x="500" y="163" text-anchor="middle" font-size="10.5" class="m t-mut">RG</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.230;0.240;0.700;0.710;1"/><rect x="432" y="171" width="136" height="17" rx="3" class="d-box"/><text x="500" y="184" text-anchor="middle" font-size="10.5" class="m t-mut">comprovante</text></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.330;0.340;0.700;0.710;1"/><rect x="432" y="192" width="136" height="17" rx="3" class="d-box"/><text x="500" y="205" text-anchor="middle" font-size="10.5" class="m t-mut">selfie</text></g><circle r="6" style="fill:var(--warn)" opacity="0"><animateMotion dur="8s" repeatCount="indefinite" path="M500 122 V104 M500 64 L300 40" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.72;0.86;1"/><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.710;0.720;0.860;0.870;1"/></circle><g><circle cx="200" cy="170" r="11" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2"/><path d="M195 165 L205 175 M205 165 L195 175" stroke="var(--warn)" stroke-width="2"/></g><g><circle cx="400" cy="170" r="11" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2"/><path d="M395 165 L405 175 M405 165 L395 175" stroke="var(--warn)" stroke-width="2"/></g><g opacity="0"><animate attributeName="opacity" dur="8s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.710;0.720;0.950;0.960;1"/><text x="300" y="58" text-anchor="middle" font-size="11.5" class="m t-warn">handoff: resumo com teto de tokens</text></g><text x="300" y="250" text-anchor="middle" font-size="13" class="m t-warn">sem leitura entre janelas · só o handoff sobe</text></svg>
+        <div class="cd">a janela de contexto é privada do agente</div>
+      </div>
+    </div>
+    <div class="keep"><span class="chip">tenant : usuário : thread</span><span class="chip">identidade on-behalf-of</span><span class="chip">PII mascarada na fronteira</span><span class="chip">checkpoint por thread</span></div>
+    <div class="src">Anthropic, "Effective context engineering for AI agents" · LangChain, "Context engineering for agents" (write · select · compress · isolate)</div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// CONTEXTO POR AGENTE</span><span class="hb-idx"></span></div>
+  <aside class="notes">A mesma regra do database-per-service, agora para agentes. À esquerda, os serviços da análise de crédito: cada um é dono do seu banco, e ninguém faz join no banco do outro; a integração é por evento ou API. À direita, a análise de crédito agêntica: o orquestrador delega a três agentes, e cada um é dono da sua janela de contexto. O agente de risco enche a janela com bureau, SCR e histórico; o de renda, com extratos via Open Finance; o de documentos, com RG, comprovante e selfie. Nenhum agente lê a janela do outro, e o que sobe para o orquestrador é só o handoff: um resumo com teto de tokens, um contrato. Esse é o pilar isolate de context engineering (os outros três são write, persistir fora da janela; select, trazer só o relevante; e compress, resumir o histórico). Por que isolar: janela menor é mais barata, mais precisa e sofre menos context rot; e um documento com prompt injection contamina só a janela do agente de documentos, não a decisão inteira. É um bulkhead de contexto. Os chips são as chaves de isolamento do estado durável: tenant, usuário e thread em toda leitura e escrita, inclusive no cache semântico e no índice vetorial; identidade propagada on-behalf-of (token exchange, RFC 8693); PII mascarada antes de entrar no modelo; e checkpoint por thread para retomar e auditar.</aside>
+</section>
+<!-- 09-harness -->
+<section class="slide" id="slide-harness" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">04 · MULTIAGENTES &nbsp;<span class="dim">// harness</span></div>
+    <h2>Agente = <span class="a">modelo + harness</span></h2>
+    <div class="hn2">
+      <div class="col">
+        <div class="lab">guias · feedforward</div>
+        <div class="hc hp" style="--dl:0s"><b>prompts &amp; specs</b><span>o que o agente sabe antes de agir</span></div>
+        <div class="hc hp" style="--dl:.3s"><b>contratos &amp; schemas</b><span>formato que a saída precisa respeitar</span></div>
+        <div class="hc hp" style="--dl:.6s"><b>AGENTS.md · skills</b><span>convenções e procedimentos</span></div>
+      </div>
+      <div class="arw harw"></div>
+      <div class="model mp"><b>modelo</b><span>inferência · decisão</span></div>
+      <div class="arw harw"></div>
+      <div class="col">
+        <div class="lab s">sensores · feedback</div>
+        <div class="hc s hp" style="--dl:2.4s"><b>traces</b><span>o que de fato aconteceu</span></div>
+        <div class="hc s hp" style="--dl:2.7s"><b>guardrails &amp; testes</b><span>verificação determinística</span></div>
+        <div class="hc s hp" style="--dl:3.0s"><b>LLM-as-judge · HITL</b><span>o que é subjetivo ou crítico</span></div>
+      </div>
+    </div>
+    <div class="evbar evp"><b>evals</b><span>trajetória · resultado · custo por tarefa</span><span class="warn mono"><i class="spinr">↺</i> falha detectada vira guia novo</span></div>
+    <div class="src">Birgitta Böckeler, "Harness Engineering" (Thoughtworks / martinfowler.com) · Anthropic, "Demystifying evals for AI agents" (jan/2026)</div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// HARNESS</span><span class="hb-idx"></span></div>
+  <aside class="notes">Harness é tudo que envolve o modelo para transformar previsão de texto em comportamento confiável. A animação segue o ciclo: guias acendem antes da ação (feedforward: prompts, specs, contratos, AGENTS.md, skills); o modelo decide; sensores acendem depois (feedback: traces, guardrails e testes determinísticos, LLM-as-judge para o subjetivo e humano para o crítico); e os evals fecham o ciclo, medindo trajetória, resultado e custo por tarefa. Toda falha detectada vira um guia novo. É aqui que se resolve o que as regras determinísticas não resolvem: elas garantem consistência; o harness persegue correção. Em um sistema multiagêntico, cada agente tem o seu harness.</aside>
+</section>
+<!-- 10-loop -->
+<section class="slide" id="slide-loop" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">04 · MULTIAGENTES &nbsp;<span class="dim">// loop</span></div>
+    <h2>Projetar o loop é <span class="a">projetar quando ele para</span></h2>
+    <div class="lp4b">
+      <div class="card rise d1"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="var(--acc)" stroke-width="3" stroke-dasharray="30 8" class="spin"/><text x="32" y="38" text-anchor="middle" font-size="16" font-weight="800" class="t-acc">1×</text></svg><div class="ct">turn-based</div><div class="kv">gatilho</div><div class="kd">um prompt</div><div class="kv">condição de parada</div><div class="kd">o próprio agente decide</div><div class="kv">uso</div><div class="kd">tarefas pontuais</div></div>
+      <div class="card rise d2"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="var(--acc)" stroke-width="3" stroke-dasharray="30 8" class="spin"/><circle cx="32" cy="32" r="8" style="fill:var(--ok)"/></svg><div class="ct">goal-based</div><div class="kv">gatilho</div><div class="kd">meta verificável</div><div class="kv">condição de parada</div><div class="kd">um evaluator confirma</div><div class="kv">uso</div><div class="kd">testes passando, score mínimo</div></div>
+      <div class="card rise d3"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="var(--acc)" stroke-width="3" stroke-dasharray="30 8" class="spin"/><path d="M32 18 V32 L42 38" stroke="var(--acc)" stroke-width="3" fill="none" stroke-linecap="round"/></svg><div class="ct">time-based</div><div class="kv">gatilho</div><div class="kd">intervalo ou agenda</div><div class="kv">condição de parada</div><div class="kd">cancelado ou concluído</div><div class="kv">uso</div><div class="kd">relatórios, sincronizações</div></div>
+      <div class="card rise d4"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24" fill="none" stroke="var(--acc)" stroke-width="3" stroke-dasharray="30 8" class="spin"/><path d="M34 16 L24 34 H32 L28 48 L40 28 H32 Z" style="fill:var(--warn)"/></svg><div class="ct">proactive</div><div class="kv">gatilho</div><div class="kd">evento externo</div><div class="kv">condição de parada</div><div class="kd">cada tarefa na meta</div><div class="kv">uso</div><div class="kd">triagem, incidentes, migrações</div></div>
+    </div>
+    <div class="fails2 rise d5">
+      <div><b>doom loop</b>máximo de iterações e token budget</div>
+      <div><b>goal drift</b>avaliador separado do gerador</div>
+      <div><b>context rot</b>compressão e subagentes isolados</div>
+    </div>
+    <div class="callout rise d5">Custo e latência também são <b>condição de parada</b>: budget de tokens e tempo por tarefa no loop, teto por app no gateway.</div>
+    <div class="src">Claude, "Loop engineering: getting started with loops" (jun/2026) · LangChain, "The Art of Loop Engineering" (jun/2026)</div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// LOOP</span><span class="hb-idx"></span></div>
+  <aside class="notes">Loop engineering: desenhar o ciclo que o agente repete, e principalmente quando ele para. Quatro tipos pelo gatilho: turn-based (um prompt, o agente decide que terminou), goal-based (uma meta verificável, e quem decide parar é um evaluator), time-based (agenda) e proactive (evento externo, sem humano no gatilho). Quanto menos humano no gatilho, mais harness. Embaixo, as três falhas documentadas e a contramedida de cada uma: doom loop pede teto de iterações e budget; goal drift pede avaliador separado de quem gera; context rot pede compressão e isolamento em subagentes. E custo e latência são NFRs de primeira classe do loop: o budget de tokens e de tempo por tarefa é uma condição de parada no próprio loop, e o teto por app é aplicado no gateway, como veremos no fim.</aside>
+</section>
+
+<!-- ═════════════ 05 · NFRs E AI GATEWAY ═════════════ -->
+<!-- 11-codigo-com-ai-gateway -->
+<section class="slide" id="slide-codigo-com-ai-gateway" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">05 · NFRs E AI GATEWAY &nbsp;<span class="dim">// o adapter com ai gateway</span></div>
+    <h2>Mesma porta, novo adapter: <span class="a">tudo atrás da borda</span></h2>
+    <div class="split">
+      <script type="text/plain" class="code" data-lang="ts" data-size="md" data-file="adapters/out/gateway-credit-evaluator.ts" data-hlg="1:3-5,16;2:7,12;3:8,13;4:18,20">
+// adapters/out — new adapter, same port: everything goes through the AI Gateway
+export class GatewayCreditEvaluator implements CreditEvaluator {
+  private readonly llm = new OpenAI({        // OpenAI-compatible API
+    baseURL: `${AI_GATEWAY_URL}/v1`,         // ① Model Gateway
+    apiKey: workloadToken(),                 // workload identity, no vendor key
+  });
+  private readonly bureau = mcpClient(`${AI_GATEWAY_URL}/mcp/credit-bureau`); // ②
+  private readonly fraud = a2aClient(`${AI_GATEWAY_URL}/a2a/fraud`);          // ③
+
+  async evaluate(proposal: Proposal): Promise<Assessment> {
+    const [score, fraudRisk] = await Promise.all([
+      this.bureau.callTool("get_score", { customerId: proposal.customerId }),
+      this.fraud.sendTask("transaction_score", { proposalId: proposal.id }),
+    ]);
+    const res = await this.llm.chat.completions.create({
+      model: "credit-deep",                  // ① alias: the gateway routes
+      messages: render(proposal, score, fraudRisk),
+      response_format: zodResponseFormat(AssessmentSchema, "assessment"), // ④
+    });
+    return AssessmentSchema.parse(JSON.parse(res.choices[0].message.content!)); // ④
+  }
+}
+</script>
+      <div class="side">
+        <svg class="gwd" viewBox="0 0 680 400" width="100%" aria-label="Caminho de cada chamada do adapter pelo AI Gateway: modelo, tool e agente"><rect x="0" y="160" width="162" height="76" rx="12" class="d-box2" stroke="var(--acc)" stroke-width="2"/><text x="81" y="192" text-anchor="middle" font-size="13" font-weight="700" class="m">GatewayCredit</text><text x="81" y="212" text-anchor="middle" font-size="13" font-weight="700" class="m">Evaluator</text><text x="81" y="256" text-anchor="middle" font-size="11" class="m" style="fill:var(--ok)">token do workload</text><text x="81" y="272" text-anchor="middle" font-size="11" class="m" style="fill:var(--ok)">sem chave de provedor</text><rect x="196" y="8" width="282" height="368" rx="16" fill="none" stroke="var(--warn)" stroke-width="2.5"/><text x="337" y="30" text-anchor="middle" font-size="13" font-weight="800" class="m t-warn" letter-spacing="2.5">AI GATEWAY</text><g class="lane l1 frag" data-f="1"><path d="M162 198 C180 198 186 92 210 92" fill="none" stroke="#AC54EB" stroke-width="2"/><rect x="210" y="40" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#AC54EB" stroke-width="2"/><text x="224" y="67" font-size="13" font-weight="800" class="m" style="fill:#AC54EB" letter-spacing="1">① MODEL GATEWAY</text><text x="224" y="96" font-size="12" class="m">credit-deep → anthropic</text><text x="224" y="120" font-size="11.5" class="m t-mut">fallback · PII · 2M tokens/dia</text><path d="M464 92 C482 92 486 58 500 58" fill="none" stroke="#AC54EB" stroke-width="1.6" /><rect x="500" y="44" width="180" height="28" rx="7" class="d-box" /><text x="590" y="63" text-anchor="middle" font-size="11.5" class="m">Anthropic · primário</text><path d="M464 92 C482 92 486 92 500 92" fill="none" stroke="#AC54EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="500" y="78" width="180" height="28" rx="7" class="d-box" stroke-dasharray="5 4"/><text x="590" y="97" text-anchor="middle" font-size="11.5" class="m">OpenAI · fallback</text><path d="M464 92 C482 92 486 126 500 126" fill="none" stroke="#AC54EB" stroke-width="1.6" stroke-dasharray="4 4"/><rect x="500" y="112" width="180" height="28" rx="7" class="d-box" stroke-dasharray="5 4"/><text x="590" y="131" text-anchor="middle" font-size="11.5" class="m">Self-hosted · fallback</text><circle class="pk mpath" r="6" style="fill:#AC54EB;offset-path:path('M162 198 C180 198 186 92 210 92 L222 135 H452 L464 92 C482 92 486 58 500 58');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#AC54EB;offset-path:path('M162 198 C180 198 186 92 210 92 L222 135 H452 L464 92 C482 92 486 58 500 58');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><g class="lane l2 frag" data-f="2"><path d="M162 198 C180 198 186 204 210 204" fill="none" stroke="#0E94FF" stroke-width="2"/><rect x="210" y="152" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#0E94FF" stroke-width="2"/><text x="224" y="179" font-size="13" font-weight="800" class="m" style="fill:#0E94FF" letter-spacing="1">② MCP GATEWAY</text><text x="224" y="208" font-size="12" class="m">tool get_score</text><text x="224" y="232" font-size="11.5" class="m t-mut">scope credit.read · auditada</text><path d="M464 204 H500" fill="none" stroke="#0E94FF" stroke-width="2"/><rect x="500" y="174" width="180" height="60" rx="10" class="d-box"/><text x="590" y="200" text-anchor="middle" font-size="12.5" font-weight="700" class="m">bureau de crédito</text><text x="590" y="220" text-anchor="middle" font-size="11" class="m t-mut">MCP server</text><circle class="pk mpath" r="6" style="fill:#0E94FF;offset-path:path('M162 198 C180 198 186 204 210 204 L222 247 H452 L464 204 C482 204 486 204 500 204');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#0E94FF;offset-path:path('M162 198 C180 198 186 204 210 204 L222 247 H452 L464 204 C482 204 486 204 500 204');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><g class="lane l3 frag" data-f="3"><path d="M162 198 C180 198 186 316 210 316" fill="none" stroke="#FF7D4A" stroke-width="2"/><rect x="210" y="264" width="254" height="104" rx="11" style="fill:var(--surf-2)" stroke="#FF7D4A" stroke-width="2"/><text x="224" y="291" font-size="13" font-weight="800" class="m" style="fill:#FF7D4A" letter-spacing="1">③ AGENT GATEWAY</text><text x="224" y="320" font-size="12" class="m">skill transaction_score</text><text x="224" y="344" font-size="11.5" class="m t-mut">identidade · 100 req/min</text><path d="M464 316 H500" fill="none" stroke="#FF7D4A" stroke-width="2"/><rect x="500" y="286" width="180" height="60" rx="10" class="d-box"/><text x="590" y="312" text-anchor="middle" font-size="12.5" font-weight="700" class="m">agente de fraude</text><text x="590" y="332" text-anchor="middle" font-size="11" class="m t-mut">A2A</text><circle class="pk mpath" r="6" style="fill:#FF7D4A;offset-path:path('M162 198 C180 198 186 316 210 316 L222 359 H452 L464 316 C482 316 486 316 500 316');animation-duration:2.2s;animation-delay:0s"></circle><circle class="pk mpath" r="6" style="fill:#FF7D4A;offset-path:path('M162 198 C180 198 186 316 210 316 L222 359 H452 L464 316 C482 316 486 316 500 316');animation-duration:2.2s;animation-delay:-1.1s"></circle></g><text x="337" y="396" text-anchor="middle" font-size="11" class="m t-ref">políticas ilustrativas</text></svg>
+        <div class="keepp frag frag-ghost" data-f="4">
+          <div class="kt">④ fica no código</div>
+          <div class="ks">depende do domínio, não é infraestrutura: o gateway não decide crédito</div>
+          <div class="kg">
+            <div class="kr"><b>contrato da resposta</b><code>AssessmentSchema.parse(…)</code></div>
+            <div class="kr"><b>decisão de crédito</b><code>policy.decide(proposal, assessment)</code></div>
+            <div class="kr"><b>efeito uma vez</b><span>idempotência por intenção</span></div>
+            <div class="kr"><b>contexto isolado</b><span>uma janela por agente</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// CÓDIGO COM AI GATEWAY</span><span class="hb-idx"></span></div>
+  <aside class="notes">Fecho do hexagonal: a porta CreditEvaluator é a mesma do hexagonal, o caso de uso EvaluateProposal não mudou uma linha, e entra um adapter novo, GatewayCreditEvaluator, que manda tudo pela borda. Quatro cliques; cada um acende um trecho do código e o caminho correspondente no desenho. (1) Model Gateway: o cliente aponta para AI_GATEWAY_URL e se autentica com a identidade do workload, sem chave de provedor; o código pede o alias credit-deep e a política decide o modelo primário, o fallback, o mascaramento de PII e o budget de tokens. (2) MCP Gateway: a consulta ao bureau de crédito é uma tool MCP (get_score) que passa pela borda, com escopo mínimo e auditoria por chamada. (3) Agent Gateway: o pedido de score de fraude é uma tarefa A2A para o agente de outro domínio, com identidade e limite entre agentes. (4) O que fica no código, porque depende do domínio: o contrato da resposta (schema validado na fronteira), a decisão de crédito pela CreditPolicy, a idempotência por intenção e o contexto isolado por agente. O gateway governa o tráfego; ele não decide crédito. As políticas no desenho são ilustrativas. Se perguntarem do apiKey: workloadToken() é um bearer token de vida curta que representa o workload (OIDC, SPIFFE); o gateway valida esse token e usa a credencial do provedor que ele mesmo guarda. Nenhuma credencial de provedor mora no serviço.</aside>
+</section>
+<!-- 12-sistema-com-ai-gateway -->
+<section class="slide" id="slide-sistema-com-ai-gateway" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">05 · NFRs E AI GATEWAY &nbsp;<span class="dim">// a borda do sistema multiagêntico</span></div>
+    <h2>Com AI Gateway: <span class="a">a borda governa o tráfego de IA</span></h2>
+    <svg viewBox="0 0 1470 655" width="100%" height="655" aria-label="Aplicações agênticas nomeadas atrás de um AI Gateway com Model, MCP e Agent Gateway"><text x="20" y="18.7" font-size="12" class="m t-ref" letter-spacing="2">APLICAÇÕES AGÊNTICAS · CADA UMA COM SEUS AGENTES</text><rect x="20" y="32.8" width="268" height="149.8" rx="14" style="fill:var(--surf-2);stroke:var(--acc);stroke-width:1.5"/><text x="36" y="63.2" font-size="17" font-weight="800">App Onboarding</text><text x="36" y="91.3" font-size="11" class="m t-ref" letter-spacing="1.5">AGENTES</text><rect x="36" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="54" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="54" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="70" y="138.1" font-size="12.5" class="m">KYC</text><rect x="158" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="176" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="176" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="192" y="138.1" font-size="12.5" class="m">documentos</text><rect x="310" y="32.8" width="268" height="149.8" rx="14" style="fill:var(--surf-2);stroke:var(--warn);stroke-width:3"/><text x="326" y="63.2" font-size="17" font-weight="800">App Crédito</text><text x="326" y="91.3" font-size="11" class="m t-ref" letter-spacing="1.5">AGENTES</text><rect x="326" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="344" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="344" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="360" y="138.1" font-size="12.5" class="m">risco</text><rect x="448" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="466" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="466" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="482" y="138.1" font-size="12.5" class="m">renda</text><rect x="600" y="32.8" width="268" height="149.8" rx="14" style="fill:var(--surf-2);stroke:var(--acc);stroke-width:1.5"/><text x="616" y="63.2" font-size="17" font-weight="800">App Antifraude</text><text x="616" y="91.3" font-size="11" class="m t-ref" letter-spacing="1.5">AGENTES</text><rect x="616" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="634" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="634" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="650" y="138.1" font-size="12.5" class="m">score</text><rect x="738" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="756" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="756" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="772" y="138.1" font-size="12.5" class="m">regras</text><rect x="890" y="32.8" width="268" height="149.8" rx="14" style="fill:var(--surf-2);stroke:var(--acc);stroke-width:1.5"/><text x="906" y="63.2" font-size="17" font-weight="800">App Atendimento</text><text x="906" y="91.3" font-size="11" class="m t-ref" letter-spacing="1.5">AGENTES</text><rect x="906" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="924" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="924" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="940" y="138.1" font-size="12.5" class="m">triagem</text><rect x="1028" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="1046" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="1046" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="1062" y="138.1" font-size="12.5" class="m">suporte</text><rect x="1180" y="32.8" width="268" height="149.8" rx="14" style="fill:var(--surf-2);stroke:var(--acc);stroke-width:1.5"/><text x="1196" y="63.2" font-size="17" font-weight="800">App Cobrança</text><text x="1196" y="91.3" font-size="11" class="m t-ref" letter-spacing="1.5">AGENTES</text><rect x="1196" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="1214" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="1214" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="1230" y="138.1" font-size="12.5" class="m">negociação</text><rect x="1318" y="105.3" width="114" height="53.8" rx="10" class="d-box2"/><circle cx="1336" cy="132.2" r="8" fill="none" stroke="var(--acc)" stroke-width="2"/><circle cx="1336" cy="132.2" r="2.5" style="fill:var(--acc)"/><text x="1352" y="138.1" font-size="12.5" class="m">boleto</text><path d="M154 182.5 V229.3" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M444 182.5 V229.3" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M734 182.5 V229.3" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M1024 182.5 V229.3" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><path d="M1314 182.5 V229.3" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="20" y="229.3" width="1430" height="196.6" rx="18" class="gwband"/><text x="40" y="264.4" font-size="19" font-weight="800" class="t-warn">AI Gateway</text><text x="1430" y="264.4" text-anchor="end" font-size="12.5" class="m t-mut">um ponto de controle para todo o tráfego de IA</text><rect x="40" y="280.8" width="440" height="84.2" rx="12" class="d-box2" style="stroke:var(--acc);stroke-width:2"/><text x="260" y="315.9" text-anchor="middle" font-size="17" font-weight="800">Model Gateway</text><text x="260" y="344" text-anchor="middle" font-size="12" class="m t-mut">vault · roteamento · fallback · PII · token budget</text><rect x="515" y="280.8" width="440" height="84.2" rx="12" class="d-box2" style="stroke:var(--blue);stroke-width:2"/><text x="735" y="315.9" text-anchor="middle" font-size="17" font-weight="800">MCP Gateway</text><text x="735" y="344" text-anchor="middle" font-size="12" class="m t-mut">authZ por tool · allowlist · API → MCP</text><rect x="990" y="280.8" width="440" height="84.2" rx="12" class="d-box2" style="stroke:var(--warn);stroke-width:2"/><text x="1210" y="315.9" text-anchor="middle" font-size="17" font-weight="800">Agent Gateway</text><text x="1210" y="344" text-anchor="middle" font-size="12" class="m t-mut">identidade · limites entre agentes · discovery</text><text x="40" y="402.5" font-size="12.5" class="m t-acc">control plane · identidade · política · custo · auditoria · traces (OTel GenAI)</text><text x="1430" y="402.5" text-anchor="end" font-size="11" class="m t-ref">Agent Gateway: padrão em evolução no mercado</text><path d="M260 365 V475" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="40" y="475" width="440" height="107.6" rx="12" class="d-box"/><text x="56" y="503.1" font-size="12" class="m t-ref" letter-spacing="1.5">MODELOS</text><rect x="56" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="103" y="547.6" text-anchor="middle" font-size="12" class="m">Anthropic</text><rect x="158" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="205" y="547.6" text-anchor="middle" font-size="12" class="m">OpenAI</text><rect x="260" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="307" y="547.6" text-anchor="middle" font-size="12" class="m">Gemini</text><rect x="362" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="409" y="547.6" text-anchor="middle" font-size="12" class="m">self-hosted</text><path d="M735 365 V475" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="515" y="475" width="440" height="107.6" rx="12" class="d-box"/><text x="531" y="503.1" font-size="12" class="m t-ref" letter-spacing="1.5">MCP SERVERS E APIS</text><rect x="531" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="578" y="547.6" text-anchor="middle" font-size="12" class="m">core</text><rect x="633" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="680" y="547.6" text-anchor="middle" font-size="12" class="m">bureau</text><rect x="735" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="782" y="547.6" text-anchor="middle" font-size="12" class="m">CRM</text><rect x="837" y="519.5" width="94" height="44.5" rx="8" class="d-box2"/><text x="884" y="547.6" text-anchor="middle" font-size="12" class="m">legado</text><path d="M1210 365 V475" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/><rect x="990" y="475" width="440" height="107.6" rx="12" class="d-box"/><text x="1006" y="503.1" font-size="12" class="m t-ref" letter-spacing="1.5">AGENTES EXTERNOS</text><rect x="1006" y="519.5" width="196" height="44.5" rx="8" class="d-box2"/><text x="1104" y="547.6" text-anchor="middle" font-size="12" class="m">parceiros</text><rect x="1210" y="519.5" width="196" height="44.5" rx="8" class="d-box2"/><text x="1308" y="547.6" text-anchor="middle" font-size="12" class="m">outros domínios</text><circle cx="30" cy="627.1" r="6" style="fill:var(--acc)"/><text x="44" y="631.8" font-size="12.5" class="m t-mut">app → modelo</text><circle cx="200" cy="627.1" r="6" style="fill:var(--blue)"/><text x="214" y="631.8" font-size="12.5" class="m t-mut">app → tools e APIs (MCP)</text><circle cx="450" cy="627.1" r="6" style="fill:var(--warn)"/><text x="464" y="631.8" font-size="12.5" class="m t-mut">agente → agente de outra app (A2A)</text><text x="1450" y="631.8" text-anchor="end" font-size="12.5" class="m t-warn">ex.: App Crédito pede um score à App Antifraude</text><circle r="7" style="fill:var(--acc);offset-path:path('M444 182.5 V280.8 H260 V365 V475');animation-duration:3.0s;animation-delay:0s" class="mpath"></circle><circle r="7" style="fill:var(--blue);offset-path:path('M444 182.5 V280.8 H735 V365 V475');animation-duration:3.0s;animation-delay:-1.0s" class="mpath"></circle><circle r="7" style="fill:var(--warn);offset-path:path('M444 182.5 V280.8 H1210 V280.8 H734 V182.5');animation-duration:3.4s;animation-delay:-2.0s" class="mpath"></circle><circle r="6" style="fill:var(--warn);offset-path:path('M1024 182.5 V280.8 H1210 V280.8 H1314 V182.5');animation-duration:3.4s;animation-delay:-0.6s" class="mpath"></circle><circle r="6" style="fill:var(--blue);offset-path:path('M154 182.5 V280.8 H735 V365 V475');animation-duration:3.2s;animation-delay:-1.6s" class="mpath"></circle></svg>
+  </div>
+  <div class="hud-bottom"><span class="sec">// SISTEMA COM AI GATEWAY</span><span class="hb-idx"></span></div>
+  <aside class="notes">Do código para o sistema inteiro: o mesmo desenho, agora com a borda. Em cima, cinco aplicações agênticas, cada uma com seus agentes: Onboarding (KYC e documentos), Crédito (risco e renda), Antifraude, Atendimento e Cobrança. Todo tráfego de IA dessas apps passa por um ponto de controle, com três módulos. Model Gateway, para os LLMs: credenciais em vault, roteamento e fallback entre provedores, mascaramento de PII, token budget por app. MCP Gateway, para ferramentas: autorização por tool, allowlist e a transformação de APIs existentes em MCP. Agent Gateway, para o tráfego entre agentes via A2A: identidade, limites e discovery. Por cima, um control plane com identidade, política, custo, auditoria e traces no padrão OpenTelemetry GenAI. A legenda explica as cores dos fluxos: roxo é app chamando modelo, azul é app chamando tools e APIs, laranja é um agente chamando agente de outra app; por exemplo, o agente de risco da App Crédito pedindo um score à App Antifraude. É a mesma história dos microsserviços: o que é transversal sai do código e vai para a borda. A lição do ESB continua valendo: a borda governa, mas não decide regra de negócio. Na Sensedia, é esse o desenho do AI Gateway; governar o tráfego entre agentes ainda é um padrão em evolução no mercado, inclusive no nosso roadmap.</aside>
+</section>
+
+<!-- ═════════════ ENCERRAMENTO ═════════════ -->
+<!-- 13-obrigado -->
+<section class="slide" id="slide-obrigado" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">OBRIGADO!</div>
+    <div class="thesis rise d1">O núcleo é <span class="prob">probabilístico</span>.<br/>A casca, <span class="det">determinística</span>.</div>
+    <div class="qr-box"><img src="assets/qr.svg" alt="QR code para a apresentação"></div>
+    <div class="qr-url">it0dan.github.io/recnplay-2026</div>
+    <div class="qr-sub">Danilo Amaral · Sensedia · linkedin.com/in/it0dan</div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// OBRIGADO</span><span class="hb-idx"></span></div>
+  <aside class="notes">Para levar: o núcleo é probabilístico, a casca é determinística. Não dá para tornar o modelo idempotente, mas dá para construir em volta dele uma casca que seja: contrato, contexto isolado, harness, loop com critério de parada e a borda que governa o tráfego de IA. Obrigado! Deixar este slide na tela durante as perguntas: cerca de 3 minutos reservados para o Q&amp;A. O QR aponta para o GitHub Pages da apresentação, com slides, código e fontes.</aside>
+</section>
+</div><!-- /stage -->
+
+<!-- módulos: config e core primeiro, boot por último (ele confere se todos carregaram) -->
+<script src="src/js/config.js"></script>
+<script src="src/js/core/util.js"></script>
+<script src="src/js/core/deck.js"></script>
+<script src="src/js/core/router.js"></script>
+<script src="src/js/core/layout.js"></script>
+<script src="src/js/ui/highlight.js"></script>
+<script src="src/js/ui/codebox.js"></script>
+<script src="src/js/ui/hud.js"></script>
+<script src="src/js/ui/dotgrid.js"></script>
+<script src="src/js/ui/theme.js"></script>
+<script src="src/js/features/timer.js"></script>
+<script src="src/js/features/blackout.js"></script>
+<script src="src/js/features/panels.js"></script>
+<script src="src/js/features/notes.js"></script>
+<script src="src/js/input/controls.js"></script>
+<script src="src/js/boot.js"></script>
+</body>
+</html>

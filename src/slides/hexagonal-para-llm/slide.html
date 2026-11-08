@@ -1,0 +1,40 @@
+<section class="slide" id="slide-hexagonal-para-llm" data-t="3:30">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">03 · APLICAÇÕES E ESTEIRAS AGÊNTICAS &nbsp;<span class="dim">// hexagonal para llm</span></div>
+    <h2>Hexagonal para LLM: <span class="a">o modelo é um adapter</span></h2>
+    <div class="split">
+      <svg viewBox="0 0 800 500" width="820" height="512" aria-label="Arquitetura hexagonal com porta de raciocínio e adaptadores por provedor">
+        <text x="60" y="134" text-anchor="middle" font-size="12" class="m t-ref" letter-spacing="1.5">ADAPTERS IN</text>
+        <rect x="0" y="150" width="120" height="46" rx="9" class="d-box"/><text x="60" y="178" text-anchor="middle" font-size="14" class="m">REST</text>
+        <rect x="0" y="216" width="120" height="46" rx="9" class="d-box"/><text x="60" y="244" text-anchor="middle" font-size="14" class="m">evento / fila</text>
+        <rect x="0" y="282" width="120" height="46" rx="9" class="d-box"/><text x="60" y="310" text-anchor="middle" font-size="14" class="m">chat</text>
+        <path d="M120 173 L160 239 M120 239 L160 239 M120 305 L160 239" class="d-ln"/>
+        <polygon points="460,239 385,369 235,369 160,239 235,109 385,109" fill="var(--surf)" stroke="var(--acc-strong)" stroke-width="3"/>
+        <text x="310" y="200" text-anchor="middle" font-size="13" class="m t-acc" letter-spacing="2">NÚCLEO</text>
+        <text x="310" y="234" text-anchor="middle" font-size="22" font-weight="800">EvaluateProposal</text>
+        <text x="310" y="262" text-anchor="middle" font-size="13" class="m t-mut">CreditPolicy · Assessment</text>
+        <text x="310" y="296" text-anchor="middle" font-size="12" class="m t-ref">sem "messages",</text>
+        <text x="310" y="314" text-anchor="middle" font-size="12" class="m t-ref">sem "choices"</text>
+        <rect x="428" y="216" width="150" height="46" rx="8" fill="var(--acc-strong)"/>
+        <text x="503" y="244" text-anchor="middle" font-size="12" font-weight="700" class="m" style="fill:#fff">CreditEvaluator</text>
+        <rect x="610" y="42" width="188" height="400" rx="14" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="7 6"/>
+        <text x="704" y="30" text-anchor="middle" font-size="12" class="m t-warn" letter-spacing="1.5">ADAPTERS OUT · ACL</text>
+        <rect x="628" y="66"  width="152" height="50" rx="9" class="d-box"/><text x="704" y="96"  text-anchor="middle" font-size="13.5" class="m">Anthropic</text>
+        <rect x="628" y="146" width="152" height="50" rx="9" class="d-box"/><text x="704" y="176" text-anchor="middle" font-size="13.5" class="m">OpenAI</text>
+        <rect x="628" y="226" width="152" height="50" rx="9" class="d-box"/><text x="704" y="256" text-anchor="middle" font-size="13.5" class="m">Gemini</text>
+        <rect x="628" y="306" width="152" height="50" rx="9" class="d-box"/><text x="704" y="336" text-anchor="middle" font-size="13.5" class="m">Self-hosted</text>
+        <rect x="628" y="378" width="152" height="46" rx="9" class="d-box" stroke-dasharray="5 4"/><text x="704" y="406" text-anchor="middle" font-size="13" class="m t-ok" style="fill:var(--ok)">Fake · tests</text>
+        <path d="M578 239 C604 239 604 91 628 91 M578 239 C604 239 604 171 628 171 M578 239 L628 251 M578 239 C604 239 604 331 628 331 M578 239 C604 239 604 401 628 401" class="d-arr"/>
+        <text x="310" y="420" text-anchor="middle" font-size="13" class="m t-ref">dependências apontam para dentro</text>
+      </svg>
+      <div class="whw">
+        <div class="wc"><div class="wk">o que é</div><div class="wt">Hexagonal (Cockburn, 2005), Onion (Palermo, 2008) e Clean (Martin, 2012) são a mesma ideia: <b>o núcleo no centro</b>, domínio e casos de uso, e a infraestrutura na borda. <b>As dependências apontam para dentro.</b></div></div>
+        <div class="wc"><div class="wk">por que</div><div class="wt">Trocar o detalhe sem tocar a regra: provedor de LLM, banco ou framework. Testar o núcleo sem rede, com um Fake. E limitar o que um sistema externo consegue quebrar lá dentro.</div></div>
+        <div class="wc"><div class="wk">como</div><div class="wt">O núcleo define <b>portas</b> na língua do negócio, como <code>CreditEvaluator.evaluate(proposal)</code>. <b>Adapters</b> implementam a porta e traduzem o modelo externo (ACL). A composição injeta o adapter, e um teste de arquitetura barra SDK no núcleo.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// HEXAGONAL PARA LLM</span><span class="hb-idx"></span></div>
+  <aside class="notes">Hexagonal, Onion e Clean Architecture nasceram em momentos diferentes (Alistair Cockburn em 2005, Jeffrey Palermo em 2008, Robert Martin em 2012), mas dizem a mesma coisa: o que importa, o domínio e os casos de uso, fica no centro; o que muda, banco, framework, provedor, fica na borda; e as dependências apontam para dentro. Por quê: para trocar o detalhe sem tocar a regra, para testar o núcleo sem rede e para conter o raio de impacto de um sistema externo. Como: o núcleo declara portas na língua do negócio, e adapters implementam essas portas traduzindo o modelo de fora, que é a anti-corruption layer do DDD. No desenho, a análise de crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal; ele conversa só com a porta CreditEvaluator; e cada provedor de LLM é um adapter, inclusive um Fake para testes. O ponto para aplicações com LLM: o modelo é um detalhe de infraestrutura. Messages, choices e content blocks nunca cruzam a porta; o que entra no núcleo é um Assessment validado. E quem decide é a regra de negócio, não o modelo. É esse adapter que, no fim da palestra, a gente troca por um que passa pelo AI Gateway, sem mudar uma linha do núcleo.</aside>
+</section>

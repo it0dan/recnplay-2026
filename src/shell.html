@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<!-- @generated -->
+<!--# Esqueleto do deck. O tools/build.py resolve as diretivas @include, @slides e @slide-styles,
+      apaga os comentários "<!--#" (como este) e grava o resultado em presentation.html, na raiz.
+      Por isso os caminhos (href/src) aqui são relativos à raiz do repositório. -->
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{{title}}</title>
+<link rel="stylesheet" href="src/css/main.css"/>
+<!-- @slide-styles -->
+</head>
+<body>
+<canvas id="dotgrid"></canvas>
+<div id="blackout"><span class="bc">Pausa</span><span class="bt" id="breakClock">00:00</span></div>
+<div id="notesbar"><div class="nh" id="notesHead">notas</div><div id="notesText"></div></div>
+
+<!-- @include partials/panel-fontes.html -->
+
+<!-- @include partials/panel-glossario.html -->
+
+<div class="stage" id="stage">
+<!-- @slides -->
+</div><!-- /stage -->
+
+<!-- módulos: config e core primeiro, boot por último (ele confere se todos carregaram) -->
+<script src="src/js/config.js"></script>
+<script src="src/js/core/util.js"></script>
+<script src="src/js/core/deck.js"></script>
+<script src="src/js/core/router.js"></script>
+<script src="src/js/core/layout.js"></script>
+<script src="src/js/ui/highlight.js"></script>
+<script src="src/js/ui/codebox.js"></script>
+<script src="src/js/ui/hud.js"></script>
+<script src="src/js/ui/dotgrid.js"></script>
+<script src="src/js/ui/theme.js"></script>
+<script src="src/js/features/timer.js"></script>
+<script src="src/js/features/blackout.js"></script>
+<script src="src/js/features/panels.js"></script>
+<script src="src/js/features/notes.js"></script>
+<script src="src/js/input/controls.js"></script>
+<script src="src/js/boot.js"></script>
+</body>
+</html>

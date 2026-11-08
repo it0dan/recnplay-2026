@@ -1,0 +1,35 @@
+/* Slide microsserviços e EDA: domínios, serviços com versão em deploy, banco por serviço.
+   Escopo: #slide-microsservicos-eda (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-microsservicos-eda{
+  & .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  & ul.b{list-style:none}
+  & ul.b li{position:relative;padding:6px 0 6px 22px;font-size:18px;line-height:1.45}
+  & ul.b li::before{content:'';position:absolute;left:2px;top:15px;width:8px;height:8px;border-radius:2px;background:var(--acc-strong)}
+  & ul.b li b{color:var(--acc)}
+  & .pipe{display:flex;align-items:center;gap:8px;font-family:'Roboto Mono',monospace;font-size:12.5px;color:var(--muted)}
+  & .pipe .bar{flex:1;height:10px;border-radius:6px;background:var(--surf);overflow:hidden;position:relative}
+  & .pipe .bar i{position:absolute;inset:0;transform-origin:left;background:linear-gradient(90deg,var(--acc-strong),var(--ok));animation:pipeRun var(--d,5s) linear infinite}
+  & .ver{position:relative;display:inline-block;width:52px;height:20px}
+  & .ver span{position:absolute;left:0;top:0;font-family:'Roboto Mono',monospace;font-size:14px;font-weight:700}
+  & .ver .a{animation:verA var(--d,5s) linear infinite}
+  & .ver .b{color:var(--ok);animation:verB var(--d,5s) linear infinite}
+  & .dom2{border:1.5px dashed var(--acc);border-radius:14px;padding:10px 10px 8px;display:flex;flex-direction:column;gap:7px;justify-content:flex-start}
+  & .dom2 .dl{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:1px}
+  & .svcrow{background:var(--surf-2);border-radius:9px;padding:7px 10px 6px;border-left:3px solid var(--acc-strong);position:relative;padding-right:78px}
+  & .svcrow .r1{display:flex;justify-content:space-between;align-items:baseline;margin-right:-68px}
+  & .svcrow .r1 b{font-family:'Roboto Mono',monospace;font-size:14px;font-weight:700}
+  & .svcrow .r2{font-size:12.5px;color:var(--muted);line-height:1.3;margin:2px 0 5px}
+  & .svcrow .pipe .bar{height:5px}
+  & .svcrow .ver{width:44px;height:16px}
+  & .svcrow .ver span{font-size:12px}
+  & .svcrow .pipe .db{position:absolute;right:12px;bottom:5px;width:56px;height:31px}
+  & .svcrow .pipe .db svg{width:100%;height:100%;display:block;overflow:visible}
+  & .svcrow .pipe .db .dbb{fill:none;stroke:var(--line2);stroke-width:1.5}
+  & .svcrow .pipe .db text{font-family:'Roboto Mono',monospace;font-size:10.5px;fill:var(--muted)}
+  & h2{margin-bottom:12px}
+  & .split{grid-template-columns:1fr;gap:0}
+  & .grid3{gap:12px;align-items:stretch}
+}
+@keyframes pipeRun{0%{transform:scaleX(0)}80%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.3}}
+@keyframes verA{0%,79%{opacity:1}80%,100%{opacity:0}}
+@keyframes verB{0%,79%{opacity:0}80%,100%{opacity:1}}

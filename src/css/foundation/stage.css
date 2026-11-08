@@ -1,0 +1,7 @@
+/* Palco fixo 1600×900 (escalado por js/core/layout.js), slides e textura de fundo.
+   Todas as medidas em px no CSS são medidas do palco. */
+#dotgrid{position:fixed;inset:0;z-index:0;pointer-events:none}
+.stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;z-index:2;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+.slide{position:absolute;inset:0;padding:38px 64px 32px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:slideIn .38s ease both}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}

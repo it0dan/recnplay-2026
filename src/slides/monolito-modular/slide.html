@@ -1,0 +1,63 @@
+<section class="slide" id="slide-monolito-modular" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">01 · FORMAS MODERNAS &nbsp;<span class="dim">// monolito modular</span></div>
+    <h2>Monolito modular: <span class="a">módulos com contrato, um único deploy</span></h2>
+    <div class="split">
+      <svg viewBox="0 0 900 520" width="770" height="445" aria-label="Monolito modular: host, módulos com contrato e internos encapsulados, eventos in-process e schema por módulo">
+  <text x="450" y="22" text-anchor="middle" font-size="13" class="m t-ref" letter-spacing="2">1 unidade de deploy · 1 processo · cada módulo = 1 bounded context</text>
+  <rect x="10" y="34" width="880" height="366" rx="18" class="d-box"/>
+  <rect x="30" y="50" width="840" height="40" rx="10" style="fill:var(--surf-2)" stroke="var(--line2)"/>
+  <text x="450" y="76" text-anchor="middle" font-size="13" class="m">host · HTTP, filas, jobs, injeção de dependência</text>
+  <path d="M160 90 V156 M450 90 V156 M740 90 V156" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <rect x="40" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="58" y="144" font-size="18" font-weight="800">Propostas</text>
+      <rect x="54" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="160" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="160" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="54" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="68" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M71 232 V227 A4 4 0 0 1 79 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="90" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="160" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="160" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text><rect x="330" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="348" y="144" font-size="18" font-weight="800">Risco</text>
+      <rect x="344" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="450" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="450" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="344" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="358" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M361 232 V227 A4 4 0 0 1 369 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="380" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="450" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="450" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text><rect x="620" y="118" width="240" height="196" rx="14" class="d-box2"/>
+      <text x="638" y="144" font-size="18" font-weight="800">Contratos</text>
+      <rect x="634" y="156" width="212" height="50" rx="8" style="fill:var(--surf-3)" stroke="var(--acc)" stroke-width="2"/>
+      <text x="740" y="177" text-anchor="middle" font-size="13" font-weight="700" class="m t-acc">contrato do módulo</text>
+      <text x="740" y="196" text-anchor="middle" font-size="11" class="m t-mut">facade · DTOs · eventos</text>
+      <rect x="634" y="214" width="212" height="88" rx="8" class="d-box" stroke-dasharray="5 4"/>
+      <rect x="648" y="232" width="14" height="11" rx="2" style="fill:var(--ref)"/><path d="M651 232 V227 A4 4 0 0 1 659 227 V232" stroke="var(--ref)" stroke-width="2" fill="none"/>
+      <text x="670" y="242" font-size="13" font-weight="700" class="m t-mut">encapsulado</text>
+      <text x="740" y="266" text-anchor="middle" font-size="11.5" class="m t-mut">domínio · aplicação</text>
+      <text x="740" y="284" text-anchor="middle" font-size="11.5" class="m t-mut">persistência</text>
+  <path d="M254 181 H344" class="d-arr flow"/><path d="M336 175 L344 181 L336 187" class="d-arr"/>
+  <text x="299" y="111" text-anchor="middle" font-size="11.5" class="m t-acc">chamada in-process</text>
+  <path d="M634 258 H566" stroke="var(--warn)" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <g class="mm2-x"><circle cx="600" cy="258" r="13" style="fill:var(--bg)" stroke="var(--warn)" stroke-width="2.5"/><path d="M593 251 L607 265 M607 251 L593 265" stroke="var(--warn)" stroke-width="2.5"/></g>
+  <rect x="40" y="328" width="820" height="38" rx="19" fill="none" stroke="var(--acc)" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="450" y="352" text-anchor="middle" font-size="12.5" class="m t-acc">eventos de domínio in-process · ProposalApproved</text>
+  <circle r="7" style="fill:var(--warn);offset-path:path('M160 328 H740');animation-duration:3.4s;animation-delay:0s" class="mpath"></circle><circle r="7" style="fill:var(--warn);offset-path:path('M160 328 H740');animation-duration:3.4s;animation-delay:-1.7s" class="mpath"></circle>
+  <path d="M160 314 V328 M740 314 V328" class="d-ln"/>
+  <text x="450" y="390" text-anchor="middle" font-size="12.5" class="m t-warn mm2-x">acesso ao interno de outro módulo: barrado por teste de arquitetura</text>
+  <path d="M160 366 V438 M450 366 V438 M740 366 V438" stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <rect x="60" y="420" width="780" height="90" rx="14" class="d-box"/>
+  <text x="80" y="442" font-size="12" class="m t-ref">1 banco · cada módulo só acessa o próprio schema</text>
+  <rect x="90" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="160" y="480" text-anchor="middle" font-size="13" class="m">proposals</text>
+  <rect x="380" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="450" y="480" text-anchor="middle" font-size="13" class="m">risk</text>
+  <rect x="670" y="456" width="140" height="38" rx="8" class="d-box2"/><text x="740" y="480" text-anchor="middle" font-size="13" class="m">contracts</text>
+</svg>
+      <div class="codebox"><div class="cbh"><i></i><i></i><i></i><span>~/credit-analysis</span><span class="lang">terminal</span></div><pre><span class="ln tline" style="--i:0"><span class="tk-s">$ tree src</span></span><span class="ln tline" style="--i:1"><span class="tk-p">src/</span></span><span class="ln tline" style="--i:2"><span class="tree">├── </span><span class="tk-p">host/</span><span class="tk-c">  # HTTP, filas, jobs, DI</span></span><span class="ln tline" style="--i:3"><span class="tree">├── </span><span class="tk-p">modules/</span></span><span class="ln tline" style="--i:4"><span class="tree">│   ├── </span><span class="tk-p">proposals/</span></span><span class="ln tline" style="--i:5"><span class="tree">│   │   ├── </span><span class="tk-p">contract/</span><span class="tk-c">  # facade, DTOs, eventos</span></span><span class="ln tline" style="--i:6"><span class="tree">│   │   └── </span><span class="tk-p">internal/</span><span class="tk-c">  # domínio · aplicação · persistência</span></span><span class="ln tline" style="--i:7"><span class="tree">│   ├── </span><span class="tk-p">risk/</span></span><span class="ln tline" style="--i:8"><span class="tree">│   │   ├── </span><span class="tk-p">contract/</span></span><span class="ln tline" style="--i:9"><span class="tree">│   │   └── </span><span class="tk-p">internal/</span></span><span class="ln tline" style="--i:10"><span class="tree">│   └── </span><span class="tk-p">contracts/</span></span><span class="ln tline" style="--i:11"><span class="tree">│       ├── </span><span class="tk-p">contract/</span></span><span class="ln tline" style="--i:12"><span class="tree">│       └── </span><span class="tk-p">internal/</span></span><span class="ln tline" style="--i:13"><span class="tree">└── </span><span class="tk-p">shared-kernel/</span><span class="tk-c">  # tipos comuns, mínimo</span></span><span class="ln tline" style="--i:14"><span class="tk-p">test/</span></span><span class="ln tline" style="--i:15"><span class="tree">└── </span><span class="">architecture.test.ts</span><span class="tk-c">  # só contract/ é visível</span></span></pre></div>
+    </div>
+    <div class="cases"><div class="cl rise d1"><b>cases</b><i>o recuo</i><span>quando juntar foi a escolha certa</span></div><div class="case rise d2"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/primevideo.png" alt="Prime Video"><span class="cy">2023</span></div><div class="ct">Monitoramento de áudio e vídeo: de Step Functions + Lambda para um único processo no ECS</div></div><div class="cm"><b>−90%</b><span>de custo</span></div></div><div class="case rise d3"><div class="cbx"><div class="ch"><img class="clogo" src="assets/brand/cases/segment.svg" alt="Segment"><span class="cy">2018</span></div><div class="ct">Mais de 140 microsserviços de destinos consolidados em um serviço e um monorepo</div></div><div class="cm"><b>140+ → 1</b><span>serviços</span></div></div></div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// MONOLITO MODULAR</span><span class="hb-idx"></span></div>
+  <aside class="notes">Depois de distribuir, o movimento de volta. Monolito modular: uma unidade de deploy e um processo, mas dividido em módulos com fronteiras de verdade. Cada módulo é um bounded context e tem duas partes. O contrato do módulo (facade, DTOs e os eventos que ele publica) é a única parte visível para os outros módulos; "visível" aqui é visibilidade de código, dentro do mesmo processo, e não uma API HTTP pública. O resto (domínio, aplicação e persistência) fica encapsulado. A comunicação entre módulos acontece de duas formas: chamada in-process ao contrato (Propostas chamando Risco para pedir a análise) ou eventos de domínio in-process (ProposalApproved, que Contratos escuta para emitir a CCB), que mantêm os módulos desacoplados. Acessar o interno de outro módulo é barrado por teste de arquitetura no build (ArchUnit, Spring Modulith, regras de módulo do Nx ou Packwerk). Os dados seguem a mesma regra: um banco, mas cada módulo só acessa o próprio schema, sem joins entre módulos. O host é quem expõe HTTP, consome filas e roda jobs, e despacha para os contratos. No repositório, isso vira contract/ e internal/ por módulo, mais um shared kernel mínimo. Se um módulo precisar de escala ou deploy próprios, ele já nasce extraível para serviço: o contrato vira API e os eventos in-process viram eventos no broker. Dois cases do "recuo". Prime Video, 2023: o serviço de monitoramento de qualidade de áudio e vídeo rodava distribuído em Step Functions, Lambda e S3, não escalava e custava caro; juntaram os componentes num único processo no ECS e o custo caiu cerca de 90%. Atenção ao recorte: foi uma ferramenta, não o Prime Video inteiro, e a lição é granularidade errada, não "microsserviço é ruim". Segment, 2018: mais de 140 microsserviços, um por destino, viraram um serviço e um monorepo, porque o custo operacional por serviço tinha passado do benefício. E a Shopify é o exemplo de quem nunca saiu do monolito: tornou-o modular, com fronteiras verificadas por ferramenta (Packwerk).</aside>
+</section>

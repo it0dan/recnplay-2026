@@ -1,0 +1,6 @@
+/* Tela de pausa com cronômetro (tecla B ou "."). */
+#blackout{position:fixed;inset:0;background:var(--bg);z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;cursor:none}
+#blackout.active{display:flex}
+#blackout .bc{font-family:'Roboto Mono',monospace;font-size:15px;letter-spacing:.4em;text-transform:uppercase;color:var(--warn);animation:blink .9s steps(2) infinite}
+#blackout .bt{font-family:'Roboto Mono',monospace;font-size:44px;font-variant-numeric:tabular-nums}
+@keyframes blink{50%{opacity:.25}}

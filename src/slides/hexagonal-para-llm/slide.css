@@ -1,0 +1,12 @@
+/* Slide Hexagonal, Onion e Clean para LLM: o que é · por que · como.
+   Escopo: #slide-hexagonal-para-llm (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-hexagonal-para-llm{
+  & .whw{display:flex;flex-direction:column;gap:14px}
+  & .wc{border:1px solid var(--line2);border-left:3px solid var(--acc);border-radius:12px;padding:14px 18px}
+  & .wc .wk{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+  & .wc .wt{font-size:17px;line-height:1.45;color:var(--muted)}
+  & .wc .wt b{color:var(--text);font-weight:700}
+  & .wc .wt code{font-family:'Roboto Mono',monospace;font-size:14px;color:var(--warn)}
+  & h2{margin-bottom:12px}
+  & .split{grid-template-columns:820px 1fr;gap:34px;align-items:center}
+}

@@ -1,0 +1,6 @@
+/* Slide sistema com AI Gateway.
+   Escopo: #slide-sistema-com-ai-gateway (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-sistema-com-ai-gateway{
+  & .gwband{fill:var(--surf-3);stroke:var(--warn);stroke-width:3}
+  & h2{margin-bottom:6px}
+}

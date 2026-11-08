@@ -1,0 +1,9 @@
+/* Fragmentos (passos dentro do slide): .frag + data-f="N" e um dos modos abaixo.
+   ghost = esmaecido até a vez · hide = invisível até a vez · out = some na vez. */
+.frag{transition:opacity .45s ease, transform .45s cubic-bezier(.2,1.2,.35,1), filter .45s}
+.frag-ghost{opacity:.14;filter:grayscale(1);transform:translateY(10px)}
+.frag-ghost.on{opacity:1;filter:none;transform:none}
+.frag-hide{opacity:0;transform:translateY(12px)}
+.frag-hide.on{opacity:1;transform:none}
+.frag-out{transition:opacity .45s ease, transform .45s}
+.frag-out.on{opacity:0;transform:translateY(-12px);pointer-events:none}

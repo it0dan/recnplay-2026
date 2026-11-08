@@ -1,0 +1,35 @@
+/* Caixas de código geradas por js/ui/codebox.js a partir de <script type="text/plain" class="code">.
+   Tamanhos: data-size="sm|xs|xxs|md". Realce por passo: data-hlg (grupos g1–g4 acendem no passo 1–4). */
+/* caixa e barra de título */
+.codebox{background:var(--code-bg);border:1px solid var(--line2);border-radius:14px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.25);display:flex;flex-direction:column;min-width:0}
+.codebox .cbh{display:flex;align-items:center;gap:8px;padding:9px 16px;border-bottom:1px solid var(--code-line);font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.55)}
+.codebox .cbh i{width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block}
+.codebox .cbh i:nth-child(2){background:#febc2e}
+.codebox .cbh i:nth-child(3){background:#28c840;margin-right:8px}
+.codebox .cbh .lang{margin-left:auto;color:#DAA9FC}
+.codebox pre{margin:0;padding:14px 0;font-family:'Roboto Mono',monospace;font-size:15px;line-height:1.55;color:var(--code-fg);white-space:pre;overflow:hidden}
+/* tamanhos (data-size) */
+.codebox pre.sm{font-size:14px;line-height:1.5}
+.codebox pre.xs{font-size:12.5px;line-height:1.5}
+.codebox pre.md{font-size:15px;line-height:1.78}
+.codebox pre.xxs{font-size:11.5px;line-height:1.42}
+/* linhas: data-hl acende sempre (.on) */
+.codebox .ln{display:block;padding:0 20px 0 16px;border-left:3px solid transparent}
+.codebox .ln.on{background:rgba(255,125,74,.13);border-left-color:#FF7D4A}
+.codebox .ln.dim{opacity:.45}
+/* tokens do realce (js/ui/highlight.js) e árvore de diretórios dos terminais desenhados à mão */
+.tk-k{color:#D7A2FF}
+.tk-s{color:#B9E58A}
+.tk-c{color:#8E86A0;font-style:italic}
+.tk-t{color:#FFD27A}
+.tk-n{color:#FF9E6E}
+.tk-f{color:#8DC7FF}
+.tk-p{color:#8DC7FF}
+.codebox .tree{color:#8E86A0}
+/* data-hlg: grupo N acende no passo N; o resto esmaece */
+.slide[data-step="1"] .hlg .ln:not(.g1),.slide[data-step="2"] .hlg .ln:not(.g2),.slide[data-step="3"] .hlg .ln:not(.g3),.slide[data-step="4"] .hlg .ln:not(.g4){opacity:.28;transition:opacity .4s}
+.hlg .ln{transition:opacity .4s, background .4s}
+.slide[data-step="1"] .hlg .ln.g1{background:rgba(172,84,235,.25);border-left-color:#AC54EB}
+.slide[data-step="2"] .hlg .ln.g2{background:rgba(14,148,255,.22);border-left-color:#0E94FF}
+.slide[data-step="3"] .hlg .ln.g3{background:rgba(255,125,74,.2);border-left-color:#FF7D4A}
+.slide[data-step="4"] .hlg .ln.g4{background:rgba(61,220,132,.18);border-left-color:#3DDC84}

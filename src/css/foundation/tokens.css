@@ -1,0 +1,42 @@
+/* Design tokens Sensedia. :root = tema claro; [data-theme="dark"] = tema escuro (padrão).
+   Trocar estas variáveis muda o deck inteiro, inclusive os diagramas SVG. */
+:root{
+  --bg:#F9F9F9;
+  --surf:#FFFFFF;
+  --surf-2:#F3EAFB;
+  --surf-3:#EADCF7;
+  --acc:#8241B0;
+  --acc-strong:#5C2E7D;
+  --warn:#EA5B0C;
+  --ok:#1FA55C;
+  --blue:#0E94FF;
+  --text:#232025;
+  --muted:#4C4C4C;
+  --ref:#7A7A7A;
+  --line:#E4E4E4;
+  --line2:#C4C4C4;
+  --dot:rgba(130,65,176,0.16);
+  --code-bg:#1A0F26;
+  --code-fg:#EDE6F5;
+  --code-line:rgba(255,255,255,.08);
+}
+[data-theme="dark"]{
+  --bg:#2B163B;
+  --surf:#3D2054;
+  --surf-2:#4A2564;
+  --surf-3:#57307A;
+  --acc:#DAA9FC;
+  --acc-strong:#AC54EB;
+  --warn:#FF7D4A;
+  --ok:#3DDC84;
+  --blue:#97D1FF;
+  --text:#FFFFFF;
+  --muted:rgba(255,255,255,0.70);
+  --ref:rgba(255,255,255,0.46);
+  --line:rgba(255,255,255,0.12);
+  --line2:rgba(255,255,255,0.24);
+  --dot:rgba(218,169,252,0.14);
+  --code-bg:#180B24;
+  --code-fg:#F1EAFA;
+  --code-line:rgba(255,255,255,.07);
+}

@@ -1,0 +1,9 @@
+/* Slide monolito modular.
+   Escopo: #slide-monolito-modular (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-monolito-modular{
+  & .mm2-x{animation:mm2x 7s infinite}
+  & h2{margin-bottom:10px}
+  & .split{grid-template-columns:770px 1fr;gap:30px;align-items:center}
+  & .codebox pre{font-size:12.5px;line-height:1.45}
+}
+@keyframes mm2x{0%,40%{opacity:0}44%,80%{opacity:1}84%,100%{opacity:0}}

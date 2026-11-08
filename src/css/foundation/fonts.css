@@ -1,0 +1,5 @@
+/* Fontes locais (variáveis): o deck funciona offline. */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:300 800;font-display:swap;
+  src:url('../../../assets/fonts/montserrat-var.woff2') format('woff2')}
+@font-face{font-family:'Roboto Mono';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url('../../../assets/fonts/robotomono-var.woff2') format('woff2')}

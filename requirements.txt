@@ -1,0 +1,4 @@
+# só para as ferramentas opcionais em tools/ — o deck em si não precisa de nada
+qrcode>=7
+playwright>=1.40
+pillow>=10

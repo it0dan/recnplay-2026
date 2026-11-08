@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  deck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: presentation.html em dia com src/
+        run: python3 tools/build.py --check
+      - name: dependências das ferramentas
+        run: |
+          pip install -r requirements.txt
+          python3 -m playwright install --with-deps chromium
+      - name: checagem de layout
+        run: python3 tools/check_layout.py

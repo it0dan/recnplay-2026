@@ -1,0 +1,4 @@
+/* Barra de notas do apresentador (tecla N). */
+#notesbar{position:fixed;left:0;right:0;bottom:0;z-index:480;background:rgba(15,8,22,.94);color:#F1EAFA;font-size:17px;line-height:1.5;padding:16px 28px 18px;display:none;border-top:2px solid #FF7D4A;max-height:42vh;overflow:auto}
+#notesbar.active{display:block}
+#notesbar .nh{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#FF7D4A;margin-bottom:6px}

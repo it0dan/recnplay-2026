@@ -1,0 +1,11 @@
+/* HUD: cabeçalho do evento (preenchido por js/ui/hud.js), rodapé com seção e índice, timer. */
+.hud-top,.hud-bottom{display:flex;justify-content:space-between;align-items:center;font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.hud-top{padding-bottom:14px;border-bottom:1px solid var(--line)}
+.hud-bottom{padding-top:14px;border-top:1px solid var(--line)}
+.hud-top .l{display:flex;gap:22px;align-items:center}
+.hud-top .l span:first-child{color:var(--acc)}
+.hud-top .r{display:flex;gap:12px;align-items:center}
+.hud-bottom .sec{color:var(--acc)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--warn);box-shadow:0 0 8px var(--warn);animation:pulse 2s ease-in-out infinite;display:inline-block}
+.hud-timer{font-variant-numeric:tabular-nums}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
