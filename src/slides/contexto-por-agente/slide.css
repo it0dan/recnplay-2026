@@ -15,4 +15,21 @@
   & .pair .cd{font-size:19px;text-align:center}
   & .keep{justify-content:center}
   & .src{text-align:center;margin-top:10px}
+  /* ciclo de 8s que começa na entrada do slide: o orquestrador delega (.task desce), a janela de cada
+     agente enche (.it1–.it3) e só o handoff sobe (.up + selo). --dl defasa cada agente. Sem animação
+     (reduced-motion), janelas e selo ficam visíveis e os pacotes, ocultos. */
+  & .ctx .task,& .ctx .up{offset-rotate:0deg;opacity:0;animation:8s linear var(--dl,0s) infinite both}
+  & .ctx .task{fill:var(--acc);animation-name:ctxTask}
+  & .ctx .up{fill:var(--warn);animation-name:ctxUp}
+  & .ctx .it{animation:8s linear var(--dl,0s) infinite both}
+  & .ctx .it1{animation-name:ctxIt1}
+  & .ctx .it2{animation-name:ctxIt2}
+  & .ctx .it3{animation-name:ctxIt3}
+  & .ctx .handoff{animation:ctxHandoff 8s linear infinite both}
 }
+@keyframes ctxTask{0%,5%{offset-distance:0%;opacity:0}6%{offset-distance:0%;opacity:1}18%{offset-distance:100%;opacity:1}19%,100%{offset-distance:100%;opacity:0}}
+@keyframes ctxIt1{0%,20%{opacity:0}22%,91%{opacity:1}93%,100%{opacity:0}}
+@keyframes ctxIt2{0%,29%{opacity:0}31%,91%{opacity:1}93%,100%{opacity:0}}
+@keyframes ctxIt3{0%,38%{opacity:0}40%,91%{opacity:1}93%,100%{opacity:0}}
+@keyframes ctxUp{0%,61%{offset-distance:0%;opacity:0}62%{offset-distance:0%;opacity:1}76%{offset-distance:100%;opacity:1}77%,100%{offset-distance:100%;opacity:0}}
+@keyframes ctxHandoff{0%,61%{opacity:0}63%,91%{opacity:1}93%,100%{opacity:0}}

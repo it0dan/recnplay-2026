@@ -38,9 +38,9 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 | **01 · Formas modernas** | 02 – 04 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
 | **02 · Desenvolvendo com GenAI** | 05 – 06 | Linha do tempo agêntica · AI-SDLC (SDD, SPDD, AGENTS.md, skills) |
 | **03 · Aplicações agênticas** | 07 | Hexagonal, Onion e Clean para LLM: o que é, por que, como |
-| **04 · Multiagentes** | 08 – 10 | Contexto por agente · harness · loop |
-| **05 · NFRs e AI Gateway** | 11 – 12 | A mesma porta com um adapter atrás da borda · o sistema com AI Gateway |
-| **Encerramento** | 13 | Obrigado + QR code |
+| **04 · Multiagentes** | 08 – 11 | Contexto por agente · harness · loop · harness e loop no código (onde cada um mora no hexagonal) |
+| **05 · NFRs e AI Gateway** | 12 – 14 | Sem × com AI Gateway e por quê · a mesma porta com um adapter atrás da borda · o sistema com AI Gateway |
+| **Encerramento** | 15 | Obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).
@@ -101,7 +101,7 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   ├── brand/                   # Logos do evento e dos cases (veja os READMEs das pastas)
 │   └── qr.svg                   # QR code do último slide (gerado por tools/make_qr.py)
 ├── docs/
-│   ├── CUE-SHEET.md             # Roteiro de palco: ordem, tempos, cliques, falas e resgates
+│   ├── CUE-SHEET.md             # Roteiro de palco (gerado por tools/make_cue_sheet.py)
 │   └── REFERENCIAS.md           # Fontes citadas no palco e nas notas
 ├── tools/                       # Python; só o build é necessário para editar
 │   ├── _deck.py                 #   base comum: caminhos, leitura do deck.json, abrir o deck no Chromium
@@ -110,6 +110,7 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   ├── export_pdf.py            #   → dist/recnplay-2026.pdf (1 página por slide)
 │   ├── check_layout.py          #   aponta texto vazando, sobreposto ou fora da forma, e erros de JS
 │   ├── check_links.py           #   testa os links das referências
+│   ├── make_cue_sheet.py        #   regera docs/CUE-SHEET.md a partir dos slides (tempos, cliques, notas)
 │   └── make_qr.py               #   regera assets/qr.svg para outra URL
 ├── Makefile                     # Atalhos: make build · check · pdf · bundle · dist · links · serve
 └── .github/workflows/ci.yml     # CI: presentation.html em dia com src/ + checagem de layout
@@ -119,7 +120,8 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 
 1. Edite em `src/` (slide, estilo, módulo ou painel).
 2. Rode `python3 tools/build.py` (ou `make build`): ele valida cada slide, avisa se a soma dos tempos-alvo não fecha com a duração e regrava o `presentation.html`.
-3. Faça commit de `src/` **e** do `presentation.html`. O CI falha se um ficar diferente do outro.
+3. Se mexeu em ordem, tempos ou notas, rode também `python3 tools/make_cue_sheet.py`.
+4. Faça commit de `src/` **e** do `presentation.html`. O CI falha se um ficar diferente do outro.
 
 ### Manutenção rápida
 
@@ -159,9 +161,10 @@ python3 tools/export_pdf.py       # → dist/recnplay-2026.pdf
 python3 tools/check_layout.py     # checagem visual automática de todos os slides
 python3 tools/check_links.py      # testa os links (precisa de internet)
 python3 tools/make_qr.py <url>    # QR para outra URL
+python3 tools/make_cue_sheet.py   # regera docs/CUE-SHEET.md (só biblioteca padrão)
 ```
 
-Com `make`: `make build`, `make check` (o mesmo que o CI), `make dist` (bundle + PDF), `make serve`.
+Com `make`: `make build`, `make check` (o mesmo que o CI), `make cue` (cue sheet), `make dist` (bundle + PDF), `make serve`.
 
 ### Publicar no GitHub Pages
 

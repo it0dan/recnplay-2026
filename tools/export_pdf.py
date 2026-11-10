@@ -12,7 +12,7 @@ from _deck import ROOT, DIST, manifest, open_deck, goto_slide, slide_count
 
 OUT = DIST / 'recnplay-2026.pdf'
 DEFAULT_WAIT_MS = 3600
-WAIT_MS = {'contexto-por-agente': 4500}   # slides com animação de entrada mais longa
+WAIT_MS = {'contexto-por-agente': 5600}   # captura no momento do ciclo em que o handoff está visível
 
 
 async def main():

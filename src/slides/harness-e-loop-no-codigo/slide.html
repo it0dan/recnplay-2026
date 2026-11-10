@@ -1,0 +1,46 @@
+<section class="slide" id="slide-harness-e-loop-no-codigo" data-t="3:00">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">04 · MULTIAGENTES &nbsp;<span class="dim">// harness e loop no código</span></div>
+    <h2>Harness e loop <span class="a">têm endereço na arquitetura</span></h2>
+    <div class="split">
+      <script type="text/plain" class="code" data-lang="ts" data-file="application/evaluate-proposal.ts" data-hlg="1:4;2:5,6,15,16;3:11,13,14,17,20;4:7,12,18,19,22">
+// application/evaluate-proposal.ts — the use case owns the loop
+export class EvaluateProposal {
+  constructor(
+    private readonly evaluator: CreditEvaluator, // port → LLM adapter ①
+    private readonly judge: Judge,               // port → LLM-as-judge ②
+    private readonly policy: CreditPolicy,       // domain, deterministic ②
+    private readonly budget: Budget,             // tokens and time per task ④
+  ) {}
+
+  async execute(proposal: Proposal): Promise<Decision> {
+    let attempt = proposal;
+    for (let turn = 1; turn <= MAX_TURNS; turn++) {             // ④ limit
+      const draft = await this.evaluator.evaluate(attempt);     // ③ act
+      const findings = [                                        // ③ verify
+        ...this.policy.check(attempt, draft),                   // ② guardrail
+        ...(await this.judge.review(attempt, draft)),           // ② judge
+      ];
+      if (!findings.length) return this.policy.decide(proposal, draft); // ④ goal
+      if (this.budget.exceeded()) break;                        // ④ cost
+      attempt = proposal.withFindings(findings);                // ③ correct
+    }
+    return Decision.escalate(proposal, "human_review");         // ④ HITL
+  }
+}
+</script>
+      <div class="side">
+        <div class="codebox hlg"><div class="cbh"><i></i><i></i><i></i><span>~/credit-agentic</span><span class="lang">estrutura</span></div><pre><span class="ln"><span class="tree"></span>credit-agentic/</span><span class="ln g1"><span class="tree">├── </span>AGENTS.md                       <span class="tk-c">① convenções do repositório</span></span><span class="ln g1"><span class="tree">├── </span>skills/credit-policy/SKILL.md   <span class="tk-c">① procedimento sob demanda</span></span><span class="ln"><span class="tree">├── </span>src/</span><span class="ln"><span class="tree">│   ├── </span>domain/                     <span class="tk-c">núcleo: sem SDK, sem LLM</span></span><span class="ln g1"><span class="tree">│   │   ├── </span>assessment.ts           <span class="tk-c">① contrato da saída (schema)</span></span><span class="ln g2"><span class="tree">│   │   └── </span>credit-policy.ts        <span class="tk-c">② guardrail determinístico</span></span><span class="ln"><span class="tree">│   ├── </span>application/</span><span class="ln"><span class="tree">│   │   ├── </span>ports/                  <span class="tk-c">CreditEvaluator · Judge</span></span><span class="ln g3 g4"><span class="tree">│   │   └── </span>evaluate-proposal.ts    <span class="tk-c">③ ④ o loop mora aqui</span></span><span class="ln"><span class="tree">│   └── </span>adapters/out/</span><span class="ln"><span class="tree">│       ├── </span>gateway-credit-evaluator.ts</span><span class="ln g1"><span class="tree">│       ├── </span>prompts/evaluate.md     <span class="tk-c">① prompt versionado</span></span><span class="ln g2"><span class="tree">│       └── </span>llm-judge.ts            <span class="tk-c">② LLM-as-judge</span></span><span class="ln g2"><span class="tree">├── </span>tests/architecture.test.ts      <span class="tk-c">② barra SDK no núcleo</span></span><span class="ln g2"><span class="tree">└── </span>evals/                          <span class="tk-c">② fora do runtime, no CI</span></span><span class="ln g2"><span class="tree">    ├── </span>golden/proposals.jsonl      <span class="tk-c">② casos de referência</span></span><span class="ln g2"><span class="tree">    └── </span>trajectory.eval.ts          <span class="tk-c">② trajetória · resultado · custo</span></span></pre></div>
+        <div class="legend">
+          <div class="lg g1 frag frag-ghost" data-f="1"><b>① guias · antes de agir</b><span>AGENTS.md, skills, schema e prompt, versionados com o código</span></div>
+          <div class="lg g2 frag frag-ghost" data-f="2"><b>② sensores · depois de agir</b><span>guardrail no domínio, judge atrás de uma porta, evals no CI</span></div>
+          <div class="lg g3 frag frag-ghost" data-f="3"><b>③ loop · no caso de uso</b><span>agir → verificar → corrigir, falando só com portas</span></div>
+          <div class="lg g4 frag frag-ghost" data-f="4"><b>④ parada · regra explícita</b><span>meta atingida, MAX_TURNS, budget ou humano</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// HARNESS E LOOP NO CÓDIGO</span><span class="hb-idx"></span></div>
+  <aside class="notes">Harness e loop não são conceitos soltos: eles têm endereço na mesma arquitetura hexagonal que a gente já viu. À esquerda, o caso de uso EvaluateProposal; à direita, a estrutura do repositório. Quatro cliques. (1) Guias, o feedforward do harness: AGENTS.md na raiz, com as convenções do repositório; skills carregadas sob demanda; o schema do Assessment no domínio, que é o contrato da saída; e o prompt versionado dentro do adapter, porque prompt é detalhe de infraestrutura. Tudo versionado junto com o código. (2) Sensores, o feedback: a CreditPolicy no domínio é o guardrail determinístico; o LLM-as-judge entra atrás de uma porta, Judge, como qualquer outro adapter; o teste de arquitetura barra SDK no núcleo; e os evals ficam fora do runtime, rodando no CI sobre casos de referência, medindo trajetória, resultado e custo. (3) O loop mora no caso de uso: agir, verificar, corrigir. O adapter gera um rascunho, os sensores devolvem achados, e os achados voltam como contexto da próxima tentativa. Repare que o loop só fala com portas: não tem SDK, não tem prompt, não tem provedor. (4) E as condições de parada são regra explícita, não torcida: meta atingida (nenhum achado, e quem decide é a policy), teto de iterações, budget de tokens e tempo, e, se nada disso resolver, escalonamento para um humano. É a tese da palestra em 25 linhas: o núcleo é probabilístico, mas a casca que decide quando ele para é determinística. Se perguntarem por que o judge é uma porta: porque é outro modelo, com outro provedor e outro custo, e eu quero trocar e testar com um fake como faço com o avaliador.</aside>
+</section>

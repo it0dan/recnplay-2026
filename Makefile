@@ -1,10 +1,13 @@
 # Atalhos para as ferramentas em tools/. Apresentar não precisa de nada disto: basta abrir o presentation.html.
 PY ?= python3
 
-.PHONY: build check layout links pdf bundle dist qr serve deps
+.PHONY: build cue check layout links pdf bundle dist qr serve deps
 
 build:            ## src/ → presentation.html
 	$(PY) tools/build.py
+
+cue:              ## docs/CUE-SHEET.md a partir dos slides (tempos, cliques, notas)
+	$(PY) tools/make_cue_sheet.py
 
 check:           ## o que o CI roda: presentation.html em dia com src/ + checagem de layout
 	$(PY) tools/build.py --check
