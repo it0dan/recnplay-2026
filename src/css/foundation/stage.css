@@ -1,7 +1,10 @@
 /* Palco fixo 1600×900 (escalado por js/core/layout.js), slides e textura de fundo.
-   Todas as medidas em px no CSS são medidas do palco. */
+   Todas as medidas em px no CSS são medidas do palco. Em qualquer tela (TV, notebook, tablet, celular)
+   o palco é o mesmo; só a escala (--s) e o centro (--cx/--cy, dentro da área segura do aparelho) mudam. */
 #dotgrid{position:fixed;inset:0;z-index:0;pointer-events:none}
-.stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;z-index:2;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
+.stage{position:fixed;left:var(--cx,50%);top:var(--cy,50%);width:1600px;height:900px;z-index:2;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center center}
 .slide{position:absolute;inset:0;padding:38px 64px 32px;display:none;flex-direction:column}
 .slide.active{display:flex;animation:slideIn .38s ease both}
 @keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* sonda lida pelo layout.js: o padding é o recorte do aparelho (notch, cantos, barra de gestos) */
+#safearea{position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}

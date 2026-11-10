@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Núcleo probabilístico, casca determinística">
+<rect width="512" height="512" rx="96" fill="#2B163B"/>
+<polygon points="446.0,256.0 351.0,420.5 161.0,420.5 66.0,256.0 161.0,91.5 351.0,91.5" fill="none" stroke="#FF7D4A" stroke-width="18" stroke-linejoin="round"/>
+<polygon points="388.0,256.0 322.0,370.3 190.0,370.3 124.0,256.0 190.0,141.7 322.0,141.7" fill="none" stroke="#DAA9FC" stroke-width="10" stroke-opacity=".6" stroke-linejoin="round"/>
+<polygon points="348.0,256.0 302.0,335.7 210.0,335.7 164.0,256.0 210.0,176.3 302.0,176.3" fill="#AC54EB"/>
+<text x="256" y="278" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="62" fill="#fff">LLM</text>
+</svg>

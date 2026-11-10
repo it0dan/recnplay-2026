@@ -12,6 +12,7 @@ cue:              ## docs/CUE-SHEET.md a partir dos slides (tempos, cliques, not
 check:           ## o que o CI roda: presentation.html em dia com src/ + checagem de layout
 	$(PY) tools/build.py --check
 	$(PY) tools/check_layout.py
+	$(PY) tools/check_responsive.py
 
 layout: build    ## texto vazando, sobreposto ou fora da forma, e erros de JS
 	$(PY) tools/check_layout.py

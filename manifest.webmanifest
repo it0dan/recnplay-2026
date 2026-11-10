@@ -1,0 +1,13 @@
+{
+  "name": "Do Monolítico ao Agente Autônomo — REC'n'Play 2026",
+  "short_name": "REC'n'Play 2026",
+  "description": "Padrões arquiteturais para sistemas baseados em IA — TDC Stage @ REC'n'Play 2026",
+  "lang": "pt-BR",
+  "start_url": "presentation.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#2B163B",
+  "theme_color": "#2B163B",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

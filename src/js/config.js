@@ -15,8 +15,9 @@
     timer: Object.freeze({ totalSeconds: 40 * 60, warnAtSeconds: 5 * 60 }),
     // tema inicial e chave em que a escolha do apresentador fica guardada
     theme: Object.freeze({ initial: 'dark', storageKey: 'recnplay-theme-mode' }),
-    // tecla segurada: intervalo entre um slide e o próximo
-    input: Object.freeze({ holdStepMs: 140 }),
+    // tecla segurada: intervalo entre um slide e o próximo · toque: faixa esquerda da tela que volta (fração da
+    // largura) e deslocamento mínimo, em px, para um deslize contar
+    input: Object.freeze({ holdStepMs: 140, backZone: 0.28, swipeMinPx: 56 }),
     // textura de pontos do fundo
     dotgrid: Object.freeze({ gap: 42, radius: 1.1 }),
   });

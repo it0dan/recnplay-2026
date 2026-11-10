@@ -64,6 +64,21 @@ Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue she
 
 **Passadores de slide** (Logitech, Kensington, genéricos USB) funcionam sem configuração, porque emulam `PgDn`/`PgUp` (ou setas), `F5`/`Esc` e `.`. Para abrir direto num slide, acrescente `#N` à URL (ex.: `presentation.html#7`); o slide abre com todos os passos revelados.
 
+### Celular e tablet
+
+O deck é o mesmo em qualquer tela: o palco 16:9 é escalado para caber inteiro e centralizado na área útil do aparelho (fora de notch e barra de gestos). O que no notebook é atalho de teclado, no toque vira gesto ou botão:
+
+| Gesto | Ação |
+| :-- | :-- |
+| Tocar na tela | Avança (slide ou próximo passo) |
+| Tocar na faixa esquerda da tela | Volta |
+| Deslizar para a esquerda / direita | Avança / volta |
+| Botão `⋯` (canto inferior direito) | Menu com voltar, avançar, início, fim, notas, fontes, glossário, tema, timer, pausa e tela cheia |
+| Botão `✕` | Fecha o menu, o painel ou a pausa |
+| Pinça | Zoom do navegador, para ler um detalhe |
+
+Com o aparelho em pé o palco fica pequeno, e o deck sugere girar. "Tela cheia" já entra deitada onde o navegador permite; no iPhone, que não tem tela cheia para páginas, use *Compartilhar → Adicionar à Tela de Início* para abrir sem as barras do Safari. Os controles de toque só aparecem em aparelhos de toque; para vê-los no notebook, abra `presentation.html?touch=1`.
+
 ---
 
 ## Estrutura do repositório
@@ -74,10 +89,11 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 .
 ├── presentation.html            # GERADO por tools/build.py — não edite à mão
 ├── index.html                   # Redireciona para presentation.html (raiz do GitHub Pages)
+├── manifest.webmanifest         # Permite instalar o deck no celular/tablet (tela cheia, deitado)
 ├── src/
 │   ├── deck.json                # Ordem dos slides, seções, título e duração (40 min)
 │   ├── shell.html               # Esqueleto da página: <head>, overlays, includes, <script>s
-│   ├── partials/
+│   ├── partials/                # painéis S/G e controles de toque (celular e tablet)
 │   │   ├── panel-fontes.html    #   painel de fontes (tecla S)
 │   │   └── panel-glossario.html #   painel de glossário (tecla G)
 │   ├── slides/                  # Um diretório por slide: markup + estilos juntos
@@ -88,13 +104,13 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   │   ├── main.css             # @import na ordem da cascata
 │   │   ├── foundation/          #   fontes, tokens (temas), reset, palco, tipografia, reduced-motion
 │   │   ├── components/          #   HUD, layout, card, motion, seta, diagrama SVG, codebox, fragmentos, cases
-│   │   └── chrome/              #   notas, tela de pausa, painéis S/G
+│   │   └── chrome/              #   notas, tela de pausa, painéis S/G, controles de toque
 │   └── js/                      # Módulos RP.* (IIFE no namespace window.RP), na ordem de carga
 │       ├── config.js            #   evento, duração do timer, tema, tamanho do palco: o que muda por evento
 │       ├── core/                #   util, deck (estado, fragmentos, navegação), router (#N), layout (escala)
 │       ├── ui/                  #   highlight (puro), codebox, hud, dotgrid, theme
 │       ├── features/            #   timer, blackout, panels, notes
-│       ├── input/controls.js    #   teclado, passador e clique
+│       ├── input/               #   controls (teclado, passador, clique e toque) · touch (deslize e menu de toque)
 │       └── boot.js              #   confere os módulos, faz as ligações e inicia
 ├── assets/
 │   ├── fonts/                   # Montserrat e Roboto Mono (variáveis, locais: funciona offline)
@@ -109,6 +125,7 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   ├── bundle.py                #   → dist/recnplay-2026.html (arquivo único, para backup)
 │   ├── export_pdf.py            #   → dist/recnplay-2026.pdf (1 página por slide)
 │   ├── check_layout.py          #   aponta texto vazando, sobreposto ou fora da forma, e erros de JS
+│   ├── check_responsive.py      #   celular e tablet emulados: palco cabe na tela, toque, deslize e menu
 │   ├── check_links.py           #   testa os links das referências
 │   ├── make_cue_sheet.py        #   regera docs/CUE-SHEET.md a partir dos slides (tempos, cliques, notas)
 │   └── make_qr.py               #   regera assets/qr.svg para outra URL
@@ -159,6 +176,7 @@ python3 -m playwright install chromium
 python3 tools/bundle.py           # → dist/recnplay-2026.html (arquivo único para pendrive/e-mail)
 python3 tools/export_pdf.py       # → dist/recnplay-2026.pdf
 python3 tools/check_layout.py     # checagem visual automática de todos os slides
+python3 tools/check_responsive.py # celular e tablet emulados: encaixe na tela, toque, deslize e menu
 python3 tools/check_links.py      # testa os links (precisa de internet)
 python3 tools/make_qr.py <url>    # QR para outra URL
 python3 tools/make_cue_sheet.py   # regera docs/CUE-SHEET.md (só biblioteca padrão)

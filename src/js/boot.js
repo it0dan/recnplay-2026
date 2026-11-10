@@ -5,7 +5,7 @@
   'use strict';
 
   const REQUIRED = ['config', 'util', 'core', 'router', 'layout', 'highlight', 'code', 'hud', 'dotgrid',
-                    'theme', 'timer', 'blackout', 'panels', 'notes', 'input'];
+                    'theme', 'timer', 'blackout', 'panels', 'notes', 'input', 'touch'];
   const missing = REQUIRED.filter(k => !RP[k]);
   if (missing.length){
     console.error('[RP boot] módulos ausentes:', missing.join(', '), '— deck não inicializado.');
@@ -23,7 +23,7 @@
 
   // listeners
   RP.layout.bind(); RP.dotgrid.bind(); RP.router.bind();
-  RP.panels.bind(); RP.notes.bind();   RP.input.bind();
+  RP.panels.bind(); RP.notes.bind();   RP.input.bind();  RP.touch.bind();
 
   // init
   RP.theme.init();

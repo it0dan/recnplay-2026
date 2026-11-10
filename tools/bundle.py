@@ -33,6 +33,8 @@ def main():
     html = re.sub(r'<link rel="stylesheet" href="([^"]+)"/>', lambda m: f'<style>\n{css(ROOT / m.group(1))}</style>', html)
     html = re.sub(r'<script src="([^"]+)"></script>',
                   lambda m: '<script>\n' + (ROOT / m.group(1)).read_text(encoding='utf-8').replace('</script', '<\\/script') + '</script>', html)
+    html = re.sub(r'<link rel="manifest"[^>]*/>\n?', '', html)   # o arquivo único não é instalável: sem manifesto
+    html = re.sub(r'<link rel="icon" href="(assets/[^"]+)"', lambda m: f'<link rel="icon" href="{data_uri(ROOT / m.group(1))}"', html)
     html = re.sub(r'<img ([^>]*?)src="(assets/[^"]+)"', lambda m: f'<img {m.group(1)}src="{data_uri(ROOT / m.group(2))}"', html)
     leftovers = re.findall(r'(?:href|src)="(?!data:|https?:|#)[^"]+"|@import', html)
     assert not leftovers, f'referências locais não embutidas: {leftovers[:5]}'

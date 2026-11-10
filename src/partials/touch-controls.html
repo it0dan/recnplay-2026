@@ -1,0 +1,20 @@
+<!-- Controles para celular e tablet: o que no notebook é atalho de teclado. Só aparecem em telas de toque
+     (classe .touch no <html>, posta por js/input/touch.js); no notebook e na TV nada muda. -->
+<div id="touchui">
+  <button id="tfab" type="button" aria-label="Abrir controles" aria-expanded="false" aria-controls="tmenu">⋯</button>
+  <div id="tmenu" role="menu" aria-label="Controles da apresentação">
+    <button type="button" role="menuitem" data-act="prev"><i>←</i>voltar</button>
+    <button type="button" role="menuitem" data-act="next"><i>→</i>avançar</button>
+    <button type="button" role="menuitem" data-act="first"><i>⇤</i>início</button>
+    <button type="button" role="menuitem" data-act="last"><i>⇥</i>fim</button>
+    <button type="button" role="menuitem" data-act="notes"><i>N</i>notas</button>
+    <button type="button" role="menuitem" data-act="refs"><i>S</i>fontes</button>
+    <button type="button" role="menuitem" data-act="gloss"><i>G</i>glossário</button>
+    <button type="button" role="menuitem" data-act="theme"><i>D</i>tema</button>
+    <button type="button" role="menuitem" data-act="timer"><i>T</i>timer</button>
+    <button type="button" role="menuitem" data-act="reset"><i>R</i>zerar timer</button>
+    <button type="button" role="menuitem" data-act="pause"><i>B</i>pausa</button>
+    <button type="button" role="menuitem" data-act="full"><i>F</i>tela cheia</button>
+  </div>
+  <div id="rotatehint" role="status">↻ gire o aparelho para ver em tela cheia</div>
+</div>

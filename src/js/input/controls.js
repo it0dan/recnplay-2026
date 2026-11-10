@@ -1,12 +1,14 @@
 // ═══════════════════════════════════════════
 // CONTROLS — teclado, passador de slides e clique
 // ═══════════════════════════════════════════
-// contrato: RP.input = { bind() }
+// contrato: RP.input = { bind(), fullscreen(), muteClick(ms) }
 // Passadores (Logitech, Kensington, genéricos USB) emulam teclado:
 //   avançar → ArrowRight/PageDown · voltar → ArrowLeft/PageUp
 //   "apresentar" → F5 / Shift+F5 / Esc · "tela preta" → . ou B
 // Segurar avançar/voltar percorre o deck slide a slide até o fim/início.
 // Com pausa ou painel aberto, a navegação fica bloqueada.
+// Toque (celular/tablet): tocar avança; tocar na faixa esquerda da tela volta. Com mouse, clicar sempre avança.
+// Deslizar e o menu de toque ficam em js/input/touch.js.
 // depende de: RP.config, RP.core, RP.timer, RP.blackout, RP.panels, RP.notes, RP.theme
 (function (RP) {
   'use strict';
@@ -18,7 +20,12 @@
   const blocked = () => RP.blackout.isOpen() || RP.panels.isOpen();
 
   function fullscreen(){
-    try { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); } catch (e) {}
+    try {
+      if (document.fullscreenElement) return document.exitFullscreen();
+      const p = document.documentElement.requestFullscreen();
+      // em celular e tablet, tela cheia já entra deitada (onde o navegador permite travar a orientação)
+      if (p && p.then) p.then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape').catch(() => {})).catch(() => {});
+    } catch (e) {}
   }
 
   // tecla (minúscula) → ação; atalhos de uma letra
@@ -61,20 +68,27 @@
     else if (KEYS[letter]) KEYS[letter]();
   }
 
+  // último tipo de ponteiro (mouse, touch ou pen) e janela em que o clique é ignorado (logo após um deslize)
+  let pointer = 'mouse', mutedUntil = 0;
+  const muteClick = ms => { mutedUntil = performance.now() + ms; };
+
   function onClick(e){
     if (e.button !== 0 || blocked() || e.target.closest('a')) return;
+    if (performance.now() < mutedUntil) return;
     const sel = window.getSelection(); if (sel && String(sel).length) return;
-    RP.core.next();
+    const back = pointer === 'touch' && e.clientX < window.innerWidth * RP.config.input.backZone;
+    back ? RP.core.prev() : RP.core.next();
   }
 
   function bind(){
     window.addEventListener('keydown', onKey, true);                  // captura: vale com foco em link/painel
     document.addEventListener('click', onClick);
+    window.addEventListener('pointerdown', e => { pointer = e.pointerType || 'mouse'; }, true);
     // foco nunca fica preso num link (Espaço/Enter do passador acionariam o link)
     document.addEventListener('mouseup', () => {
       const a = document.activeElement; if (a && a !== document.body && a.blur) a.blur();
     });
   }
 
-  RP.input = { bind };
+  RP.input = { bind, fullscreen, muteClick };
 }(window.RP = window.RP || {}));
