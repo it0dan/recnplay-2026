@@ -1,5 +1,6 @@
 /* Design tokens Sensedia. :root = tema claro; [data-theme="dark"] = tema escuro (padrão).
-   Trocar estas variáveis muda o deck inteiro, inclusive os diagramas SVG. */
+   Trocar estas variáveis muda o deck inteiro, inclusive os diagramas SVG.
+   --code-*, --tk-* (tokens do realce), --hl e --g1…--g4 (grupos de destaque por passo) são da caixa de código. */
 :root{
   --bg:#F9F9F9;
   --surf:#FFFFFF;
@@ -16,9 +17,24 @@
   --line:#E4E4E4;
   --line2:#C4C4C4;
   --dot:rgba(130,65,176,0.16);
-  --code-bg:#1A0F26;
-  --code-fg:#EDE6F5;
-  --code-line:rgba(255,255,255,.08);
+  --code-bg:#FCFAFE;
+  --code-fg:#2A2333;
+  --code-line:rgba(35,32,37,.10);
+  --code-head:rgba(35,32,37,.62);
+  --code-lang:#8241B0;
+  --code-shadow:0 10px 28px rgba(92,46,125,.14);
+  --tk-k:#7B2FB5;
+  --tk-s:#2F7D32;
+  --tk-c:#8A8494;
+  --tk-t:#A85D00;
+  --tk-n:#C2410C;
+  --tk-f:#0B6BCB;
+  --hl:#EA5B0C;
+  --hl-bg:rgba(234,91,12,.11);
+  --g1:#8241B0; --g1-bg:rgba(130,65,176,.15);
+  --g2:#0B7FDB; --g2-bg:rgba(14,148,255,.13);
+  --g3:#EA5B0C; --g3-bg:rgba(234,91,12,.13);
+  --g4:#1FA55C; --g4-bg:rgba(31,165,92,.15);
 }
 [data-theme="dark"]{
   --bg:#2B163B;
@@ -39,4 +55,19 @@
   --code-bg:#180B24;
   --code-fg:#F1EAFA;
   --code-line:rgba(255,255,255,.07);
+  --code-head:rgba(255,255,255,.55);
+  --code-lang:#DAA9FC;
+  --code-shadow:0 14px 40px rgba(0,0,0,.25);
+  --tk-k:#D7A2FF;
+  --tk-s:#B9E58A;
+  --tk-c:#8E86A0;
+  --tk-t:#FFD27A;
+  --tk-n:#FF9E6E;
+  --tk-f:#8DC7FF;
+  --hl:#FF7D4A;
+  --hl-bg:rgba(255,125,74,.13);
+  --g1:#AC54EB; --g1-bg:rgba(172,84,235,.25);
+  --g2:#0E94FF; --g2-bg:rgba(14,148,255,.22);
+  --g3:#FF7D4A; --g3-bg:rgba(255,125,74,.2);
+  --g4:#3DDC84; --g4-bg:rgba(61,220,132,.18);
 }

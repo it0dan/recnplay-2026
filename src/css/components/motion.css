@@ -11,6 +11,7 @@
 .d4{animation-delay:.75s!important}
 .d5{animation-delay:.95s!important}
 .slide.active .tline{opacity:0;animation:tIn .25s ease forwards;animation-delay:calc(var(--i) * .07s + .2s)}
+@media (prefers-reduced-motion:reduce){.slide.active .tline{opacity:1}}   /* sem animação, a linha já nasce visível */
 @keyframes dash{to{stroke-dashoffset:-28}}
 @keyframes spin{to{transform:rotate(1turn)}}
 @keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}

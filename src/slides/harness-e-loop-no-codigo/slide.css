@@ -11,8 +11,8 @@
   & .lg b{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
   & .lg span{font-size:14.5px;line-height:1.35;color:var(--muted)}
   /* as mesmas cores dos grupos g1–g4 da caixa de código */
-  & .lg.g1{--c:#AC54EB}
-  & .lg.g2{--c:#0E94FF}
-  & .lg.g3{--c:#FF7D4A}
-  & .lg.g4{--c:#3DDC84}
+  & .lg.g1{--c:var(--g1)}
+  & .lg.g2{--c:var(--g2)}
+  & .lg.g3{--c:var(--g3)}
+  & .lg.g4{--c:var(--g4)}
 }
