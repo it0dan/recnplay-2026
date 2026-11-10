@@ -53,6 +53,18 @@ Tudo que é citado no palco ou nas notas do apresentador. É o mesmo conteúdo d
 - [Agent2Agent Protocol (A2A)](https://a2a-protocol.org/latest/specification/) — Linux Foundation
 - [Semantic conventions · Gen AI](https://opentelemetry.io/docs/specs/semconv/registry/attributes/gen-ai/) — OpenTelemetry
 - [RFC 8693 · OAuth 2.0 Token Exchange](https://www.rfc-editor.org/rfc/rfc8693.html) — IETF · 2020
+- [MCP · Enterprise-Managed Authorization (ID-JAG)](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization) — extensão de autorização do MCP
+- [MCP Authorization (baseada em OAuth 2.1)](https://modelcontextprotocol.io/specification/latest/basic/authorization) — especificação MCP
+- [Identity Assertion JWT Authorization Grant (ID-JAG)](https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/) — IETF OAuth WG · draft
 - [SPIFFE (identidade de workload)](https://spiffe.io/) — CNCF
+
+## AgentOps · AI FinOps
+
+Base do painel de métricas (slide de AgentOps e AI FinOps). Os valores do painel são ilustrativos; as faixas de referência de AgentOps são a régua de maturidade descrita no primeiro artigo.
+
+- [AgentOps: como provar valor dos seus agentes de IA?](https://www.sensedia.com.br/post/agentops-como-provar-valor-agentes-ia) — Danilo Amaral · Sensedia · set/2026
+- [AI FinOps é um problema de arquitetura](https://www.sensedia.com.br/post/ai-finops-ai-gateway) — Gabriel Zessin · Sensedia · set/2026
+- [O que é AI FinOps e por que é essencial para o controle de custos com IA?](https://www.sensedia.com.br/post/ai-finops-controle-de-custos-ia) — Sensedia · set/2026
+- [AI FinOps: como evitar surpresas nos custos dos LLMs?](https://www.sensedia.com.br/post/ai-finops-custos-llms) — Lisa Arthur · Sensedia · out/2026
 
 As configurações de gateway mostradas nos slides são **ilustrativas**: explicam o padrão e não descrevem a sintaxe de nenhum produto.

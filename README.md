@@ -39,8 +39,8 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 | **02 · Desenvolvendo com GenAI** | 05 – 06 | Linha do tempo agêntica · AI-SDLC (SDD, SPDD, AGENTS.md, skills) |
 | **03 · Aplicações agênticas** | 07 | Hexagonal, Onion e Clean para LLM: o que é, por que, como |
 | **04 · Multiagentes** | 08 – 11 | Contexto por agente · harness · loop · harness e loop no código (onde cada um mora no hexagonal) |
-| **05 · NFRs e AI Gateway** | 12 – 14 | Sem × com AI Gateway e por quê · a mesma porta com um adapter atrás da borda · o sistema com AI Gateway |
-| **Encerramento** | 15 | Obrigado + QR code |
+| **05 · NFRs e AI Gateway** | 12 – 15 | Sem × com AI Gateway e por quê · LLM, MCP e Agent Gateway no código (OAuth 2.1, EMA/ID-JAG, OBO) · o sistema com AI Gateway · AgentOps e AI FinOps (painel ilustrativo) |
+| **Encerramento** | 16 | Obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).

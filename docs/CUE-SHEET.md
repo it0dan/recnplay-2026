@@ -9,21 +9,22 @@ Mapa de palco: ordem dos slides, tempo-alvo de cada um, tempo acumulado e quanto
 | # | Slide | Link | Alvo | Acumulado | Cliques |
 | --: | :-- | :-- | --: | --: | :--: |
 | 00 | CAPA | `#0` | 0:30 | 00:30 | — |
-| 01 | LINHA DO TEMPO | `#1` | 3:00 | 03:30 | 6 |
-| 02 | MICROSSERVIÇOS · EDA | `#2` | 3:00 | 06:30 | — |
-| 03 | MONOLITO MODULAR | `#3` | 2:30 | 09:00 | — |
-| 04 | 30.11.2022 | `#4` | 0:30 | 09:30 | — |
-| 05 | LINHA DO TEMPO AGÊNTICA | `#5` | 2:30 | 12:00 | 4 |
-| 06 | AI-SDLC | `#6` | 3:00 | 15:00 | — |
-| 07 | HEXAGONAL PARA LLM | `#7` | 3:00 | 18:00 | — |
-| 08 | CONTEXTO POR AGENTE | `#8` | 2:45 | 20:45 | — |
-| 09 | HARNESS | `#9` | 2:45 | 23:30 | — |
-| 10 | LOOP | `#10` | 2:45 | 26:15 | — |
-| 11 | HARNESS E LOOP NO CÓDIGO | `#11` | 3:00 | 29:15 | 4 |
-| 12 | AI GATEWAY | `#12` | 2:15 | 31:30 | 2 |
-| 13 | CÓDIGO COM AI GATEWAY | `#13` | 3:00 | 34:30 | 4 |
-| 14 | SISTEMA COM AI GATEWAY | `#14` | 2:30 | 37:00 | — |
-| 15 | OBRIGADO | `#15` | 3:00 | 40:00 | — |
+| 01 | LINHA DO TEMPO | `#1` | 2:45 | 03:15 | 6 |
+| 02 | MICROSSERVIÇOS · EDA | `#2` | 2:45 | 06:00 | — |
+| 03 | MONOLITO MODULAR | `#3` | 2:30 | 08:30 | — |
+| 04 | 30.11.2022 | `#4` | 0:30 | 09:00 | — |
+| 05 | LINHA DO TEMPO AGÊNTICA | `#5` | 2:30 | 11:30 | 4 |
+| 06 | AI-SDLC | `#6` | 2:45 | 14:15 | — |
+| 07 | HEXAGONAL PARA LLM | `#7` | 2:45 | 17:00 | — |
+| 08 | CONTEXTO POR AGENTE | `#8` | 2:45 | 19:45 | — |
+| 09 | HARNESS | `#9` | 2:45 | 22:30 | — |
+| 10 | LOOP | `#10` | 2:45 | 25:15 | — |
+| 11 | HARNESS E LOOP NO CÓDIGO | `#11` | 2:45 | 28:00 | 4 |
+| 12 | AI GATEWAY | `#12` | 2:15 | 30:15 | 2 |
+| 13 | CÓDIGO COM AI GATEWAY | `#13` | 2:45 | 33:00 | 3 |
+| 14 | SISTEMA COM AI GATEWAY | `#14` | 2:15 | 35:15 | — |
+| 15 | AGENTOPS · AI FINOPS | `#15` | 2:00 | 37:15 | — |
+| 16 | OBRIGADO | `#16` | 2:45 | 40:00 | — |
 
 Tempo-alvo total: **40:00** de 40 min; o tempo do último slide é o das perguntas.
 
@@ -34,12 +35,12 @@ O timer da HUD (`T`) conta de 40:00 para baixo. Ao terminar cada bloco, ele deve
 | Bloco | Último slide | Decorrido | Timer marcando |
 | :-- | :--: | --: | --: |
 | ABERTURA | 00 | 00:30 | 39:30 |
-| 01 · FORMAS MODERNAS | 04 | 09:30 | 30:30 |
-| 02 · DESENVOLVENDO COM GENAI | 06 | 15:00 | 25:00 |
-| 03 · APLICAÇÕES AGÊNTICAS | 07 | 18:00 | 22:00 |
-| 04 · MULTIAGENTES | 11 | 29:15 | 10:45 |
-| 05 · NFRs E AI GATEWAY | 14 | 37:00 | 03:00 |
-| ENCERRAMENTO | 15 | 40:00 | 00:00 |
+| 01 · FORMAS MODERNAS | 04 | 09:00 | 31:00 |
+| 02 · DESENVOLVENDO COM GENAI | 06 | 14:15 | 25:45 |
+| 03 · APLICAÇÕES AGÊNTICAS | 07 | 17:00 | 23:00 |
+| 04 · MULTIAGENTES | 11 | 28:00 | 12:00 |
+| 05 · NFRs E AI GATEWAY | 15 | 37:15 | 02:45 |
+| ENCERRAMENTO | 16 | 40:00 | 00:00 |
 
 ## Resgates
 
@@ -60,13 +61,13 @@ Boa tarde, Recife! Hoje vou contar uma história de 30 anos de arquitetura em 35
 
 ### 01 · LINHA DO TEMPO
 
-`slide-linha-do-tempo` · alvo 3:00 · 6 clique(s) internos antes de avançar
+`slide-linha-do-tempo` · alvo 2:45 · 6 clique(s) internos antes de avançar
 
 Slide interativo: cada → acende uma era (6 cliques antes de avançar). Para cada uma, uma frase: qual acoplamento ela atacou e o que deixou de padrão. Monolito: tudo num artefato, resposta foi camadas e depois ports & adapters. SOA: integração ponto a ponto, resposta foi contrato e barramento. Microsserviços: times e deploys presos ao mesmo ciclo, resposta foi API gateway e estado por serviço. Event-driven e serverless: acoplamento temporal, resposta foi pub/sub, saga e consumidores idempotentes. Depois, IA generativa (2023): entra um componente probabilístico, mas o humano ainda executa, via assistentes e copilotos. Por fim, agentes (2025): o modelo passa a decidir e agir. A partir daqui, a palestra percorre essas formas de construir software e chega aos agentes.
 
 ### 02 · MICROSSERVIÇOS · EDA
 
-`slide-microsservicos-eda` · alvo 3:00 · sem cliques internos
+`slide-microsservicos-eda` · alvo 2:45 · sem cliques internos
 
 Daqui até o fim, um único domínio: análise de crédito. Uma fintech de crédito em três domínios. Originação cuida da entrada: proposta e status na esteira, cadastro e KYC do cliente, documentos com OCR e simulação de parcelas e CET. Análise de risco consulta bureaus e o SCR, comprova renda via Open Finance e avalia risco de identidade e golpe. Contratação e desembolso emite a CCB com assinatura digital, libera o crédito via Pix e acompanha a cobrança. Cada serviço tem time, pipeline e banco próprios: repare nas versões avançando de forma independente e, ao lado de cada pipeline, o banco que só aquele serviço acessa. Database-per-service: ninguém faz join no banco do outro; a integração é por evento ou API. E cada time escolhe o banco que serve ao seu problema: relacional para proposta e contrato, documento para extratos de renda, objeto para comprovantes, grafo para fraude, cache para simulação. Guardem essa imagem: é ela que volta adiante, quando cada agente for dono da sua janela de contexto. Entre domínios, eventos: ProposalReceived, ScoreCalculated, ProposalApproved, CreditDisbursed. Quando o proposal-svc publica ProposalReceived, o score-svc consome e, antes de consultar o bureau, verifica se aquele eventId já foi processado, porque a entrega é at-least-once e consultar o bureau duas vezes custa dinheiro. Guardem essa ideia: idempotência volta no fim, quando o modelo passar a decidir e a regra de negócio precisar garantir efeito uma vez só. Dois cases da confirmação. Netflix: depois de uma corrupção de banco em 2008 que parou o envio de DVDs por três dias, migrou de um monolito em data center próprio para centenas de microsserviços na AWS, concluindo em janeiro de 2016; no período, a audiência cresceu cerca de mil vezes. Amazon: entre 2001 e 2006, saiu de um monolito em duas camadas para uma plataforma de serviços descentralizada, com times donos do serviço de ponta a ponta, o "you build it, you run it" do Werner Vogels. O ponto em comum: microsserviço é uma decisão organizacional e de escala, não de moda.
 
@@ -90,13 +91,13 @@ Slide interativo: cada → acende uma fase. O eixo é quem executa. 2022, assist
 
 ### 06 · AI-SDLC
 
-`slide-ai-sdlc` · alvo 3:00 · sem cliques internos
+`slide-ai-sdlc` · alvo 2:45 · sem cliques internos
 
 AI-SDLC é a última fase da linha do tempo, a esteira agêntica, olhada de perto. Uma intenção vira spec antes de virar código: spec-driven development (SDD, como no Spec Kit e no OpenSpec). A variação que usamos, SPDD, encadeia cinco artefatos: proposal (o porquê), design (como, com ADRs), spec (contrato verificável, critérios de aceite), tasks (passos pequenos) e, por fim, o prompt pronto para o agente. Nenhuma implementação começa sem essa cadeia. Do lado direito, o repositório vira contexto versionado: AGENTS.md é a fonte canônica de convenções, padrão aberto e agnóstico de ferramenta; o CLAUDE.md, ou equivalente, só importa o AGENTS.md e acrescenta o específico; e as skills (cada uma uma pasta com SKILL.md) são procedimentos carregados sob demanda, como gerar um ADR ou criar um adapter. Humanos ficam nos gates: aprovar a spec e aprovar o merge. E é aqui que hexagonal e clean pagam dividendos: fronteiras claras cabem numa janela de contexto, e testes por porta viram sensores do agente.
 
 ### 07 · HEXAGONAL PARA LLM
 
-`slide-hexagonal-para-llm` · alvo 3:00 · sem cliques internos
+`slide-hexagonal-para-llm` · alvo 2:45 · sem cliques internos
 
 Hexagonal, Onion e Clean Architecture nasceram em momentos diferentes (Alistair Cockburn em 2005, Jeffrey Palermo em 2008, Robert Martin em 2012), mas dizem a mesma coisa: o que importa, o domínio e os casos de uso, fica no centro; o que muda, banco, framework, provedor, fica na borda; e as dependências apontam para dentro. Por quê: para trocar o detalhe sem tocar a regra, para testar o núcleo sem rede e para conter o raio de impacto de um sistema externo. Como: o núcleo declara portas na língua do negócio, e adapters implementam essas portas traduzindo o modelo de fora, que é a anti-corruption layer do DDD. No desenho, a análise de crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal; ele conversa só com a porta CreditEvaluator; e cada provedor de LLM é um adapter, inclusive um Fake para testes. O ponto para aplicações com LLM: o modelo é um detalhe de infraestrutura. Messages, choices e content blocks nunca cruzam a porta; o que entra no núcleo é um Assessment validado. E quem decide é a regra de negócio, não o modelo. É esse adapter que, no fim da palestra, a gente troca por um que passa pelo AI Gateway, sem mudar uma linha do núcleo.
 
@@ -120,7 +121,7 @@ Loop engineering: desenhar o ciclo que o agente repete, e principalmente quando 
 
 ### 11 · HARNESS E LOOP NO CÓDIGO
 
-`slide-harness-e-loop-no-codigo` · alvo 3:00 · 4 clique(s) internos antes de avançar
+`slide-harness-e-loop-no-codigo` · alvo 2:45 · 4 clique(s) internos antes de avançar
 
 Harness e loop não são conceitos soltos: eles têm endereço na mesma arquitetura hexagonal que a gente já viu. À esquerda, o caso de uso EvaluateProposal; à direita, a estrutura do repositório. Quatro cliques. (1) Guias, o feedforward do harness: AGENTS.md na raiz, com as convenções do repositório; skills carregadas sob demanda; o schema do Assessment no domínio, que é o contrato da saída; e o prompt versionado dentro do adapter, porque prompt é detalhe de infraestrutura. Tudo versionado junto com o código. (2) Sensores, o feedback: a CreditPolicy no domínio é o guardrail determinístico; o LLM-as-judge entra atrás de uma porta, Judge, como qualquer outro adapter; o teste de arquitetura barra SDK no núcleo; e os evals ficam fora do runtime, rodando no CI sobre casos de referência, medindo trajetória, resultado e custo. (3) O loop mora no caso de uso: agir, verificar, corrigir. O adapter gera um rascunho, os sensores devolvem achados, e os achados voltam como contexto da próxima tentativa. Repare que o loop só fala com portas: não tem SDK, não tem prompt, não tem provedor. (4) E as condições de parada são regra explícita, não torcida: meta atingida (nenhum achado, e quem decide é a policy), teto de iterações, budget de tokens e tempo, e, se nada disso resolver, escalonamento para um humano. É a tese da palestra em 25 linhas: o núcleo é probabilístico, mas a casca que decide quando ele para é determinística. Se perguntarem por que o judge é uma porta: porque é outro modelo, com outro provedor e outro custo, e eu quero trocar e testar com um fake como faço com o avaliador.
 
@@ -132,18 +133,24 @@ Até aqui a gente resolveu o que é de cada aplicação: porta e adapter, contex
 
 ### 13 · CÓDIGO COM AI GATEWAY
 
-`slide-codigo-com-ai-gateway` · alvo 3:00 · 4 clique(s) internos antes de avançar
+`slide-codigo-com-ai-gateway` · alvo 2:45 · 3 clique(s) internos antes de avançar
 
-Fecho do hexagonal: a porta CreditEvaluator é a mesma do hexagonal, o caso de uso EvaluateProposal não mudou uma linha, e entra um adapter novo, GatewayCreditEvaluator, que manda tudo pela borda. Quatro cliques; cada um acende um trecho do código e o caminho correspondente no desenho. (1) Model Gateway: o cliente aponta para AI_GATEWAY_URL e se autentica com a identidade do workload, sem chave de provedor; o código pede o alias credit-deep e a política decide o modelo primário, o fallback, o mascaramento de PII e o budget de tokens. (2) MCP Gateway: a consulta ao bureau de crédito é uma tool MCP (get_score) que passa pela borda, com escopo mínimo e auditoria por chamada. (3) Agent Gateway: o pedido de score de fraude é uma tarefa A2A para o agente de outro domínio, com identidade e limite entre agentes. (4) O que fica no código, porque depende do domínio: o contrato da resposta (schema validado na fronteira), a decisão de crédito pela CreditPolicy, a idempotência por intenção e o contexto isolado por agente. O gateway governa o tráfego; ele não decide crédito. As políticas no desenho são ilustrativas. Se perguntarem do apiKey: workloadToken() é um bearer token de vida curta que representa o workload (OIDC, SPIFFE); o gateway valida esse token e usa a credencial do provedor que ele mesmo guarda. Nenhuma credencial de provedor mora no serviço.
+Fecho do hexagonal: a porta CreditEvaluator é a mesma, o caso de uso EvaluateProposal não mudou uma linha, e entra um adapter novo, GatewayCreditEvaluator, que manda tudo pela borda. Três cliques; cada um acende um trecho do código e o caminho correspondente no desenho. Antes dos cliques, repare na primeira linha: não existe API key de provedor neste serviço. Todo salto é autenticado com OAuth 2.1, com token de vida curta. (1) LLM Gateway: o cliente aponta para o gateway e se autentica com client credentials, a identidade do próprio workload; o código pede o alias credit-deep e a política decide o modelo primário, o fallback, o mascaramento de PII e o budget em dólares. A credencial do provedor fica guardada na borda. (2) MCP Gateway: a consulta ao bureau de crédito é uma tool MCP, get_score. A autorização é a Enterprise-Managed Authorization do MCP: em vez de cada usuário consentir tool por tool, o IdP da empresa emite uma asserção de identidade, o ID-JAG, que é trocada pelo token de acesso ao MCP server. Quem decide o acesso é a política corporativa, com escopo mínimo e auditoria por chamada. (3) Agent Gateway: o pedido de score de fraude é uma tarefa A2A para o agente de outro domínio. Aqui entra o on-behalf-of: um token exchange, RFC 8693, para o agente agir em nome do usuário com escopo reduzido, e cada agente com identidade e limite próprios. O que continua no código é o que depende do domínio, como vimos no slide do harness e do loop: o contrato da resposta e a decisão de crédito. O gateway governa o tráfego; ele não decide crédito. As políticas do desenho são ilustrativas. Se perguntarem por que não API key: chave estática não expira, não carrega identidade nem escopo, e acaba copiada entre times; token OAuth de vida curta carrega as claims que depois viram rateio de custo e trilha de auditoria.
 
 ### 14 · SISTEMA COM AI GATEWAY
 
-`slide-sistema-com-ai-gateway` · alvo 2:30 · sem cliques internos
+`slide-sistema-com-ai-gateway` · alvo 2:15 · sem cliques internos
 
-Do código para o sistema inteiro: o mesmo desenho, agora com a borda. Em cima, cinco aplicações agênticas, cada uma com seus agentes: Onboarding (KYC e documentos), Crédito (risco e renda), Antifraude, Atendimento e Cobrança. Todo tráfego de IA dessas apps passa por um ponto de controle, com três módulos. Model Gateway, para os LLMs: credenciais em vault, roteamento e fallback entre provedores, mascaramento de PII, token budget por app. MCP Gateway, para ferramentas: autorização por tool, allowlist e a transformação de APIs existentes em MCP. Agent Gateway, para o tráfego entre agentes via A2A: identidade, limites e discovery. Por cima, um control plane com identidade, política, custo, auditoria e traces no padrão OpenTelemetry GenAI. A legenda explica as cores dos fluxos: roxo é app chamando modelo, azul é app chamando tools e APIs, laranja é um agente chamando agente de outra app; por exemplo, o agente de risco da App Crédito pedindo um score à App Antifraude. É a mesma história dos microsserviços: o que é transversal sai do código e vai para a borda. A lição do ESB continua valendo: a borda governa, mas não decide regra de negócio. Na Sensedia, é esse o desenho do AI Gateway; governar o tráfego entre agentes ainda é um padrão em evolução no mercado, inclusive no nosso roadmap.
+Do código para o sistema inteiro: o mesmo desenho, agora com a borda. Em cima, cinco aplicações agênticas, cada uma com seus agentes: Onboarding (KYC e documentos), Crédito (risco e renda), Antifraude, Atendimento e Cobrança. Todo tráfego de IA dessas apps passa por um ponto de controle, com três módulos. LLM Gateway, para os LLMs: credenciais em vault, roteamento e fallback entre provedores, mascaramento de PII, token budget por app. MCP Gateway, para ferramentas: autorização por tool, allowlist e a transformação de APIs existentes em MCP. Agent Gateway, para o tráfego entre agentes via A2A: identidade, limites e discovery. Por cima, um control plane com identidade, política, custo, auditoria e traces no padrão OpenTelemetry GenAI. A legenda explica as cores dos fluxos: roxo é app chamando modelo, azul é app chamando tools e APIs, laranja é um agente chamando agente de outra app; por exemplo, o agente de risco da App Crédito pedindo um score à App Antifraude. É a mesma história dos microsserviços: o que é transversal sai do código e vai para a borda. A lição do ESB continua valendo: a borda governa, mas não decide regra de negócio. Na Sensedia, é esse o desenho do AI Gateway; governar o tráfego entre agentes ainda é um padrão em evolução no mercado, inclusive no nosso roadmap.
 
-### 15 · OBRIGADO
+### 15 · AGENTOPS · AI FINOPS
 
-`slide-obrigado` · alvo 3:00 · sem cliques internos
+`slide-agentops-ai-finops` · alvo 2:00 · sem cliques internos
 
-Para levar: o núcleo é probabilístico, a casca é determinística. Não dá para tornar o modelo idempotente, mas dá para construir em volta dele uma casca que seja: contrato, contexto isolado, harness, loop com critério de parada e a borda que governa o tráfego de IA. Obrigado! Deixar este slide na tela durante as perguntas: cerca de 3 minutos reservados para o Q&A. O QR aponta para o GitHub Pages da apresentação, com slides, código e fontes.
+Com todo o tráfego de IA passando por um ponto só, a borda vira o lugar natural para medir. Esta tela é um exemplo com dados ilustrativos de duas disciplinas. À esquerda, AI FinOps: custo deixa de ser a fatura do fim do mês e vira métrica de arquitetura, calculada a cada requisição. Custo do período contra o budget em dólares, e não só em número de chamadas; custo por requisição, que separa crescimento por adoção de degradação, como prompt inchado, retry e troca de modelo sem aviso; custo por mil tokens; e cache hit-rate, que é indicador financeiro. Embaixo, o rateio por agente: a atribuição sai das claims do token, não de uma chave por time, e é por isso que a autenticação do slide anterior importa. À direita, AgentOps: as métricas que provam que o agente está fazendo o trabalho certo, com uma régua de maturidade. Acerto na chamada de ferramentas e respeito às instruções com piso de 95 por cento; groundedness de pelo menos 4 em 5; recovery rate acima de 70 por cento em falhas transitórias; refusal rate até 5 por cento em consultas legítimas; latência p99 até 30 segundos em conversa; e cost-per-success, tokens gastos divididos pelas conclusões bem-sucedidas, com teto de duas vezes o custo da tarefa. Repare na linha em atenção: recovery rate abaixo da régua. Sem medir, isso apareceria como reclamação de usuário; medindo, vira item do backlog do harness. E lembrem da conta do loop: 99 por cento de acerto por turno, em 100 turnos encadeados, dá cerca de 37 por cento de chance de tudo dar certo. Taxa por turno isolado engana. As faixas são uma régua de maturidade, não um consenso de mercado, e os números da tela são exemplo. As referências estão no painel de fontes: quatro artigos do blog da Sensedia sobre AgentOps e AI FinOps.
+
+### 16 · OBRIGADO
+
+`slide-obrigado` · alvo 2:45 · sem cliques internos
+
+Para levar: o núcleo é probabilístico, a casca é determinística. Não dá para tornar o modelo idempotente, mas dá para construir em volta dele uma casca que seja: contrato, contexto isolado, harness, loop com critério de parada e a borda que governa o tráfego de IA. Obrigado! Deixar este slide na tela durante as perguntas: pouco menos de 3 minutos reservados para o Q&A. O QR aponta para o GitHub Pages da apresentação, com slides, código e fontes.

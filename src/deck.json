@@ -7,7 +7,7 @@
     { "title": "02 · DESENVOLVENDO COM GENAI", "slides": ["linha-do-tempo-agentica", "ai-sdlc"] },
     { "title": "03 · APLICAÇÕES AGÊNTICAS",   "slides": ["hexagonal-para-llm"] },
     { "title": "04 · MULTIAGENTES",           "slides": ["contexto-por-agente", "harness", "loop", "harness-e-loop-no-codigo"] },
-    { "title": "05 · NFRs E AI GATEWAY",      "slides": ["ai-gateway", "codigo-com-ai-gateway", "sistema-com-ai-gateway"] },
+    { "title": "05 · NFRs E AI GATEWAY",      "slides": ["ai-gateway", "codigo-com-ai-gateway", "sistema-com-ai-gateway", "agentops-ai-finops"] },
     { "title": "ENCERRAMENTO",                "slides": ["obrigado"] }
   ]
 }
