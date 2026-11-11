@@ -38,9 +38,9 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 | **01 · Formas modernas** | 02 – 04 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
 | **02 · Desenvolvendo com GenAI** | 05 | Do assistente à esteira agêntica (spec, gates humanos, evals, contexto versionado) |
 | **03 · Multiagentes** | 06 – 08 | Contexto por agente · harness · loop |
-| **04 · A tese** | 09 – 10 | Clean Architecture para LLM: o modelo é um detalhe · então → agora (os padrões mudam de lugar; quando não ir para multiagente) |
-| **05 · NFRs e AI Gateway** | 11 – 12 | Sem × com AI Gateway · o sistema de crédito com AI Gateway, ligado a hexagonal, contexto, harness e loop (OAuth 2.1, EMA/ID-JAG, OBO) |
-| **Encerramento** | 13 | Obrigado + QR code |
+| **04 · A tese** | 09 – 10 | Clean Architecture para LLM: o modelo é um detalhe (desenho + código) · então → agora (os padrões mudam de lugar) |
+| **05 · NFRs e AI Gateway** | 11 | AI Gateway: gestão, governança e NFR (sem × com AI Gateway) |
+| **Encerramento** | 12 – 13 | O desafio não é o modelo, é a arquitetura em volta dele · obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).

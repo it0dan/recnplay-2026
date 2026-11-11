@@ -9,7 +9,9 @@
   /* cases empilhados na coluna da direita */
   & .cases{grid-template-columns:minmax(0,1fr);gap:14px;margin-top:0}
   & .cases .cl{padding:4px 0 4px 14px}
-  & .case{padding:16px 20px}
+  & .case{padding:16px 20px;grid-template-columns:minmax(0,1fr)}
+  & .case .cm{flex-direction:row;align-items:baseline;justify-content:flex-start;gap:12px;margin-top:10px;text-align:left}
+  & .case .cm span{margin-top:0}
   /* leitura vertical (celular/tablet em pé) */
   .read & .mono-lay{grid-template-columns:minmax(0,1fr);gap:14px}
 }

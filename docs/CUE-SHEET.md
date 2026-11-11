@@ -15,12 +15,12 @@ Mapa de palco: ordem dos slides, tempo-alvo de cada um, tempo acumulado e quanto
 | 04 | 30.11.2022 | `#4` | 0:30 | 09:45 | — |
 | 05 | LINHA DO TEMPO AGÊNTICA | `#5` | 3:15 | 13:00 | 5 |
 | 06 | CONTEXTO POR AGENTE | `#6` | 3:15 | 16:15 | — |
-| 07 | HARNESS | `#7` | 3:15 | 19:30 | — |
-| 08 | LOOP | `#8` | 3:00 | 22:30 | — |
-| 09 | HEXAGONAL PARA LLM | `#9` | 3:45 | 26:15 | — |
-| 10 | ENTÃO → AGORA | `#10` | 3:30 | 29:45 | 4 |
-| 11 | AI GATEWAY | `#11` | 2:45 | 32:30 | 1 |
-| 12 | SISTEMA COM AI GATEWAY | `#12` | 4:15 | 36:45 | 4 |
+| 07 | HARNESS | `#7` | 3:30 | 19:45 | — |
+| 08 | LOOP | `#8` | 3:15 | 23:00 | — |
+| 09 | HEXAGONAL PARA LLM | `#9` | 4:15 | 27:15 | 1 |
+| 10 | ENTÃO → AGORA | `#10` | 3:00 | 30:15 | 3 |
+| 11 | AI GATEWAY | `#11` | 3:15 | 33:30 | 1 |
+| 12 | FECHAMENTO | `#12` | 3:15 | 36:45 | — |
 | 13 | OBRIGADO | `#13` | 3:15 | 40:00 | — |
 
 Tempo-alvo total: **40:00** de 40 min; o tempo do último slide é o das perguntas.
@@ -34,9 +34,9 @@ O timer da HUD (`T`) conta de 40:00 para baixo. Ao terminar cada bloco, ele deve
 | ABERTURA | 00 | 00:30 | 39:30 |
 | 01 · FORMAS MODERNAS | 04 | 09:45 | 30:15 |
 | 02 · DESENVOLVENDO COM GENAI | 05 | 13:00 | 27:00 |
-| 03 · MULTIAGENTES | 08 | 22:30 | 17:30 |
-| 04 · A TESE: CLEAN ARCHITECTURE PARA LLM | 10 | 29:45 | 10:15 |
-| 05 · NFRs E AI GATEWAY | 12 | 36:45 | 03:15 |
+| 03 · MULTIAGENTES | 08 | 23:00 | 17:00 |
+| 04 · A TESE: CLEAN ARCHITECTURE PARA LLM | 10 | 30:15 | 09:45 |
+| 05 · NFRs E AI GATEWAY | 11 | 33:30 | 06:30 |
 | ENCERRAMENTO | 13 | 40:00 | 00:00 |
 
 ## Resgates
@@ -94,39 +94,39 @@ A mesma regra do database-per-service, agora para agentes. À esquerda, os servi
 
 ### 07 · HARNESS
 
-`slide-harness` · alvo 3:15 · sem cliques internos
+`slide-harness` · alvo 3:30 · sem cliques internos
 
 Harness é tudo que envolve o modelo para transformar previsão de texto em comportamento confiável. A animação segue o ciclo: guias acendem antes da ação (feedforward: prompts, specs, contratos, AGENTS.md, skills); o modelo decide; sensores acendem depois (feedback: traces, guardrails e testes determinísticos, LLM-as-judge para o subjetivo e humano para o crítico); e os evals fecham o ciclo, medindo trajetória, resultado e custo por tarefa. Toda falha detectada vira um guia novo. É aqui que se resolve o que as regras determinísticas não resolvem: elas garantem consistência; o harness persegue correção. Em um sistema multiagêntico, cada agente tem o seu harness.
 
 ### 08 · LOOP
 
-`slide-loop` · alvo 3:00 · sem cliques internos
+`slide-loop` · alvo 3:15 · sem cliques internos
 
 Loop engineering: desenhar o ciclo que o agente repete, e principalmente quando ele para. Quatro tipos pelo gatilho: turn-based (um prompt, o agente decide que terminou), goal-based (uma meta verificável, e quem decide parar é um evaluator), time-based (agenda) e proactive (evento externo, sem humano no gatilho). Quanto menos humano no gatilho, mais harness. Embaixo, as três falhas documentadas e a contramedida de cada uma: doom loop pede teto de iterações e budget; goal drift pede avaliador separado de quem gera; context rot pede compressão e isolamento em subagentes. E custo e latência são NFRs de primeira classe do loop: o budget de tokens e de tempo por tarefa é uma condição de parada no próprio loop, e o teto por app é aplicado no gateway, como veremos no fim.
 
 ### 09 · HEXAGONAL PARA LLM
 
-`slide-hexagonal-para-llm` · alvo 3:45 · sem cliques internos
+`slide-hexagonal-para-llm` · alvo 4:15 · 1 clique(s) internos antes de avançar
 
-Depois de contexto, harness e loop, a tese que amarra tudo, e que é a promessa desta palestra: desacoplar o provedor de LLM com Clean Architecture. O desafio: integrar IA não é adicionar um componente de modelo. É acomodar uma peça probabilística e imprevisível dentro de sistemas determinísticos, que exigem governança e disponibilidade. A resposta já existe: Hexagonal, de Cockburn, Onion, de Palermo, e Clean, de Uncle Bob, dizem a mesma coisa. O núcleo, domínio e casos de uso, decide; a infraestrutura fica na borda; as dependências apontam para dentro. No crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal, que fala só com a porta CreditEvaluator. Cada provedor de LLM é um adapter, inclusive um Fake para testes. Messages e choices nunca cruzam a porta; o que entra no núcleo é um Assessment validado, e quem decide é a CreditPolicy, não o modelo. O que se ganha: trocar de provedor sem tocar a regra, que é mitigar acoplamento tecnológico; testar o núcleo sem rede; e resiliência na borda. E tudo que vimos até aqui tem endereço: contexto, harness e loop moram na casca, em volta do núcleo. É esse adapter que, daqui a pouco, a gente coloca atrás do AI Gateway, sem mudar uma linha do núcleo.
+Depois de contexto, harness e loop, a tese que amarra tudo, e que é a promessa desta palestra: desacoplar o provedor de LLM com Clean Architecture. O desafio: integrar IA não é adicionar um componente de modelo. É acomodar uma peça probabilística e imprevisível dentro de sistemas determinísticos, que exigem governança e disponibilidade. A resposta já existe: Hexagonal, de Cockburn, Onion, de Palermo, e Clean, de Uncle Bob, dizem a mesma coisa. O núcleo, domínio e casos de uso, decide; a infraestrutura fica na borda; as dependências apontam para dentro. No crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal, que fala só com a porta CreditEvaluator. Cada provedor de LLM é um adapter, inclusive um Fake para testes. Messages e choices nunca cruzam a porta; o que entra no núcleo é um Assessment validado, e quem decide é a CreditPolicy, não o modelo. O que se ganha: trocar de provedor sem tocar a regra, que é mitigar acoplamento tecnológico; testar o núcleo sem rede; e resiliência na borda. E tudo que vimos até aqui tem endereço: contexto, harness e loop moram na casca, em volta do núcleo. É esse adapter que, daqui a pouco, a gente coloca atrás do AI Gateway, sem mudar uma linha do núcleo. Clique: o mesmo desenho, em código. A porta CreditEvaluator no domínio, falando a língua do negócio. O caso de uso EvaluateProposal recebe a porta e a política: o modelo sugere, a CreditPolicy decide. Um adapter por provedor, que traduz a resposta do modelo e valida o Assessment na fronteira: messages nunca passam da porta. E na composição se troca o provedor, ou se injeta um Fake para testar, sem mudar uma linha do núcleo.
 
 ### 10 · ENTÃO → AGORA
 
-`slide-entao-agora` · alvo 3:30 · 4 clique(s) internos antes de avançar
+`slide-entao-agora` · alvo 3:00 · 3 clique(s) internos antes de avançar
 
-Lembram do começo? A história se repete. Este slide é o fecho dessa promessa: cada padrão que a gente usou para dividir sistemas reaparece, no mesmo papel, num sistema com agentes. Três cliques. Monolito modular vira agente único com tools: o ponto de partida certo. Microsserviço vira agente como serviço: um agente é, na prática, mais um serviço, com dono, deploy, escala e contexto próprios, falando com os outros por protocolo, A2A, e não por banco compartilhado. Database-per-service vira contexto por agente. Ports and adapters e ACL viram o modelo como adapter. Timeout, retry e saga viram o loop com condição de parada. Testes de contrato viram evals. E o API Gateway, que virou a borda do tráfego de APIs, ganha um irmão: o AI Gateway, a borda do tráfego de IA. A lição que vem junto é a mesma do ESB: a borda governa o tráfego, mas não decide regra de negócio. Quarto clique, o espelho do monolito modular: quando não ir para multiagente. Se é uma tarefa, com um dono e um contexto que cabe na janela, um agente com tools basta. Multiagente se paga quando contexto, dono ou permissão precisam se separar, e cada handoff custa tokens, latência e mais um ponto de falha. É a mesma pergunta de Prime Video e Segment, agora para agentes: granularidade.
+Lembram do começo? A história se repete. Este slide é o fecho dessa promessa: cada padrão que a gente usou para dividir sistemas reaparece, no mesmo papel, num sistema com agentes. Três cliques. Monolito modular vira agente único com tools: o ponto de partida certo. Microsserviço vira agente como serviço: um agente é, na prática, mais um serviço, com dono, deploy, escala e contexto próprios, falando com os outros por protocolo, A2A, e não por banco compartilhado. Database-per-service vira contexto por agente. Ports and adapters e ACL viram o modelo como adapter. Timeout, retry e saga viram o loop com condição de parada. Testes de contrato viram evals. E o API Gateway, que virou a borda do tráfego de APIs, ganha um irmão: o AI Gateway, a borda do tráfego de IA. A lição que vem junto é a mesma do ESB: a borda governa o tráfego, mas não decide regra de negócio.
 
 ### 11 · AI GATEWAY
 
-`slide-ai-gateway` · alvo 2:45 · 1 clique(s) internos antes de avançar
+`slide-ai-gateway` · alvo 3:15 · 1 clique(s) internos antes de avançar
 
 Até aqui a gente resolveu o que é de cada aplicação: porta e adapter, contexto isolado, harness e loop. Agora o que é do sistema inteiro. Sem AI Gateway, cada aplicação agêntica fala direto com cada provedor de modelo, cada tool e cada agente de outro domínio. Três apps e quatro destinos já são doze integrações, e cada uma carrega a sua chave de provedor, o seu retry, o seu log e o seu jeito de contar token. É o mesmo problema que a gente tinha com API antes do API Gateway, só que agora o tráfego é de modelo, de tool e de agente. Clique 1: com AI Gateway, todo o tráfego de IA passa por um ponto de controle. As apps se autenticam com a própria identidade, pedem um modelo por alias, e a borda cuida de credencial, política, roteamento, trace e custo. Por quê, em uma frase: o que é de todos (credencial, roteamento, fallback, custo, política, trace) sai do código de cada aplicação e vai para a borda. O que o gateway não faz: ele não decide crédito e não valida o contrato do domínio; isso continua no núcleo, como o próximo slide mostra no código. Se perguntarem de produto: é esse papel que o Sensedia AI Gateway cumpre; os nomes de políticas nos próximos slides são ilustrativos.
 
-### 12 · SISTEMA COM AI GATEWAY
+### 12 · FECHAMENTO
 
-`slide-sistema-com-ai-gateway` · alvo 4:15 · 4 clique(s) internos antes de avançar
+`slide-fechamento` · alvo 3:15 · sem cliques internos
 
-Do código para o sistema inteiro: o mesmo desenho, agora com a borda. Em cima, cinco aplicações agênticas, cada uma com seus agentes: Onboarding (KYC e documentos), Crédito (risco e renda), Antifraude, Atendimento e Cobrança. Todo tráfego de IA dessas apps passa por um ponto de controle, com três módulos. LLM Gateway, para os LLMs: credenciais em vault, roteamento e fallback entre provedores, mascaramento de PII, token budget por app. MCP Gateway, para ferramentas: autorização por tool, allowlist e a transformação de APIs existentes em MCP. Agent Gateway, para o tráfego entre agentes via A2A: identidade, limites e discovery. Por cima, um control plane com identidade, política, custo, auditoria e traces no padrão OpenTelemetry GenAI. A legenda explica as cores dos fluxos: roxo é app chamando modelo, azul é app chamando tools e APIs, laranja é um agente chamando agente de outra app; por exemplo, o agente de risco da App Crédito pedindo um score à App Antifraude. É a mesma história dos microsserviços: o que é transversal sai do código e vai para a borda. A lição do ESB continua valendo: a borda governa, mas não decide regra de negócio. Na Sensedia, é esse o desenho do AI Gateway; governar o tráfego entre agentes ainda é um padrão em evolução no mercado, inclusive no nosso roadmap. Repare na linha verde de cada módulo: não existe API key de provedor nos serviços. Todo salto é OAuth 2.1, com token de vida curta. No LLM Gateway, client credentials: a identidade do próprio workload; a credencial do provedor fica guardada na borda. No MCP Gateway, a Enterprise-Managed Authorization do MCP: o IdP da empresa emite uma asserção, o ID-JAG, trocada pelo token de acesso ao MCP server, e quem decide o acesso é a política corporativa. No Agent Gateway, on-behalf-of: token exchange, RFC 8693, para o agente agir em nome do usuário com escopo reduzido. E trocar de modelo vira configuração na borda, mas não sem evals: o comportamento muda entre provedores, e a troca passa pelo mesmo conjunto de casos de referência. Quatro cliques ligam este desenho a tudo que a gente viu. (1) Hexagonal: dentro de cada app, como a App Crédito, o núcleo decide e o LLM é um adapter atrás da porta; o AI Gateway é só o outro lado desse adapter. (2) Contexto: cada agente com a sua janela; risco não lê a de renda, e só o handoff sobe. (3) Harness: guias, como AGENTS.md e skills, moram no repositório de cada app; sensores, como política, auditoria e traces, ficam na borda, para todas as apps. (4) Loop: o budget por tarefa é condição de parada dentro da app; o teto por app é aplicado no LLM Gateway.
+Para fechar, a imagem que resume a palestra. No centro, o modelo: probabilístico, imprevisível, e é assim que ele deve ser; os pontinhos não param quietos. Em volta, camada por camada, o que a gente desenhou para acomodar esse núcleo num sistema que exige governança e disponibilidade. Primeiro, porta e adapter: Clean Architecture, para o provedor de LLM ser um detalhe trocável, e é assim que se mitiga o acoplamento tecnológico. Depois, contexto isolado por agente: cada um com a sua janela. Depois, harness e loop: guias, sensores e uma regra explícita de quando parar, que é o que torna a orquestração de vários agentes gerenciável. E por fora, a borda: o AI Gateway, com identidade, política, fallback e custo, que é de onde vem a resiliência sistêmica. Do monolítico ao agente autônomo, os padrões não mudaram, mudaram de lugar. O desafio não é o modelo; é a arquitetura em volta dele. Fica a pergunta para a próxima integração com IA que vocês fizerem: onde mora a decisão no seu sistema? Se a resposta for dentro do modelo, ainda falta casca.
 
 ### 13 · OBRIGADO
 

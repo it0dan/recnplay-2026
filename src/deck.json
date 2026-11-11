@@ -7,7 +7,7 @@
     { "title": "02 · DESENVOLVENDO COM GENAI",             "slides": ["linha-do-tempo-agentica"] },
     { "title": "03 · MULTIAGENTES",                        "slides": ["contexto-por-agente", "harness", "loop"] },
     { "title": "04 · A TESE: CLEAN ARCHITECTURE PARA LLM", "slides": ["hexagonal-para-llm", "entao-agora"] },
-    { "title": "05 · NFRs E AI GATEWAY",                   "slides": ["ai-gateway", "sistema-com-ai-gateway"] },
-    { "title": "ENCERRAMENTO",                             "slides": ["obrigado"] }
+    { "title": "05 · NFRs E AI GATEWAY",                   "slides": ["ai-gateway"] },
+    { "title": "ENCERRAMENTO",                             "slides": ["fechamento", "obrigado"] }
   ]
 }

@@ -1,0 +1,22 @@
+/* Slide fechamento: o núcleo probabilístico no centro e, em volta, as camadas determinísticas da palestra.
+   Escopo: #slide-fechamento (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-fechamento{
+  & .fx{display:grid;grid-template-columns:640px minmax(0,1fr);gap:48px;align-items:center}
+  & .rings{display:block;max-height:660px}
+  & .rings .rg{transform-box:fill-box;transform-origin:center}
+  & .rings .pdot{fill:var(--acc);animation:pdot 2.4s ease-in-out infinite}
+  & h2{font-size:46px;line-height:1.12;margin-bottom:28px}
+  & .tks{display:flex;flex-direction:column;gap:14px}
+  & .tk{border-left:4px solid var(--acc);padding:6px 0 6px 18px;display:flex;flex-direction:column;gap:4px}
+  & .tk b{font-family:'Roboto Mono',monospace;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+  & .tk span{font-size:21px;line-height:1.35}
+  & .q{margin-top:34px;font-size:21px;line-height:1.45;color:var(--muted)}
+  & .q b{display:inline-block;margin-top:4px;font-size:30px;font-weight:800;color:var(--warn)}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .fx{grid-template-columns:minmax(0,1fr);gap:16px}
+  .read & h2{font-size:28px;margin-bottom:16px}
+  .read & .tk span{font-size:15px}
+  .read & .q{font-size:15px;margin-top:18px}
+  .read & .q b{font-size:21px}
+}
+@keyframes pdot{0%,100%{transform:translate(0,0);opacity:.9}25%{transform:translate(4px,-3px);opacity:.4}50%{transform:translate(-3px,4px);opacity:1}75%{transform:translate(3px,3px);opacity:.5}}

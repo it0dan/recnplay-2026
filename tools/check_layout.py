@@ -29,7 +29,8 @@ SVG_TEXT = """() => { const out=[]; const s=document.querySelector('.slide.activ
    const xs=c.map(p=>p.x), ys=c.map(p=>p.y); return {x:Math.min(...xs),y:Math.min(...ys),width:Math.max(...xs)-Math.min(...xs),height:Math.max(...ys)-Math.min(...ys)}; };
  s.querySelectorAll('svg').forEach(svg=>{
   const shapes=[...svg.querySelectorAll('rect,polygon,ellipse,circle')].filter(r=>{const b=r.getBBox(); return b.width>24&&b.height>16;});
-  svg.querySelectorAll('text').forEach(t=>{ const b=bb(svg,t); if(!b.width) return;
+  svg.querySelectorAll('text').forEach(t=>{ if(t.querySelector('textPath')) return;   // texto em arco: a caixa não diz nada
+    const b=bb(svg,t); if(!b.width) return;
     const P=(x,y)=>{const p=svg.createSVGPoint(); p.x=x; p.y=y; return p;};
     const inside=(sh,p)=>{ try{ const q=p.matrixTransform(toRoot(svg,sh).inverse()); return sh.isPointInFill(q);}catch(e){return false;} };
     const c=P(b.x+b.width/2,b.y+b.height/2);
@@ -41,7 +42,7 @@ SVG_TEXT = """() => { const out=[]; const s=document.querySelector('.slide.activ
     if(corners.some(p=>!inside(cont,p))){ const k=bb(svg,cont), f=v=>v.toFixed(1);
       out.push(t.textContent.trim().slice(0,46)+' ⊄ '+cont.tagName+' (texto x '+f(b.x)+'→'+f(b.x+b.width)+', forma x '+f(k.x)+'→'+f(k.x+k.width)+')'); }
   });});
- s.querySelectorAll('svg').forEach(svg=>{ const ts=[...svg.querySelectorAll('text')].map(t=>({t,b:bb(svg,t)})).filter(o=>o.b.width);
+ s.querySelectorAll('svg').forEach(svg=>{ const ts=[...svg.querySelectorAll('text')].filter(t=>!t.querySelector('textPath')).map(t=>({t,b:bb(svg,t)})).filter(o=>o.b.width);
    for(let i=0;i<ts.length;i++) for(let j=i+1;j<ts.length;j++){ const a=ts[i].b,c=ts[j].b;
      const ox=Math.min(a.x+a.width,c.x+c.width)-Math.max(a.x,c.x), oy=Math.min(a.y+a.height,c.y+c.height)-Math.max(a.y,c.y);
      if(ox>2&&oy>3) out.push('OVERLAP '+ts[i].t.textContent.trim().slice(0,25)+' × '+ts[j].t.textContent.trim().slice(0,25)); } });

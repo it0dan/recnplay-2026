@@ -8,8 +8,18 @@
   & .wc .wt b{color:var(--text);font-weight:700}
   & .wc .wt code{font-family:'Roboto Mono',monospace;font-size:14px;color:var(--warn)}
   & h2{margin-bottom:12px}
-  & .split{grid-template-columns:820px 1fr;gap:34px;align-items:center}
+  & .split{grid-template-columns:780px 1fr;gap:30px;align-items:center}
+  /* cartões e código no mesmo lugar: no clique, os cartões saem e o código entra */
+  & .stk{display:grid}
+  & .stk>*{grid-area:1/1}
+  & .cbx .codebox pre{font-size:13.2px;line-height:1.5}
   /* leitura vertical (celular/tablet em pé) */
+  .read & .stk{gap:12px}
+  .read & .stk>*{grid-area:auto}
+  .read & .stk{grid-template-columns:minmax(0,1fr)}
+  .read & .stk>*{min-width:0}
+  .read & .cbx .codebox pre{overflow-x:auto}
+  .read & .cbx .codebox pre{font-size:11px;line-height:1.55}
   .read & .wc .wt{font-size:15px}
   .read & .wc .wt code{font-size:12.5px}
 }
