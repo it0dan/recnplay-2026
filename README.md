@@ -38,9 +38,9 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 | **01 · Formas modernas** | 02 – 04 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
 | **02 · Desenvolvendo com GenAI** | 05 | Do assistente à esteira agêntica (spec, gates humanos, evals, contexto versionado) |
 | **03 · Aplicações agênticas** | 06 | Hexagonal, Onion e Clean para LLM: o que é, por que, como |
-| **04 · Multiagentes** | 07 – 10 | Contexto por agente · harness e loop · onde cada peça mora no hexagonal · então → agora (e quando não ir para multiagente) |
-| **05 · NFRs e AI Gateway** | 11 – 13 | Sem × com AI Gateway e por quê · o sistema com AI Gateway (OAuth 2.1, EMA/ID-JAG, OBO) · AgentOps e AI FinOps (painel ilustrativo) |
-| **Encerramento** | 14 | Obrigado + QR code |
+| **04 · Multiagentes** | 07 – 10 | Contexto por agente · harness e loop · onde cada peça mora no hexágono · então → agora (microsserviço vira agente como serviço; quando não ir para multiagente) |
+| **05 · NFRs e AI Gateway** | 11 – 12 | Sem × com AI Gateway · antes e agora no mesmo sistema: agentes integrados ao monolito modular e aos microsserviços, API Gateway e AI Gateway (OAuth 2.1, EMA/ID-JAG, OBO) |
+| **Encerramento** | 13 | Obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).

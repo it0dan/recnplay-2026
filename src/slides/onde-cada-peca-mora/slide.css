@@ -2,8 +2,9 @@
    Cada passo acende uma cor (g1 guias · g2 sensores · g3 loop · g4 parada); o resto esmaece.
    Escopo: #slide-onde-cada-peca-mora (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
 #slide-onde-cada-peca-mora{
-  & h2{margin-bottom:16px}
-  & .map{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:stretch}
+  & h2{margin-bottom:8px}
+  & .map{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+  & .map.only-read{display:none}
   & .ring{border-radius:20px;padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px}
   & .r1{border:2px solid var(--line2)}
   & .r2{border:2px solid var(--acc);background:var(--surf-2)}
@@ -24,17 +25,35 @@
   /* passo N: acende a cor N e esmaece o resto */
   &[data-step="1"] .it:not(.g1),&[data-step="2"] .it:not(.g2),&[data-step="3"] .it:not(.g3),&[data-step="4"] .it:not(.g4){opacity:.28}
   &[data-step="1"] .it.g1,&[data-step="2"] .it.g2,&[data-step="3"] .it.g3,&[data-step="4"] .it.g4{border-color:var(--c);background:var(--surf)}
+  /* palco: hexágonos à esquerda, legenda que acende por passo à direita */
+  & .lay{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:center}
+  & .hexmap{display:block;max-height:610px}
+  & .hexmap .h1{fill:none;stroke:var(--line2);stroke-width:2}
+  & .hexmap .h2{fill:var(--surf-2);stroke:var(--acc);stroke-width:2}
+  & .hexmap .h3{fill:var(--surf);stroke:var(--acc-strong);stroke-width:3}
+  & .hexmap .ob{fill:none;stroke:var(--line2);stroke-width:1.6;stroke-dasharray:6 5}
+  & .hexmap .lk{fill:none;stroke:var(--line2);stroke-width:1.5;stroke-dasharray:4 4}
+  & .hexmap .it{transition:opacity .4s}
+  & .hexmap .pb{fill:var(--bg);stroke:var(--c,var(--line2));stroke-width:1.6;transition:fill .4s,stroke-width .4s}
+  & .hexmap .pd{fill:var(--c,var(--line2))}
+  & .hexmap .it text{font-weight:600}
+  & .hexmap .it.g1{--c:var(--g1)}
+  & .hexmap .it.g2{--c:var(--g2)}
+  & .hexmap .it.g3{--c:var(--g3)}
+  & .hexmap .it.g4{--c:var(--g4)}
+  &[data-step="1"] .hexmap .it.g1 .pb,&[data-step="2"] .hexmap .it.g2 .pb,&[data-step="3"] .hexmap .it.g3 .pb,&[data-step="4"] .hexmap .it.g4 .pb{stroke-width:3;fill:var(--surf)}
   /* legenda (as mesmas cores) */
-  & .legend{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
-  & .lg{background:var(--surf-2);border-radius:12px;padding:10px 14px;border-left:4px solid var(--c);display:flex;flex-direction:column;gap:3px}
-  & .lg b{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
-  & .lg span{font-size:14.5px;line-height:1.35;color:var(--muted)}
+  & .legend{display:flex;flex-direction:column;gap:12px}
+  & .lg{background:var(--surf-2);border-radius:14px;padding:12px 18px;border-left:5px solid var(--c);display:flex;flex-direction:column;gap:5px}
+  & .lg b{font-family:'Roboto Mono',monospace;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+  & .lg span{font-size:16px;line-height:1.38;color:var(--muted)}
   & .lg.g1{--c:var(--g1)}
   & .lg.g2{--c:var(--g2)}
   & .lg.g3{--c:var(--g3)}
   & .lg.g4{--c:var(--g4)}
   /* leitura vertical (celular/tablet em pé) */
-  .read & .map{grid-template-columns:minmax(0,1fr);gap:12px}
+  .read & .lay{grid-template-columns:minmax(0,1fr);gap:12px}
+  .read & .map.only-read{display:grid}
   .read & .ring{padding:12px 12px 14px;border-radius:16px}
   .read & .rl{font-size:10.5px}
   .read & .it{font-size:14px;padding:7px 10px}

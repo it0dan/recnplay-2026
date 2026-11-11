@@ -1,27 +1,27 @@
 /* Slide então → agora: cada padrão de sistemas distribuídos e o seu lugar num sistema com agentes.
    Escopo: #slide-entao-agora (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
 #slide-entao-agora{
-  & h2{margin-bottom:18px}
-  & .tbl{display:flex;flex-direction:column;gap:8px}
-  & .hd,& .row{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center}
-  & .hd span{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ref);padding:0 20px}
+  & h2{margin-bottom:16px}
+  & .tbl{display:flex;flex-direction:column;gap:10px}
+  & .hd,& .row{display:grid;grid-template-columns:1fr 110px 1fr;align-items:center}
+  & .hd span{font-family:'Roboto Mono',monospace;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--ref);padding:0 24px}
   & .hd span:last-child{color:var(--warn)}
-  & .th,& .nw{border-radius:12px;padding:10px 20px;display:flex;align-items:baseline;gap:14px}
-  & .th{background:var(--surf-2);border-left:4px solid var(--acc-strong)}
-  & .nw{background:var(--surf-2);border-left:4px solid var(--warn)}
-  & .th b,& .nw b{font-size:19px;font-weight:800;white-space:nowrap}
+  & .th,& .nw{border-radius:14px;padding:13px 24px;display:flex;align-items:baseline;gap:16px;min-height:58px}
+  & .th{background:var(--surf-2);border-left:5px solid var(--acc-strong)}
+  & .nw{background:var(--surf-2);border-left:5px solid var(--warn)}
+  & .th b,& .nw b{font-size:22px;font-weight:800;white-space:nowrap}
   & .nw b{color:var(--warn)}
-  & .th span,& .nw span{font-size:15.5px;color:var(--muted)}
-  & .ar{text-align:center;font-size:26px;font-weight:800;color:var(--warn)}
-  & .callout{margin-top:18px;font-size:17px;border-left-color:var(--ok)}
+  & .th span,& .nw span{font-size:17px;color:var(--muted)}
+  & .row .arw{margin:0 14px}
+  & .callout{margin-top:18px;font-size:18px;border-left-color:var(--ok)}
   & .callout b{color:var(--ok)}
   /* leitura vertical (celular/tablet em pé) */
   .read & .hd{display:none}
   .read & .row{grid-template-columns:minmax(0,1fr);gap:4px}
-  .read & .ar{font-size:18px;line-height:1;transform:rotate(90deg)}
-  .read & .th,.read & .nw{flex-direction:column;gap:2px;padding:8px 14px}
+  .read & .row .arw{display:none}
+  .read & .th,.read & .nw{flex-direction:column;gap:2px;padding:8px 14px;min-height:0}
   .read & .th b,.read & .nw b{font-size:16px;white-space:normal}
   .read & .th span,.read & .nw span{font-size:13.5px}
-  .read & .row+.row{margin-top:6px}
+  .read & .row+.row{margin-top:8px}
   .read & .callout{font-size:14.5px}
 }
