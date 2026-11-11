@@ -1,0 +1,43 @@
+/* Slide onde cada peça mora: harness e loop desenhados nas camadas do hexagonal (cebola), sem código.
+   Cada passo acende uma cor (g1 guias · g2 sensores · g3 loop · g4 parada); o resto esmaece.
+   Escopo: #slide-onde-cada-peca-mora (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-onde-cada-peca-mora{
+  & h2{margin-bottom:16px}
+  & .map{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:stretch}
+  & .ring{border-radius:20px;padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px}
+  & .r1{border:2px solid var(--line2)}
+  & .r2{border:2px solid var(--acc);background:var(--surf-2)}
+  & .r3{border:2px solid var(--acc-strong);background:var(--surf)}
+  & .rl{font-family:'Roboto Mono',monospace;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ref)}
+  & .r2>.rl{color:var(--acc)}
+  & .its{display:flex;flex-wrap:wrap;gap:8px}
+  & .it{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:8px 14px;font-size:16.5px;font-weight:600;background:var(--surf);border:1.5px solid var(--line2);transition:opacity .4s,border-color .4s,background .4s}
+  & .r2 .it,& .r3 .it{background:var(--bg)}
+  & .it::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--c,var(--line2));flex:none}
+  & .it.g1{--c:var(--g1)}
+  & .it.g2{--c:var(--g2)}
+  & .it.g3{--c:var(--g3)}
+  & .it.g4{--c:var(--g4)}
+  & .out{border:2px dashed var(--line2);border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+  & .ob{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  & .ob b{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  /* passo N: acende a cor N e esmaece o resto */
+  &[data-step="1"] .it:not(.g1),&[data-step="2"] .it:not(.g2),&[data-step="3"] .it:not(.g3),&[data-step="4"] .it:not(.g4){opacity:.28}
+  &[data-step="1"] .it.g1,&[data-step="2"] .it.g2,&[data-step="3"] .it.g3,&[data-step="4"] .it.g4{border-color:var(--c);background:var(--surf)}
+  /* legenda (as mesmas cores) */
+  & .legend{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+  & .lg{background:var(--surf-2);border-radius:12px;padding:10px 14px;border-left:4px solid var(--c);display:flex;flex-direction:column;gap:3px}
+  & .lg b{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+  & .lg span{font-size:14.5px;line-height:1.35;color:var(--muted)}
+  & .lg.g1{--c:var(--g1)}
+  & .lg.g2{--c:var(--g2)}
+  & .lg.g3{--c:var(--g3)}
+  & .lg.g4{--c:var(--g4)}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .map{grid-template-columns:minmax(0,1fr);gap:12px}
+  .read & .ring{padding:12px 12px 14px;border-radius:16px}
+  .read & .rl{font-size:10.5px}
+  .read & .it{font-size:14px;padding:7px 10px}
+  .read & .legend{grid-template-columns:minmax(0,1fr);gap:8px}
+  .read & .lg span{font-size:14px}
+}

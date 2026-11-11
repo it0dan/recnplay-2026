@@ -11,6 +11,7 @@
   & .cmeta .mv{font-size:19px;font-weight:600}
   & .evlogos{display:flex;align-items:center;gap:34px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
   & .evlogos .x{font-family:'Roboto Mono',monospace;color:var(--ref);font-size:20px}
+  & .lead .lim{color:var(--warn);font-weight:600}
   /* leitura vertical (celular/tablet em pé) */
   .read & .cmeta{margin-top:26px;padding-top:16px}
   .read & .evlogos{flex-wrap:wrap;gap:10px 18px;margin-top:26px;padding-top:18px}

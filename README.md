@@ -22,7 +22,7 @@ A arquitetura de software evoluiu dividindo o sistema: monolito modular, micross
 
 Todos os exemplos usam um único domínio, do primeiro ao último slide: **análise de crédito agêntica**.
 
-**Tese central:** *núcleo probabilístico, casca determinística.* Não dá para tornar o modelo idempotente, mas dá para construir uma casca que seja. Os padrões de sempre (hexagonal, database-per-service, saga, idempotência) continuam valendo. O que muda é onde eles se aplicam: no contrato da resposta, no contexto de cada agente e na borda que governa o tráfego de IA.
+**Tese central:** *o núcleo é probabilístico; a casca que decide quando ele para é determinística.* Não dá para tornar o modelo idempotente, mas dá para construir uma casca que seja. A autonomia que funciona em produção é autonomia com limites desenhados. Os padrões de sempre (hexagonal, database-per-service, saga, idempotência) continuam valendo. Os padrões não mudam, mudam de lugar: no contrato da resposta, no contexto de cada agente e na borda que governa o tráfego de IA.
 
 ## Palestrante
 
@@ -34,13 +34,13 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 
 | Bloco | Slides | Conteúdo |
 | :-- | :-- | :-- |
-| **Abertura** | 00 – 01 | Capa e linha do tempo da arquitetura de software |
+| **Abertura** | 00 – 01 | Capa (autonomia com limites) e linha do tempo da arquitetura de software |
 | **01 · Formas modernas** | 02 – 04 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
-| **02 · Desenvolvendo com GenAI** | 05 – 06 | Linha do tempo agêntica · AI-SDLC (SDD, SPDD, AGENTS.md, skills) |
-| **03 · Aplicações agênticas** | 07 | Hexagonal, Onion e Clean para LLM: o que é, por que, como |
-| **04 · Multiagentes** | 08 – 11 | Contexto por agente · harness · loop · harness e loop no código (onde cada um mora no hexagonal) |
-| **05 · NFRs e AI Gateway** | 12 – 15 | Sem × com AI Gateway e por quê · LLM, MCP e Agent Gateway no código (OAuth 2.1, EMA/ID-JAG, OBO) · o sistema com AI Gateway · AgentOps e AI FinOps (painel ilustrativo) |
-| **Encerramento** | 16 | Obrigado + QR code |
+| **02 · Desenvolvendo com GenAI** | 05 | Do assistente à esteira agêntica (spec, gates humanos, evals, contexto versionado) |
+| **03 · Aplicações agênticas** | 06 | Hexagonal, Onion e Clean para LLM: o que é, por que, como |
+| **04 · Multiagentes** | 07 – 10 | Contexto por agente · harness e loop · onde cada peça mora no hexagonal · então → agora (e quando não ir para multiagente) |
+| **05 · NFRs e AI Gateway** | 11 – 13 | Sem × com AI Gateway e por quê · o sistema com AI Gateway (OAuth 2.1, EMA/ID-JAG, OBO) · AgentOps e AI FinOps (painel ilustrativo) |
+| **Encerramento** | 14 | Obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).
@@ -76,7 +76,7 @@ Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue she
 | Botão `⋯` (canto inferior direito) | Menu com voltar, avançar, início, fim, notas, fontes, glossário, tema, timer, pausa e tela cheia |
 | Botão `✕` | Fecha o menu, o painel ou a pausa |
 
-**Em pé**, entra a **leitura vertical**: os slides viram uma página que se rola para cima, cada um reorganizado em uma coluna, com todos os passos já revelados. Grades viram listas, os desenhos largos (monolito modular, hexagonal, código com AI Gateway e sistema com AI Gateway) têm uma versão própria em pé, e o código rola de lado dentro da caixa. O menu `⋯` continua lá: notas, fontes e glossário valem para o slide que está na tela, e avançar/voltar rolam até o slide seguinte. Ao deitar o aparelho, o palco volta no mesmo slide.
+**Em pé**, entra a **leitura vertical**: os slides viram uma página que se rola para cima, cada um reorganizado em uma coluna, com todos os passos já revelados. Grades viram listas, e os desenhos largos (monolito modular, hexagonal e sistema com AI Gateway) têm uma versão própria em pé. O menu `⋯` continua lá: notas, fontes e glossário valem para o slide que está na tela, e avançar/voltar rolam até o slide seguinte. Ao deitar o aparelho, o palco volta no mesmo slide.
 
 "Tela cheia" já entra deitada onde o navegador permite; no iPhone, que não tem tela cheia para páginas, use *Compartilhar → Adicionar à Tela de Início*. Para ver no notebook: `presentation.html?touch=1` mostra os controles de toque e `presentation.html?read=1` liga a leitura vertical.
 

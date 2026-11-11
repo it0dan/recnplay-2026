@@ -22,6 +22,7 @@
   .read & .md.m3{--c:var(--g3)}
   .read & .md b{font-size:15px}
   .read & .md span{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--muted)}
+  .read & .md i{font-style:normal;font-family:'Roboto Mono',monospace;font-size:11px;font-weight:700;color:var(--ok)}
   .read & .md em{font-style:normal;font-size:12.5px;color:var(--c);margin-top:3px}
   .read & .cp{font-family:'Roboto Mono',monospace;font-size:10.5px;line-height:1.5;color:var(--acc)}
   .read & .nt{font-family:'Roboto Mono',monospace;font-size:10.5px;line-height:1.5;color:var(--ref);margin-top:8px}

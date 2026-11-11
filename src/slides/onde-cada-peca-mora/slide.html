@@ -1,0 +1,30 @@
+<section class="slide" id="slide-onde-cada-peca-mora" data-t="2:45">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">04 · MULTIAGENTES &nbsp;<span class="dim">// onde cada peça mora</span></div>
+    <h2>Harness e loop <span class="a">têm endereço na arquitetura</span></h2>
+    <div class="map">
+      <div class="ring r1"><div class="rl">adapters · infraestrutura</div>
+        <div class="its"><span class="it g0">LLM que gera a resposta</span><span class="it g1">prompt versionado</span><span class="it g2">LLM-as-judge, atrás de uma porta</span></div>
+        <div class="ring r2"><div class="rl">aplicação · caso de uso EvaluateProposal</div>
+          <div class="its"><span class="it g3">o loop: agir → verificar → corrigir</span><span class="it g4">para: meta · teto · budget · humano</span></div>
+          <div class="ring r3"><div class="rl">domínio · núcleo</div>
+            <div class="its"><span class="it g1">contrato da saída (schema)</span><span class="it g2">CreditPolicy: guardrail determinístico</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="out"><div class="rl">fora do runtime</div>
+        <div class="ob"><b>repositório</b><span class="it g1">AGENTS.md · skills</span></div>
+        <div class="ob"><b>CI</b><span class="it g2">evals: casos de referência, trajetória e custo</span><span class="it g2">teste de arquitetura: SDK fora do núcleo</span></div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="lg g1 frag frag-ghost" data-f="1"><b>① guias · antes de agir</b><span>AGENTS.md, skills, schema e prompt, versionados com o código</span></div>
+      <div class="lg g2 frag frag-ghost" data-f="2"><b>② sensores · depois de agir</b><span>guardrail no domínio, judge atrás de uma porta, evals no CI</span></div>
+      <div class="lg g3 frag frag-ghost" data-f="3"><b>③ loop · no caso de uso</b><span>agir → verificar → corrigir, falando só com portas</span></div>
+      <div class="lg g4 frag frag-ghost" data-f="4"><b>④ parada · regra explícita</b><span>meta atingida, teto de iterações, budget ou humano</span></div>
+    </div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// ONDE CADA PEÇA MORA</span><span class="hb-idx"></span></div>
+  <aside class="notes">Harness e loop não são conceitos soltos: eles têm endereço na mesma arquitetura hexagonal que a gente já viu, desenhada aqui como cebola. Quatro cliques, cada um acende uma cor. (1) Guias, o feedforward: AGENTS.md e skills no repositório; o contrato da saída no domínio; o prompt versionado dentro do adapter, porque prompt é detalhe de infraestrutura. (2) Sensores, o feedback: a CreditPolicy no domínio é o guardrail determinístico; o LLM-as-judge entra atrás de uma porta, como qualquer outro adapter, para poder ser trocado e testado com um fake; e no CI ficam os evals, sobre casos de referência, medindo trajetória, resultado e custo, mais o teste de arquitetura que barra SDK no núcleo. (3) O loop mora no caso de uso: agir, verificar, corrigir, falando só com portas, sem SDK e sem prompt. (4) E as condições de parada também moram ali, como regra explícita: meta atingida, teto de iterações, budget, ou escalonamento para um humano. É a tese da palestra num desenho: o núcleo é probabilístico, e a casca que decide quando ele para é determinística.</aside>
+</section>

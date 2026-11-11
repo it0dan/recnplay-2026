@@ -1,4 +1,4 @@
-<section class="slide" id="slide-hexagonal-para-llm" data-t="2:45">
+<section class="slide" id="slide-hexagonal-para-llm" data-t="3:15">
   <div class="hud-top"></div>
   <div class="body">
     <div class="tag">03 · APLICAÇÕES E ESTEIRAS AGÊNTICAS &nbsp;<span class="dim">// hexagonal para llm</span></div>
@@ -32,7 +32,7 @@
       <div class="whw">
         <div class="wc"><div class="wk">o que é</div><div class="wt">Hexagonal (Cockburn, 2005), Onion (Palermo, 2008) e Clean (Martin, 2012) são a mesma ideia: <b>o núcleo no centro</b>, domínio e casos de uso, e a infraestrutura na borda. <b>As dependências apontam para dentro.</b></div></div>
         <div class="wc"><div class="wk">por que</div><div class="wt">Trocar o detalhe sem tocar a regra: provedor de LLM, banco ou framework. Testar o núcleo sem rede, com um Fake. E limitar o que um sistema externo consegue quebrar lá dentro.</div></div>
-        <div class="wc"><div class="wk">como</div><div class="wt">O núcleo define <b>portas</b> na língua do negócio, como <code>CreditEvaluator.evaluate(proposal)</code>. <b>Adapters</b> implementam a porta e traduzem o modelo externo (ACL). A composição injeta o adapter, e um teste de arquitetura barra SDK no núcleo.</div></div>
+        <div class="wc"><div class="wk">como</div><div class="wt">O núcleo define <b>portas</b> na língua do negócio, como o <b>CreditEvaluator</b>: avaliar uma proposta. <b>Adapters</b> implementam a porta e traduzem o modelo externo (ACL). A composição injeta o adapter, e um teste de arquitetura barra SDK no núcleo.</div></div>
       </div>
     </div>
   </div>
