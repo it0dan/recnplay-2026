@@ -23,4 +23,15 @@
   & h2{margin-bottom:14px}
   & .split{grid-template-columns:1fr 1fr;gap:28px;margin-top:22px;align-items:stretch}
   & .codebox pre{font-size:13.5px;line-height:1.55}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .pipe5{flex-wrap:wrap;gap:8px 0;justify-content:flex-start}
+  .read & .pipe5 .node{font-size:14px;padding:8px 10px}
+  .read & .pipe5 .node small{font-size:10.5px}
+  .read & .pipe5 .gate{font-size:11px;padding:6px 8px}
+  .read & .pipe5 .arw{flex:0 0 26px;min-width:26px}
+  .read & .split{margin-top:16px}
+  .read & .spdd-col .sp-r{padding:10px 14px;grid-template-columns:118px minmax(0,1fr)}
+  .read & .spdd-col .sp-f{font-size:13.5px}
+  .read & .spdd-col .sp-d{font-size:14px}
+  .read & .codebox pre{font-size:11px;line-height:1.6}
 }

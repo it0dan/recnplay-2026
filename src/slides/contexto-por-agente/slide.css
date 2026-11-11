@@ -26,6 +26,14 @@
   & .ctx .it2{animation-name:ctxIt2}
   & .ctx .it3{animation-name:ctxIt3}
   & .ctx .handoff{animation:ctxHandoff 8s linear infinite both}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .pair{grid-template-columns:minmax(0,1fr);gap:6px}
+  .read & .pair .arrow{transform:rotate(90deg);font-size:30px;line-height:1}
+  .read & .pair .card{padding:16px 12px 14px}
+  .read & .pair-l{font-size:10.5px;letter-spacing:.14em;padding:0 6px}
+  .read & .pair .cd{font-size:16px}
+  .read & .keep{gap:6px;margin-top:14px;justify-content:flex-start}
+  .read & .keep .chip{font-size:11.5px;margin:0}
 }
 @keyframes ctxTask{0%,5%{offset-distance:0%;opacity:0}6%{offset-distance:0%;opacity:1}18%{offset-distance:100%;opacity:1}19%,100%{offset-distance:100%;opacity:0}}
 @keyframes ctxIt1{0%,20%{opacity:0}22%,91%{opacity:1}93%,100%{opacity:0}}

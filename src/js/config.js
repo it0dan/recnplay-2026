@@ -18,6 +18,8 @@
     // tecla segurada: intervalo entre um slide e o próximo · toque: faixa esquerda da tela que volta (fração da
     // largura) e deslocamento mínimo, em px, para um deslize contar
     input: Object.freeze({ holdStepMs: 140, backZone: 0.28, swipeMinPx: 56 }),
+    // leitura vertical (celular/tablet em pé): largura da coluna, em px; é ampliada para a largura da tela
+    reader: Object.freeze({ width: 540 }),
     // textura de pontos do fundo
     dotgrid: Object.freeze({ gap: 42, radius: 1.1 }),
   });

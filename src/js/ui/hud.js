@@ -12,9 +12,10 @@
                  '<div class="r"><span class="pulse"></span><span class="hud-timer">--:--</span></div>';
     document.querySelectorAll('.hud-top').forEach(el => { el.innerHTML = html; });
   }
+  // cada slide mostra o próprio número: no palco só o atual aparece; na leitura vertical, todos
   function sync(){
-    const { pad } = RP.util, tot = pad(RP.core.slides.length - 1), cur = pad(RP.core.idx);
-    document.querySelectorAll('.hb-idx').forEach(el => { el.textContent = cur + ' / ' + tot; });
+    const { pad } = RP.util, tot = pad(RP.core.slides.length - 1);
+    RP.core.slides.forEach((s, i) => s.querySelectorAll('.hb-idx').forEach(el => { el.textContent = pad(i) + ' / ' + tot; }));
   }
 
   RP.hud = { mount, sync };

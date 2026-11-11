@@ -1,0 +1,63 @@
+/* Leitura vertical (classe .read no <html>, posta por js/ui/reader.js em celular ou tablet em pé).
+   O palco deixa de ser um quadro 16:9: vira uma coluna de 540px (ampliada com zoom para a largura da tela)
+   em que os slides ficam empilhados e a pessoa rola para cima. Aqui estão as regras gerais; o que é próprio
+   de um slide fica no slide.css dele, num bloco ".read & …". O prefixo ".read #stage" garante precedência
+   sobre os estilos de palco sem !important. Sem .read (notebook, TV, celular deitado), nada daqui vale. */
+html.read{height:auto;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y proximity}
+.read body{height:auto;overflow:visible}
+.read #stage{position:relative;left:auto;top:auto;transform:none;width:540px;height:auto;zoom:var(--z,1);overflow-x:clip}
+.read #stage .slide{position:relative;inset:auto;display:flex;min-height:var(--rh,100vh);padding:20px 24px 18px;animation:none;scroll-snap-align:start}
+.read #stage .slide+.slide{border-top:1px solid var(--line)}
+.read #stage .body{padding:18px 0 16px;justify-content:center}
+
+/* sem passos: tudo revelado */
+.read #stage .frag{opacity:1;filter:none;transform:none}
+
+/* HUD enxuto */
+.read #stage .hud-top,.read #stage .hud-bottom{font-size:9.5px;letter-spacing:.12em}
+.read #stage .hud-top{padding-bottom:10px}
+.read #stage .hud-bottom{padding-top:10px}
+.read #stage .hud-top .l{gap:12px}
+.read #stage .hud-top .l span:nth-child(3){display:none}
+
+/* tipografia da coluna */
+.read #stage .tag{font-size:10.5px;letter-spacing:.2em;line-height:1.6;margin-bottom:10px}
+.read #stage h1{font-size:50px;margin-bottom:18px}
+.read #stage h2{font-size:29px;line-height:1.14;margin-bottom:16px}
+.read #stage .lead{font-size:19px}
+.read #stage .src{font-size:10.5px;line-height:1.5;margin-top:12px;text-align:left}
+.read #stage .callout{font-size:15.5px;padding:12px 16px}
+
+/* layouts de várias colunas viram uma */
+.read #stage .split{grid-template-columns:minmax(0,1fr);gap:16px}
+.read #stage .cases{grid-template-columns:minmax(0,1fr);gap:10px}
+.read #stage .cases .cl{flex-direction:row;align-items:baseline;gap:8px;flex-wrap:wrap}
+.read #stage .case{padding:12px 16px}
+.read #stage .case .ct{font-size:14px}
+.read #stage .case .cm b{font-size:28px}
+.read #stage .case .cm.q b{font-size:16px}
+
+/* diagramas: ocupam a largura da coluna, na proporção do viewBox */
+.read #stage .body svg{max-width:100%;height:auto}
+
+/* desenhos densos (.dgm): mantêm uma largura mínima legível (--dw) e rolam de lado dentro do slide.
+   No palco, .dgm não existe para o layout (display:contents). */
+.dgm{display:contents}
+.read #stage .dgm{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -24px;padding:0 24px 4px}
+.read #stage .dgm>svg{display:block;width:var(--dw,100%);max-width:none}
+.read #stage .dgm::after{content:'↔ arraste o desenho para os lados';display:block;position:sticky;left:0;margin-top:6px;font:400 9.5px/1.4 'Roboto Mono',monospace;letter-spacing:.08em;color:var(--ref)}
+
+/* código: fonte menor e rolagem lateral dentro da caixa, em vez de cortar */
+.read #stage .codebox pre{font-size:11px;line-height:1.6;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.read #stage .codebox .ln{width:max-content;min-width:100%}
+
+/* desenhos refeitos em pé (.pvw): o mesmo conteúdo do palco, reorganizado de cima para baixo */
+.read #stage .pvw>svg{display:block;width:100%;height:auto}
+
+/* sem timer na leitura: não há apresentação em curso */
+.read #stage .hud-top .r{display:none}
+
+/* blocos alternativos: .only-read só aparece na leitura vertical; .no-read some nela */
+.only-read{display:none}
+.read #stage .only-read{display:block}
+.read #stage .no-read,.read #stage .dgm.no-read{display:none}

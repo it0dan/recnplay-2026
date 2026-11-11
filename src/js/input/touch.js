@@ -77,7 +77,7 @@
     const t = e.changedTouches[0], dx = t.clientX - start.x, dy = t.clientY - start.y, dt = performance.now() - start.t;
     start = null;
     const zoomed = window.visualViewport && window.visualViewport.scale > 1.05;
-    if (zoomed || overlayOpen() || dt > 700) return;
+    if (zoomed || overlayOpen() || dt > 700 || RP.reader.isOn()) return;
     if (Math.abs(dx) < RP.config.input.swipeMinPx || Math.abs(dx) < Math.abs(dy) * 1.5) return;
     RP.input.muteClick(450);                                  // o deslize não pode contar também como toque
     if (menuOpen) setMenu(false);

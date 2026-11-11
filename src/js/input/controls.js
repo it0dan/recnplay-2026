@@ -75,6 +75,7 @@
   function onClick(e){
     if (e.button !== 0 || blocked() || e.target.closest('a')) return;
     if (performance.now() < mutedUntil) return;
+    if (RP.reader.isOn()) return;                                     // leitura vertical: quem navega é a rolagem
     const sel = window.getSelection(); if (sel && String(sel).length) return;
     const back = pointer === 'touch' && e.clientX < window.innerWidth * RP.config.input.backZone;
     back ? RP.core.prev() : RP.core.next();

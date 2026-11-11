@@ -5,5 +5,6 @@
   & h2{margin-bottom:10px}
   & .split{grid-template-columns:770px 1fr;gap:30px;align-items:center}
   & .codebox pre{font-size:12.5px;line-height:1.45}
+  /* leitura vertical (celular/tablet em pé) */
 }
 @keyframes mm2x{0%,40%{opacity:0}44%,80%{opacity:1}84%,100%{opacity:0}}

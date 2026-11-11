@@ -12,5 +12,9 @@
   &.active .dline{animation:clineIn 1.1s cubic-bezier(.3,.8,.3,1) 1s both}
   &.active .dfade{animation:tIn .6s ease 1.4s both}
   & .body{align-items:center;justify-content:center}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .dbig{font-size:84px}
+  .read & .dline{width:100%}
+  .read & .tag{text-align:center}
 }
 @keyframes clineIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}

@@ -9,4 +9,10 @@
   & .thesis{font-size:40px;font-weight:800;line-height:1.18;letter-spacing:-.01em;margin:2px 0 26px}
   & .thesis .prob{color:var(--acc)}
   & .thesis .det{color:var(--warn)}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .thesis{font-size:27px;margin-bottom:18px}
+  .read & .qr-box{width:260px;height:260px;padding:16px;border-radius:18px}
+  .read & .qr-url{font-size:17px;margin-top:16px}
+  .read & .qr-sub{font-size:14px;margin-top:8px}
+  .read & .src,.read & .tag{text-align:center}
 }

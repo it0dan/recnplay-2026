@@ -18,5 +18,18 @@
   & .tlx-p{font-family:'Roboto Mono',monospace;font-size:13.5px;line-height:1.6;color:var(--acc)}
   & .tlx-n.ai .tlx-p{color:var(--warn)}
   & h2{margin-bottom:6px}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .tlx-track,.read & .tlx-dot{display:none}
+  .read & .tlx-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  .read & .tlx-n{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:16px;align-items:start;background:var(--surf-2);border-radius:14px;padding:14px 16px;border-left:4px solid var(--acc-strong)}
+  .read & .tlx-n.ai{border-left-color:var(--warn)}
+  .read & .tlx-n>*{grid-column:2}
+  .read & .tlx-ic{grid-column:1;grid-row:1/span 8;height:auto;align-self:center}
+  .read & .tlx-ic svg{width:104px;height:auto}
+  .read & .tlx-y{font-size:11px;margin-bottom:2px}
+  .read & .tlx-t{font-size:20px;min-height:0;margin-bottom:6px}
+  .read & .tlx-k{font-size:10px;margin-bottom:1px}
+  .read & .tlx-d{font-size:14.5px;margin-bottom:6px}
+  .read & .tlx-p{font-size:12px}
 }
 @keyframes dotPop{0%{transform:scale(.3)}60%{transform:scale(1.5)}100%{transform:scale(1)}}

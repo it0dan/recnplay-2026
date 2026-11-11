@@ -1,4 +1,4 @@
-/* Ponto de entrada dos estilos compartilhados. A ordem é a da cascata: fundação → componentes → chrome.
+/* Ponto de entrada dos estilos compartilhados. A ordem é a da cascata: fundação → componentes → chrome → leitura vertical.
    Os estilos de cada slide ficam ao lado do markup, em src/slides/<nome>/slide.css, escopados por #slide-<nome>,
    e o tools/build.py os inclui depois deste arquivo, na ordem do src/deck.json. */
 
@@ -23,3 +23,5 @@
 @import url("chrome/blackout.css");
 @import url("chrome/panels.css");
 @import url("chrome/touch.css");
+
+@import url("reader/reader.css");

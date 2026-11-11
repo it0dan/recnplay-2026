@@ -13,4 +13,16 @@
   & .fails2 b{display:block;color:var(--warn);font-family:'Roboto Mono',monospace;font-size:15px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
   & h2{font-size:52px}
   & .callout{margin-top:16px;font-size:18px}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & h2{font-size:29px}
+  .read & .lp4b{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .read & .lp4b .card{padding:14px 14px 12px}
+  .read & .lp4b svg{width:52px;height:52px;margin-bottom:6px}
+  .read & .lp4b .ct{font-size:14px}
+  .read & .lp4b .kv{font-size:9.5px;margin-top:8px}
+  .read & .lp4b .kd{font-size:14px}
+  .read & .fails2{grid-template-columns:minmax(0,1fr);gap:8px;margin-top:12px}
+  .read & .fails2 div{padding:10px 14px;font-size:14.5px}
+  .read & .fails2 b{font-size:12px;margin-bottom:2px}
+  .read & .callout{margin-top:10px;font-size:14.5px}
 }

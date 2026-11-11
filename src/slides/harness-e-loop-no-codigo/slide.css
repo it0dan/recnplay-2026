@@ -15,4 +15,10 @@
   & .lg.g2{--c:var(--g2)}
   & .lg.g3{--c:var(--g3)}
   & .lg.g4{--c:var(--g4)}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .split>.codebox pre{font-size:11px;line-height:1.6}
+  .read & .side .codebox pre{font-size:10.5px;line-height:1.55}
+  .read & .legend{grid-template-columns:minmax(0,1fr);gap:8px}
+  .read & .lg b{font-size:11.5px}
+  .read & .lg span{font-size:14px}
 }

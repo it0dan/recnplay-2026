@@ -9,4 +9,7 @@
   & .wc .wt code{font-family:'Roboto Mono',monospace;font-size:14px;color:var(--warn)}
   & h2{margin-bottom:12px}
   & .split{grid-template-columns:820px 1fr;gap:34px;align-items:center}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & .wc .wt{font-size:15px}
+  .read & .wc .wt code{font-size:12.5px}
 }

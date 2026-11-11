@@ -66,7 +66,7 @@ Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue she
 
 ### Celular e tablet
 
-O deck é o mesmo em qualquer tela: o palco 16:9 é escalado para caber inteiro e centralizado na área útil do aparelho (fora de notch e barra de gestos). O que no notebook é atalho de teclado, no toque vira gesto ou botão:
+**Deitado**, o deck é o mesmo do palco: o 16:9 é escalado para caber inteiro na área útil do aparelho (fora de notch e barra de gestos). O que no notebook é atalho de teclado, no toque vira gesto ou botão:
 
 | Gesto | Ação |
 | :-- | :-- |
@@ -75,9 +75,12 @@ O deck é o mesmo em qualquer tela: o palco 16:9 é escalado para caber inteiro 
 | Deslizar para a esquerda / direita | Avança / volta |
 | Botão `⋯` (canto inferior direito) | Menu com voltar, avançar, início, fim, notas, fontes, glossário, tema, timer, pausa e tela cheia |
 | Botão `✕` | Fecha o menu, o painel ou a pausa |
-| Pinça | Zoom do navegador, para ler um detalhe |
 
-Com o aparelho em pé o palco fica pequeno, e o deck sugere girar. "Tela cheia" já entra deitada onde o navegador permite; no iPhone, que não tem tela cheia para páginas, use *Compartilhar → Adicionar à Tela de Início* para abrir sem as barras do Safari. Os controles de toque só aparecem em aparelhos de toque; para vê-los no notebook, abra `presentation.html?touch=1`.
+**Em pé**, entra a **leitura vertical**: os slides viram uma página que se rola para cima, cada um reorganizado em uma coluna, com todos os passos já revelados. Grades viram listas, os desenhos largos (monolito modular, hexagonal, código com AI Gateway e sistema com AI Gateway) têm uma versão própria em pé, e o código rola de lado dentro da caixa. O menu `⋯` continua lá: notas, fontes e glossário valem para o slide que está na tela, e avançar/voltar rolam até o slide seguinte. Ao deitar o aparelho, o palco volta no mesmo slide.
+
+"Tela cheia" já entra deitada onde o navegador permite; no iPhone, que não tem tela cheia para páginas, use *Compartilhar → Adicionar à Tela de Início*. Para ver no notebook: `presentation.html?touch=1` mostra os controles de toque e `presentation.html?read=1` liga a leitura vertical.
+
+**Como a leitura vertical é feita** (para editar um slide): a classe `.read` no `<html>` liga as regras de `src/css/reader/reader.css` e os blocos `.read & …` no fim de cada `slide.css`. Um conteúdo que só existe em pé usa `class="only-read"`; o que some em pé, `class="no-read"`. Nada disso vale sem `.read`, então o palco não muda.
 
 ---
 
@@ -104,11 +107,12 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   │   ├── main.css             # @import na ordem da cascata
 │   │   ├── foundation/          #   fontes, tokens (temas), reset, palco, tipografia, reduced-motion
 │   │   ├── components/          #   HUD, layout, card, motion, seta, diagrama SVG, codebox, fragmentos, cases
-│   │   └── chrome/              #   notas, tela de pausa, painéis S/G, controles de toque
+│   │   ├── chrome/              #   notas, tela de pausa, painéis S/G, controles de toque
+│   │   └── reader/              #   leitura vertical (celular e tablet em pé)
 │   └── js/                      # Módulos RP.* (IIFE no namespace window.RP), na ordem de carga
 │       ├── config.js            #   evento, duração do timer, tema, tamanho do palco: o que muda por evento
 │       ├── core/                #   util, deck (estado, fragmentos, navegação), router (#N), layout (escala)
-│       ├── ui/                  #   highlight (puro), codebox, hud, dotgrid, theme
+│       ├── ui/                  #   highlight (puro), codebox, hud, dotgrid, theme, reader (leitura vertical)
 │       ├── features/            #   timer, blackout, panels, notes
 │       ├── input/               #   controls (teclado, passador, clique e toque) · touch (deslize e menu de toque)
 │       └── boot.js              #   confere os módulos, faz as ligações e inicia
@@ -125,7 +129,7 @@ O código-fonte fica em `src/`, um arquivo por responsabilidade. O `presentation
 │   ├── bundle.py                #   → dist/recnplay-2026.html (arquivo único, para backup)
 │   ├── export_pdf.py            #   → dist/recnplay-2026.pdf (1 página por slide)
 │   ├── check_layout.py          #   aponta texto vazando, sobreposto ou fora da forma, e erros de JS
-│   ├── check_responsive.py      #   celular e tablet emulados: palco cabe na tela, toque, deslize e menu
+│   ├── check_responsive.py      #   celular e tablet emulados: deitado (palco, toque, menu) e em pé (leitura vertical)
 │   ├── check_links.py           #   testa os links das referências
 │   ├── make_cue_sheet.py        #   regera docs/CUE-SHEET.md a partir dos slides (tempos, cliques, notas)
 │   └── make_qr.py               #   regera assets/qr.svg para outra URL
@@ -176,7 +180,7 @@ python3 -m playwright install chromium
 python3 tools/bundle.py           # → dist/recnplay-2026.html (arquivo único para pendrive/e-mail)
 python3 tools/export_pdf.py       # → dist/recnplay-2026.pdf
 python3 tools/check_layout.py     # checagem visual automática de todos os slides
-python3 tools/check_responsive.py # celular e tablet emulados: encaixe na tela, toque, deslize e menu
+python3 tools/check_responsive.py # celular e tablet emulados: deitado (palco, toque, menu) e em pé (leitura vertical)
 python3 tools/check_links.py      # testa os links (precisa de internet)
 python3 tools/make_qr.py <url>    # QR para outra URL
 python3 tools/make_cue_sheet.py   # regera docs/CUE-SHEET.md (só biblioteca padrão)

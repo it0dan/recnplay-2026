@@ -5,7 +5,7 @@
   'use strict';
 
   const REQUIRED = ['config', 'util', 'core', 'router', 'layout', 'highlight', 'code', 'hud', 'dotgrid',
-                    'theme', 'timer', 'blackout', 'panels', 'notes', 'input', 'touch'];
+                    'theme', 'timer', 'blackout', 'panels', 'notes', 'input', 'touch', 'reader'];
   const missing = REQUIRED.filter(k => !RP[k]);
   if (missing.length){
     console.error('[RP boot] módulos ausentes:', missing.join(', '), '— deck não inicializado.');
@@ -16,6 +16,7 @@
   RP.core.bind.routerSync = RP.router.sync;
   RP.core.bind.hudSync    = RP.hud.sync;
   RP.core.bind.notesSync  = RP.notes.sync;
+  RP.core.bind.readerSync = RP.reader.sync;
 
   // conteúdo gerado antes do primeiro show
   RP.code.render();
@@ -31,4 +32,5 @@
   RP.timer.render();
   RP.core.slides.forEach(s => s.classList.remove('active'));
   RP.core.show(RP.router.read(), true);
+  RP.reader.bind();                       // depois do primeiro show: em pé, já abre rolando até o slide do #N
 }(window.RP = window.RP || {}));
