@@ -1,0 +1,28 @@
+/* Slide loop: agir → verificar → corrigir, e os três jeitos de falhar.
+   Escopo: #slide-loop (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-loop{
+  & .card .ct{font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
+  & .lp4b{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  & .lp4b .card{display:flex;flex-direction:column;padding:24px 24px 22px}
+  & .lp4b svg{width:96px;height:96px;margin-bottom:12px}
+  & .lp4b .ct{font-size:20px}
+  & .lp4b .kv{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ref);margin-top:14px}
+  & .lp4b .kd{font-size:20px;line-height:1.35;font-weight:600}
+  & .fails2{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+  & .fails2 div{background:var(--surf-2);border-radius:14px;padding:16px 20px;font-size:19px;border-left:4px solid var(--warn)}
+  & .fails2 b{display:block;color:var(--warn);font-family:'Roboto Mono',monospace;font-size:15px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+  & h2{font-size:52px}
+  & .callout{margin-top:16px;font-size:18px}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & h2{font-size:29px}
+  .read & .lp4b{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .read & .lp4b .card{padding:14px 14px 12px}
+  .read & .lp4b svg{width:52px;height:52px;margin-bottom:6px}
+  .read & .lp4b .ct{font-size:14px}
+  .read & .lp4b .kv{font-size:9.5px;margin-top:8px}
+  .read & .lp4b .kd{font-size:14px}
+  .read & .fails2{grid-template-columns:minmax(0,1fr);gap:8px;margin-top:12px}
+  .read & .fails2 div{padding:10px 14px;font-size:14.5px}
+  .read & .fails2 b{font-size:12px;margin-bottom:2px}
+  .read & .callout{margin-top:10px;font-size:14.5px}
+}

@@ -1,0 +1,28 @@
+<section class="slide" id="slide-harness" data-t="3:15">
+  <div class="hud-top"></div>
+  <div class="body">
+    <div class="tag">03 · MULTIAGENTES &nbsp;<span class="dim">// harness</span></div>
+    <h2>Agente = <span class="a">modelo + harness</span></h2>
+    <div class="hn2">
+      <div class="col">
+        <div class="lab">guias · feedforward</div>
+        <div class="hc hp" style="--dl:0s"><b>prompts &amp; specs</b><span>o que o agente sabe antes de agir</span></div>
+        <div class="hc hp" style="--dl:.3s"><b>contratos &amp; schemas</b><span>formato que a saída precisa respeitar</span></div>
+        <div class="hc hp" style="--dl:.6s"><b>AGENTS.md · skills</b><span>convenções e procedimentos</span></div>
+      </div>
+      <div class="arw harw"></div>
+      <div class="model mp"><b>modelo</b><span>inferência · decisão</span></div>
+      <div class="arw harw"></div>
+      <div class="col">
+        <div class="lab s">sensores · feedback</div>
+        <div class="hc s hp" style="--dl:2.4s"><b>traces</b><span>o que de fato aconteceu</span></div>
+        <div class="hc s hp" style="--dl:2.7s"><b>guardrails &amp; testes</b><span>verificação determinística</span></div>
+        <div class="hc s hp" style="--dl:3.0s"><b>LLM-as-judge · HITL</b><span>o que é subjetivo ou crítico</span></div>
+      </div>
+    </div>
+    <div class="evbar evp"><b>evals</b><span>trajetória · resultado · custo por tarefa</span><span class="warn mono"><i class="spinr">↺</i> falha detectada vira guia novo</span></div>
+    <div class="src">Birgitta Böckeler, "Harness Engineering" (Thoughtworks / martinfowler.com) · Anthropic, "Demystifying evals for AI agents" (jan/2026)</div>
+  </div>
+  <div class="hud-bottom"><span class="sec">// HARNESS</span><span class="hb-idx"></span></div>
+  <aside class="notes">Harness é tudo que envolve o modelo para transformar previsão de texto em comportamento confiável. A animação segue o ciclo: guias acendem antes da ação (feedforward: prompts, specs, contratos, AGENTS.md, skills); o modelo decide; sensores acendem depois (feedback: traces, guardrails e testes determinísticos, LLM-as-judge para o subjetivo e humano para o crítico); e os evals fecham o ciclo, medindo trajetória, resultado e custo por tarefa. Toda falha detectada vira um guia novo. É aqui que se resolve o que as regras determinísticas não resolvem: elas garantem consistência; o harness persegue correção. Em um sistema multiagêntico, cada agente tem o seu harness.</aside>
+</section>

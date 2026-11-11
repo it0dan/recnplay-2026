@@ -3,8 +3,14 @@
 #slide-monolito-modular{
   & .mm2-x{animation:mm2x 7s infinite}
   & h2{margin-bottom:10px}
-  & .split{grid-template-columns:minmax(0,1fr);justify-items:center}
-  & .split>.dgm>svg{width:790px;height:auto}
+  & .mono-lay{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:26px;align-items:center}
+  & .split{grid-template-columns:minmax(0,1fr)}
+  & .split>.dgm>svg{width:100%;height:auto;max-height:640px}
+  /* cases empilhados na coluna da direita */
+  & .cases{grid-template-columns:minmax(0,1fr);gap:14px;margin-top:0}
+  & .cases .cl{padding:4px 0 4px 14px}
+  & .case{padding:16px 20px}
   /* leitura vertical (celular/tablet em pé) */
+  .read & .mono-lay{grid-template-columns:minmax(0,1fr);gap:14px}
 }
 @keyframes mm2x{0%,40%{opacity:0}44%,80%{opacity:1}84%,100%{opacity:0}}
