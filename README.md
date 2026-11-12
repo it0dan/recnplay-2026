@@ -40,7 +40,7 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 | **03 · Multiagentes** | 07 – 10 | Padrões arquiteturais (transição) · contexto por agente · harness · Loop Engineering |
 | **04 · A tese** | 11 – 12 | Clean Architecture para LLM: o modelo é um detalhe (desenho + código, bloco a bloco) · então → agora (os padrões mudam de lugar) |
 | **05 · NFRs e AI Gateway** | 13 | AI Gateway: gestão, governança e NFR (sem × com AI Gateway) |
-| **Encerramento** | 14 – 15 | O desafio não é o modelo, é a arquitetura em volta dele (arquitetura é sobre tradeoffs) · obrigado + QR code |
+| **Encerramento** | 14 – 15 | O desafio não é o modelo, é a arquitetura (arquitetura é sobre tradeoffs) · obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).

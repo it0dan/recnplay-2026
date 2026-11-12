@@ -10,7 +10,7 @@ Mapa de palco: ordem dos slides, tempo-alvo de cada um, tempo acumulado e quanto
 | --: | :-- | :-- | --: | --: | :--: |
 | 00 | CAPA | `#0` | 0:30 | 00:30 | — |
 | 01 | LINHA DO TEMPO | `#1` | 2:45 | 03:15 | 6 |
-| 02 | O MOMENTO | `#2` | 2:00 | 05:15 | 4 |
+| 02 | O MOMENTO | `#2` | 2:00 | 05:15 | — |
 | 03 | MICROSSERVIÇOS · EDA | `#3` | 2:45 | 08:00 | — |
 | 04 | MONOLITO MODULAR | `#4` | 2:45 | 10:45 | — |
 | 05 | 30.11.2022 | `#5` | 0:30 | 11:15 | — |
@@ -66,9 +66,9 @@ Slide interativo: cada → acende uma era (6 cliques antes de avançar). Para ca
 
 ### 02 · O MOMENTO
 
-`slide-mercado-2026` · alvo 2:00 · 4 clique(s) internos antes de avançar
+`slide-mercado-2026` · alvo 2:00 · sem cliques internos
 
-Antes de entrar nos padrões, o momento, com dados deste semestre. Quatro cliques. Primeiro: segundo o Gartner, 71% das organizações esperam implantar IA agêntica nos próximos 12 meses, mas só 21% têm hoje capacidade de governança para agentes; a pesquisa é com mais de dois mil CIOs, divulgada no Symposium de outubro. Segundo: a McKinsey, no State of AI de agosto, mostra que entre as empresas acima de um bilhão de dólares de receita, 40% já escalam agentes; um ano antes eram 27%. Ou seja, está saindo do piloto. Terceiro, o contraponto: só 13% dos CIOs dizem ter obtido valor significativo ou transformacional com IA, também Gartner, outubro, 2.002 CIOs; o próprio Gartner resumiu como "o risco de IA cresce mais rápido que o valor". Quarto: até 2028, um quarto das violações de segurança corporativa vai ter origem em abuso de agentes de IA. Embaixo, o mesmo recado de outros lados: a Forrester batizou as previsões de 2027 de "a busca e o perigo do controle"; o AI100 de Stanford, publicado esta semana, destaca agentes agindo sem supervisão humana; e no top 10 de tendências 2027 do Gartner aparecem, com esse nome, harness de agentes de código e identidade de agentes. Todo mundo quer agentes; o que separa valor de risco não é o modelo, é arquitetura e governança. É disso que a palestra trata.
+Antes de entrar nos padrões, o momento, com dados deste semestre. Primeiro: segundo o Gartner, 71% das organizações esperam implantar IA agêntica nos próximos 12 meses, mas só 21% têm hoje capacidade de governança para agentes; a pesquisa é com mais de dois mil CIOs, divulgada no Symposium de outubro. Segundo: a McKinsey, no State of AI de agosto, mostra que entre as empresas acima de um bilhão de dólares de receita, 40% já escalam agentes; um ano antes eram 27%. Ou seja, está saindo do piloto. Terceiro, o contraponto: só 13% dos CIOs dizem ter obtido valor significativo ou transformacional com IA, também Gartner, outubro, 2.002 CIOs; o próprio Gartner resumiu como "o risco de IA cresce mais rápido que o valor". Quarto: até 2028, um quarto das violações de segurança corporativa vai ter origem em abuso de agentes de IA. Embaixo, o mesmo recado de outros lados: a Forrester batizou as previsões de 2027 de "a busca e o perigo do controle"; o AI100 de Stanford, publicado esta semana, destaca agentes agindo sem supervisão humana; e no top 10 de tendências 2027 do Gartner aparecem, com esse nome, harness de agentes de código e identidade de agentes. Todo mundo quer agentes; o que separa valor de risco não é o modelo, é arquitetura e governança. É disso que a palestra trata.
 
 ### 03 · MICROSSERVIÇOS · EDA
 
@@ -140,7 +140,7 @@ Até aqui a gente resolveu o que é de cada aplicação: porta e adapter, contex
 
 `slide-fechamento` · alvo 2:45 · sem cliques internos
 
-Para fechar, a imagem que resume a palestra. No centro, o modelo: probabilístico, imprevisível, e é assim que ele deve ser; os pontinhos não param quietos. Em volta, camada por camada, o que a gente desenhou para acomodar esse núcleo num sistema que exige governança e disponibilidade. Primeiro, porta e adapter: Clean Architecture, para o provedor de LLM ser um detalhe trocável, e é assim que se mitiga o acoplamento tecnológico. Depois, contexto isolado por agente: cada um com a sua janela. Depois, harness e loop: guias, sensores e uma regra explícita de quando parar, que é o que torna a orquestração de vários agentes gerenciável. E por fora, a borda: o AI Gateway, com identidade, política, fallback e custo, que é de onde vem a resiliência sistêmica. Do monolítico ao agente autônomo, os padrões não mudaram, mudaram de lugar. O desafio não é o modelo; é a arquitetura em volta dele. E cada anel desses tem um custo: mais latência, mais componentes, mais coisa para operar. Por isso a primeira lei da arquitetura de software, de Mark Richards e Neal Ford: arquitetura é sobre tradeoffs. Não existe o desenho certo; existe o tradeoff consciente para o seu contexto.
+Para fechar, a imagem que resume a palestra. No centro, o modelo: probabilístico, imprevisível, e é assim que ele deve ser; os pontinhos não param quietos. Em volta, camada por camada, o que a gente desenhou para acomodar esse núcleo num sistema que exige governança e disponibilidade. Primeiro, porta e adapter: Clean Architecture, para o provedor de LLM ser um detalhe trocável, e é assim que se mitiga o acoplamento tecnológico. Depois, contexto isolado por agente: cada um com a sua janela. Depois, harness e loop: guias, sensores e uma regra explícita de quando parar, que é o que torna a orquestração de vários agentes gerenciável. E por fora, a borda: o AI Gateway, com identidade, política, fallback e custo, que é de onde vem a resiliência sistêmica. Do monolítico ao agente autônomo, os padrões não mudaram, mudaram de lugar. O desafio não é o modelo; é a arquitetura. E cada anel desses tem um custo: mais latência, mais componentes, mais coisa para operar. Por isso a primeira lei da arquitetura de software, de Mark Richards e Neal Ford: arquitetura é sobre tradeoffs. Não existe o desenho certo; existe o tradeoff consciente para o seu contexto.
 
 ### 15 · OBRIGADO
 
