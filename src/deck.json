@@ -3,9 +3,9 @@
   "minutes": 40,
   "sections": [
     { "title": "ABERTURA",                                 "slides": ["capa"] },
-    { "title": "01 · FORMAS MODERNAS",                     "slides": ["linha-do-tempo", "microsservicos-eda", "monolito-modular", "30-11-2022"] },
+    { "title": "01 · FORMAS MODERNAS",                     "slides": ["linha-do-tempo", "mercado-2026", "microsservicos-eda", "monolito-modular", "30-11-2022"] },
     { "title": "02 · DESENVOLVENDO COM GENAI",             "slides": ["linha-do-tempo-agentica"] },
-    { "title": "03 · MULTIAGENTES",                        "slides": ["contexto-por-agente", "harness", "loop"] },
+    { "title": "03 · MULTIAGENTES",                        "slides": ["padroes-arquiteturais", "contexto-por-agente", "harness", "loop"] },
     { "title": "04 · A TESE: CLEAN ARCHITECTURE PARA LLM", "slides": ["hexagonal-para-llm", "entao-agora"] },
     { "title": "05 · NFRs E AI GATEWAY",                   "slides": ["ai-gateway"] },
     { "title": "ENCERRAMENTO",                             "slides": ["fechamento", "obrigado"] }

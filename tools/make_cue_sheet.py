@@ -10,7 +10,7 @@ import html, re
 from _deck import ROOT, SRC, manifest
 
 OUT = ROOT / 'docs/CUE-SHEET.md'
-EVENT = "**TDC Stage · REC'n'Play 2026** · 12/11/2026 · 11:05 · CESAR Moinho, Sala Rizoflora · Recife"
+EVENT = "**TDC Stage · REC'n'Play 2026** · 12/11/2026 · 11:05 · CESAR Moinho, Sala Risoflora · Recife"
 RESCUES = """## Resgates
 
 - **Passador parou de responder**: use as setas ou `PageDown`/`PageUp` do notebook; o clique do mouse também avança.

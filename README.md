@@ -2,7 +2,7 @@
 
 > **Padrões arquiteturais para aplicações agênticas: o que muda, o que permanece e onde a borda governa.**
 
-Repositório de apoio da palestra no **TDC Stage do REC'n'Play 2026** (12/11/2026 · 11:05 · CESAR Moinho, Sala Rizoflora · Recife). Aqui estão o deck completo, o roteiro de palco e a bibliografia verificada. Para apresentar basta um navegador: o `presentation.html` já vem montado, com fontes e imagens locais.
+Repositório de apoio da palestra no **TDC Stage do REC'n'Play 2026** (12/11/2026 · 11:05 · CESAR Moinho, Sala Risoflora · Recife). Aqui estão o deck completo, o roteiro de palco e a bibliografia verificada. Para apresentar basta um navegador: o `presentation.html` já vem montado, com fontes e imagens locais.
 
 ## O que você encontra aqui
 
@@ -34,13 +34,13 @@ Todos os exemplos usam um único domínio, do primeiro ao último slide: **anál
 
 | Bloco | Slides | Conteúdo |
 | :-- | :-- | :-- |
-| **Abertura** | 00 – 01 | Capa e linha do tempo: dos sistemas monolíticos aos sistemas agênticos |
-| **01 · Formas modernas** | 02 – 04 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
-| **02 · Desenvolvendo com GenAI** | 05 | Do assistente à esteira agêntica (spec, gates humanos, evals, contexto versionado) |
-| **03 · Multiagentes** | 06 – 08 | Contexto por agente · harness · loop |
-| **04 · A tese** | 09 – 10 | Clean Architecture para LLM: o modelo é um detalhe (desenho + código) · então → agora (os padrões mudam de lugar) |
-| **05 · NFRs e AI Gateway** | 11 | AI Gateway: gestão, governança e NFR (sem × com AI Gateway) |
-| **Encerramento** | 12 – 13 | O desafio não é o modelo, é a arquitetura em volta dele · obrigado + QR code |
+| **Abertura** | 00 – 02 | Capa · linha do tempo (dos sistemas monolíticos aos sistemas agênticos) · o momento: panorama de mercado do 2º semestre de 2026 (Gartner, McKinsey, Forrester, Stanford) |
+| **01 · Formas modernas** | 03 – 05 | Microsserviços e EDA · monolito modular (com cases da indústria) · 30.11.2022 |
+| **02 · Desenvolvendo com GenAI** | 06 | Do assistente à esteira agêntica e ao desenvolvimento orientado a especificação (SDD) |
+| **03 · Multiagentes** | 07 – 10 | Padrões arquiteturais (transição) · contexto por agente · harness · Loop Engineering |
+| **04 · A tese** | 11 – 12 | Clean Architecture para LLM: o modelo é um detalhe (desenho + código, bloco a bloco) · então → agora (os padrões mudam de lugar) |
+| **05 · NFRs e AI Gateway** | 13 | AI Gateway: gestão, governança e NFR (sem × com AI Gateway) |
+| **Encerramento** | 14 – 15 | O desafio não é o modelo, é a arquitetura em volta dele (arquitetura é sobre tradeoffs) · obrigado + QR code |
 
 
 Os tempos-alvo, os cliques de cada slide e as falas completas estão no [cue sheet](./docs/CUE-SHEET.md).

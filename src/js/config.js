@@ -8,7 +8,7 @@
 
   RP.config = Object.freeze({
     // cabeçalho de todos os slides (js/ui/hud.js)
-    event: ['RECNPLAY://LIVE', '12/11/2026 · 11:05', 'TDC STAGE · CESAR Moinho · Sala Rizoflora · Recife'],
+    event: ['RECNPLAY://LIVE', '12/11/2026 · 11:05', 'TDC STAGE · CESAR Moinho · Sala Risoflora · Recife'],
     // palco: o mesmo tamanho de .stage em src/css/foundation/stage.css
     stage: Object.freeze({ width: 1600, height: 900 }),
     // timer regressivo da HUD (T inicia/pausa · R zera); fica laranja nos últimos minutos

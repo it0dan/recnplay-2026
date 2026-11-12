@@ -2,6 +2,16 @@
 
 Tudo que é citado no palco ou nas notas do apresentador. É o mesmo conteúdo do painel de fontes do deck (tecla `S`). Links verificados em novembro de 2026.
 
+## Panorama de mercado · 2º semestre de 2026 (slide 02)
+
+- [Gartner Says AI Risk is Rising Faster Than AI Value](https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-it-symposium-xpo-keynote-release-2026) — Gartner · 19/out/2026 (71% esperam implantar IA agêntica em 12 meses; 21% têm governança de IA agêntica)
+- [Only 13% of CIOs Say Their Enterprise Has Realized Significant or Transformational Value from AI](https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai) — Gartner · CIO Agenda 2027 · 19/out/2026 · n = 2.002
+- [Top Strategic Technology Trends for 2027](https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027) — Gartner · 20/out/2026 (até 2028, 25% das violações ligadas a abuso de agentes de IA)
+- [The State of AI: Global Survey 2026](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai) — McKinsey · 25/ago/2026 · n = 1.719 (40% das empresas acima de US$ 1 bi escalam agentes; eram 27%)
+- [Predictions 2027: The Pursuit And Peril Of Control](https://www.forrester.com/blogs/predictions-2027-the-pursuit-and-peril-of-control/) — Forrester · 21/out/2026
+- [Stanford's century-long AI study (AI100 2026)](https://www.theregister.com/ai-and-ml/2026/11/10/stanfords-century-long-ai-study-admits-its-already-out-of-date/5308574) — The Register sobre o relatório AI100 de Stanford · 10/nov/2026
+- [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/) — Mark Richards & Neal Ford · O’Reilly · 2020 (primeira lei: tudo em arquitetura de software é um tradeoff)
+
 ## Arquitetura · fundamentos
 
 - [Hexagonal Architecture (Ports & Adapters)](https://alistair.cockburn.us/hexagonal-architecture) — Alistair Cockburn · 2005
@@ -18,7 +28,7 @@ Tudo que é citado no palco ou nas notas do apresentador. É o mesmo conteúdo d
 - [Microservices](https://martinfowler.com/articles/microservices.html) — James Lewis & Martin Fowler · 2014
 - [Sagas](https://doi.org/10.1145/38713.38742) — Garcia-Molina & Salem · SIGMOD 1987
 
-## Cases da indústria (slides 02–03)
+## Cases da indústria (slides 03–04)
 
 - [Prime Video: de serverless distribuído a um processo, −90% de custo](https://www.infoq.com/news/2023/05/prime-ec2-ecs-saves-costs/) — InfoQ · mai/2023
 - [Goodbye Microservices: From 100s of problem children to 1 superstar](https://twilio.com/en-us/blog/developers/best-practices/goodbye-microservices) — Alexandra Noonan · Segment · jul/2018

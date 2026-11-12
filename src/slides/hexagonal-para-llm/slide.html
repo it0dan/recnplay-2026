@@ -4,30 +4,49 @@
     <div class="tag">04 · A TESE &nbsp;<span class="dim">// clean architecture para llm</span></div>
     <h2>Clean Architecture para LLM: <span class="a">o modelo é um detalhe</span></h2>
     <div class="split">
-      <div class="dgm no-read"><svg viewBox="0 0 800 500" width="820" height="512" aria-label="Arquitetura hexagonal com porta de raciocínio e adaptadores por provedor">
+      <div class="lft no-read"><div class="dgm"><svg viewBox="0 0 800 500" width="760" height="475" aria-label="Arquitetura hexagonal com porta de raciocínio e adaptadores por provedor">
+        <g class="hx k2">
         <text x="60" y="134" text-anchor="middle" font-size="12" class="m t-ref" letter-spacing="1.5">ADAPTERS IN</text>
         <rect x="0" y="150" width="120" height="46" rx="9" class="d-box"/><text x="60" y="178" text-anchor="middle" font-size="14" class="m">REST</text>
         <rect x="0" y="216" width="120" height="46" rx="9" class="d-box"/><text x="60" y="244" text-anchor="middle" font-size="14" class="m">evento / fila</text>
         <rect x="0" y="282" width="120" height="46" rx="9" class="d-box"/><text x="60" y="310" text-anchor="middle" font-size="14" class="m">chat</text>
         <path d="M120 173 L160 239 M120 239 L160 239 M120 305 L160 239" class="d-ln"/>
+        </g>
+        <g class="hx k2 k4">
         <polygon points="460,239 385,369 235,369 160,239 235,109 385,109" fill="var(--surf)" stroke="var(--acc-strong)" stroke-width="3"/>
         <text x="310" y="200" text-anchor="middle" font-size="13" class="m t-acc" letter-spacing="2">NÚCLEO</text>
         <text x="310" y="234" text-anchor="middle" font-size="22" font-weight="800">EvaluateProposal</text>
         <text x="310" y="262" text-anchor="middle" font-size="13" class="m t-mut">CreditPolicy · Assessment</text>
         <text x="310" y="296" text-anchor="middle" font-size="12" class="m t-ref">sem "messages",</text>
         <text x="310" y="314" text-anchor="middle" font-size="12" class="m t-ref">sem "choices"</text>
+        </g>
+        <g class="hx k1 k2 k3 k4">
         <rect x="428" y="216" width="150" height="46" rx="8" fill="var(--acc-strong)"/>
         <text x="503" y="244" text-anchor="middle" font-size="12" font-weight="700" class="m" style="fill:#fff">CreditEvaluator</text>
+        </g>
+        <g class="hx k3">
         <rect x="610" y="42" width="188" height="400" rx="14" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="7 6"/>
         <text x="704" y="30" text-anchor="middle" font-size="12" class="m t-warn" letter-spacing="1.5">ADAPTERS OUT · ACL</text>
         <rect x="628" y="66"  width="152" height="50" rx="9" class="d-box"/><text x="704" y="96"  text-anchor="middle" font-size="13.5" class="m">Anthropic</text>
         <rect x="628" y="146" width="152" height="50" rx="9" class="d-box"/><text x="704" y="176" text-anchor="middle" font-size="13.5" class="m">OpenAI</text>
         <rect x="628" y="226" width="152" height="50" rx="9" class="d-box"/><text x="704" y="256" text-anchor="middle" font-size="13.5" class="m">Gemini</text>
         <rect x="628" y="306" width="152" height="50" rx="9" class="d-box"/><text x="704" y="336" text-anchor="middle" font-size="13.5" class="m">Self-hosted</text>
+        </g>
+        <g class="hx k3 k4">
         <rect x="628" y="378" width="152" height="46" rx="9" class="d-box" stroke-dasharray="5 4"/><text x="704" y="406" text-anchor="middle" font-size="13" class="m t-ok" style="fill:var(--ok)">Fake · tests</text>
+        </g>
+        <g class="hx k3 k4">
         <path d="M578 239 C604 239 604 91 628 91 M578 239 C604 239 604 171 628 171 M578 239 L628 251 M578 239 C604 239 604 331 628 331 M578 239 C604 239 604 401 628 401" class="d-arr"/>
+        </g>
         <text x="310" y="420" text-anchor="middle" font-size="13" class="m t-ref">dependências apontam para dentro · o núcleo decide</text>
       </svg></div>
+        <ol class="steps">
+          <li class="st s1 frag frag-hide" data-f="1"><i>1</i><b>porta</b><span>o núcleo define o contrato na língua do negócio</span></li>
+          <li class="st s2 frag frag-hide" data-f="2"><i>2</i><b>caso de uso</b><span>o modelo sugere o Assessment; a CreditPolicy decide</span></li>
+          <li class="st s3 frag frag-hide" data-f="3"><i>3</i><b>adapter · ACL</b><span>um por provedor: traduz e valida, messages não passam da porta</span></li>
+          <li class="st s4 frag frag-hide" data-f="4"><i>4</i><b>composição</b><span>troca o provedor ou injeta o Fake, sem tocar o núcleo</span></li>
+        </ol>
+      </div>
       <div class="only-read pvw"><svg class="pv" viewBox="0 0 492 600" width="100%" aria-label="Hexagonal em pé: adapters de entrada em cima, núcleo no meio, porta CreditEvaluator e adapters de saída embaixo"><text x="246" y="13" text-anchor="middle" font-size="11.5" class="m t-ref" letter-spacing="1.5">ADAPTERS IN</text><rect x="6" y="24" width="152" height="42" rx="9" class="d-box"/><text x="82" y="50" text-anchor="middle" font-size="13.5" class="m">REST</text><rect x="170" y="24" width="152" height="42" rx="9" class="d-box"/><text x="246" y="50" text-anchor="middle" font-size="13.5" class="m">evento / fila</text><rect x="334" y="24" width="152" height="42" rx="9" class="d-box"/><text x="410" y="50" text-anchor="middle" font-size="13.5" class="m">chat</text><path d="M82 66 L246 100 M246 66 L246 100 M410 66 L246 100" class="d-ln"/><polygon points="246,100 356,162 356,282 246,344 136,282 136,162" fill="var(--surf)" stroke="var(--acc-strong)" stroke-width="3"/><text x="246" y="178" text-anchor="middle" font-size="12.5" class="m t-acc" letter-spacing="2">NÚCLEO</text><text x="246" y="212" text-anchor="middle" font-size="22" class="" font-weight="800">EvaluateProposal</text><text x="246" y="236" text-anchor="middle" font-size="12.5" class="m t-mut">CreditPolicy · Assessment</text><text x="246" y="264" text-anchor="middle" font-size="11.5" class="m t-ref">sem "messages",</text><text x="246" y="281" text-anchor="middle" font-size="11.5" class="m t-ref">sem "choices"</text><rect x="166" y="326" width="160" height="38" rx="8" fill="var(--acc-strong)"/><text x="246" y="350" text-anchor="middle" font-size="13" class="m" font-weight="700" style="fill:#fff">CreditEvaluator</text><path d="M246 364 V398" class="d-arr"/><path d="M240 390 L246 398 L252 390" fill="none" stroke="var(--acc)" stroke-width="2"/><text x="352" y="384" text-anchor="middle" font-size="11.5" class="m t-warn" letter-spacing="1.5">ADAPTERS OUT · ACL</text><rect x="2" y="404" width="488" height="160" rx="14" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="7 6"/><rect x="16" y="420" width="140" height="56" rx="9" class="d-box"/><text x="86" y="453" text-anchor="middle" font-size="13.5" class="m">Anthropic</text><rect x="176" y="420" width="140" height="56" rx="9" class="d-box"/><text x="246" y="453" text-anchor="middle" font-size="13.5" class="m">OpenAI</text><rect x="336" y="420" width="140" height="56" rx="9" class="d-box"/><text x="406" y="453" text-anchor="middle" font-size="13.5" class="m">Gemini</text><rect x="96" y="490" width="140" height="56" rx="9" class="d-box"/><text x="166" y="523" text-anchor="middle" font-size="13.5" class="m">Self-hosted</text><rect x="256" y="490" width="140" height="56" rx="9" class="d-box" stroke-dasharray="5 4"/><text x="326" y="523" text-anchor="middle" font-size="13.5" class="m" style="fill:var(--ok)">Fake · tests</text><text x="246" y="590" text-anchor="middle" font-size="12.5" class="m t-ref">dependências apontam para dentro</text></svg></div>
       <div class="stk">
       <div class="whw frag frag-out" data-f="1">
@@ -36,7 +55,7 @@
         <div class="wc"><div class="wk">o que se ganha</div><div class="wt">Trocar de provedor <b>sem tocar a regra</b>, testar o núcleo com um Fake e dar resiliência na borda. Contexto, harness e loop moram na casca; a decisão, no núcleo.</div></div>
       </div>
         <div class="cbx frag frag-hide" data-f="1">
-<script type="text/plain" class="code" data-lang="ts" data-file="o desenho, em código">
+<script type="text/plain" class="code" data-lang="ts" data-file="o desenho, em código" data-hlg="1:1-4;2:6-15;3:17-24;4:26-27">
 // domain/ports — the core speaks business, not LLM
 export interface CreditEvaluator {
   evaluate(proposal: Proposal): Promise<Assessment>;
@@ -53,12 +72,12 @@ export class EvaluateProposal {
   }
 }
 
-// adapters/out — one adapter per provider (ACL)
+// adapters/out — one per provider (ACL): no "messages" past the port
 export class AnthropicCreditEvaluator implements CreditEvaluator {
   async evaluate(proposal: Proposal): Promise<Assessment> {
     const res = await anthropic.messages.create({
       model: MODEL, messages: render(proposal) });
-    return AssessmentSchema.parse(toJson(res)); // no "messages" past the port
+    return AssessmentSchema.parse(toJson(res));
   }
 }
 
@@ -70,5 +89,5 @@ const evaluate = new EvaluateProposal(new FakeCreditEvaluator(), policy);
     </div>
   </div>
   <div class="hud-bottom"><span class="sec">// HEXAGONAL PARA LLM</span><span class="hb-idx"></span></div>
-  <aside class="notes">Depois de contexto, harness e loop, a tese que amarra tudo, e que é a promessa desta palestra: desacoplar o provedor de LLM com Clean Architecture. O desafio: integrar IA não é adicionar um componente de modelo. É acomodar uma peça probabilística e imprevisível dentro de sistemas determinísticos, que exigem governança e disponibilidade. A resposta já existe: Hexagonal, de Cockburn, Onion, de Palermo, e Clean, de Uncle Bob, dizem a mesma coisa. O núcleo, domínio e casos de uso, decide; a infraestrutura fica na borda; as dependências apontam para dentro. No crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal, que fala só com a porta CreditEvaluator. Cada provedor de LLM é um adapter, inclusive um Fake para testes. Messages e choices nunca cruzam a porta; o que entra no núcleo é um Assessment validado, e quem decide é a CreditPolicy, não o modelo. O que se ganha: trocar de provedor sem tocar a regra, que é mitigar acoplamento tecnológico; testar o núcleo sem rede; e resiliência na borda. E tudo que vimos até aqui tem endereço: contexto, harness e loop moram na casca, em volta do núcleo. É esse adapter que, daqui a pouco, a gente coloca atrás do AI Gateway, sem mudar uma linha do núcleo. Clique: o mesmo desenho, em código. A porta CreditEvaluator no domínio, falando a língua do negócio. O caso de uso EvaluateProposal recebe a porta e a política: o modelo sugere, a CreditPolicy decide. Um adapter por provedor, que traduz a resposta do modelo e valida o Assessment na fronteira: messages nunca passam da porta. E na composição se troca o provedor, ou se injeta um Fake para testar, sem mudar uma linha do núcleo.</aside>
+  <aside class="notes">Depois de contexto, harness e loop, a tese que amarra tudo, e que é a promessa desta palestra: desacoplar o provedor de LLM com Clean Architecture. O desafio: integrar IA não é adicionar um componente de modelo. É acomodar uma peça probabilística e imprevisível dentro de sistemas determinísticos, que exigem governança e disponibilidade. A resposta já existe: Hexagonal, de Cockburn, Onion, de Palermo, e Clean, de Uncle Bob, dizem a mesma coisa. O núcleo, domínio e casos de uso, decide; a infraestrutura fica na borda; as dependências apontam para dentro. No crédito: entradas por REST, fila ou chat chamam o mesmo caso de uso, EvaluateProposal, que fala só com a porta CreditEvaluator. Cada provedor de LLM é um adapter, inclusive um Fake para testes. Messages e choices nunca cruzam a porta; o que entra no núcleo é um Assessment validado, e quem decide é a CreditPolicy, não o modelo. O que se ganha: trocar de provedor sem tocar a regra, que é mitigar acoplamento tecnológico; testar o núcleo sem rede; e resiliência na borda. E tudo que vimos até aqui tem endereço: contexto, harness e loop moram na casca, em volta do núcleo. É esse adapter que, daqui a pouco, a gente coloca atrás do AI Gateway, sem mudar uma linha do núcleo. Agora o mesmo desenho, em código, em quatro cliques; a legenda embaixo do desenho acompanha cada bloco. Clique um, a porta: CreditEvaluator mora no domínio e fala a língua do negócio, Proposal entra, Assessment sai, nada de LLM. Clique dois, o caso de uso: EvaluateProposal recebe a porta e a política; o modelo sugere o Assessment, a CreditPolicy decide. Clique três, o adapter: um por provedor, é a ACL; traduz para o SDK e valida o retorno na fronteira, messages nunca passam da porta. Clique quatro, a composição: é aqui, e só aqui, que se escolhe o provedor, ou se injeta um Fake para testar, sem mudar uma linha do núcleo.</aside>
 </section>

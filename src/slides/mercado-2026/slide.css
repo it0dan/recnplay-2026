@@ -1,0 +1,30 @@
+/* Slide o momento: panorama de mercado do 2º semestre de 2026 (Gartner, McKinsey, Forrester, Stanford).
+   Escopo: #slide-mercado-2026 (as regras aninhadas só valem dentro deste slide; & = o próprio <section>). */
+#slide-mercado-2026{
+  & h2{margin-bottom:34px}
+  & .mk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+  & .st{border:1px solid var(--line2);border-top:4px solid var(--acc);border-radius:14px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;background:var(--surf)}
+  & .st:nth-child(3){border-top-color:var(--warn)}
+  & .st:nth-child(4){border-top-color:var(--warn)}
+  & .n{font-family:'Montserrat',sans-serif;font-weight:800;font-size:76px;line-height:1;letter-spacing:-.02em;color:var(--acc)}
+  & .st:nth-child(n+3) .n{color:var(--warn)}
+  & .n small{font-size:.5em;margin-left:2px}
+  & .d{font-size:18.5px;line-height:1.4;color:var(--muted);flex:1}
+  & .d b{color:var(--text);font-weight:700}
+  & .d b.w{color:var(--warn)}
+  & .s{font-family:'Roboto Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--ref, var(--muted));border-top:1px dashed var(--line2);padding-top:10px}
+  & .qs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:24px}
+  & .qq{display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--line2);padding:4px 0 4px 16px}
+  & .qq b{font-family:'Roboto Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+  & .qq span{font-size:16px;line-height:1.4;color:var(--muted)}
+  & .qq i{color:var(--text);font-style:normal;font-weight:600}
+  /* leitura vertical (celular/tablet em pé) */
+  .read & h2{margin-bottom:18px}
+  .read & .mk{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .read & .st{padding:14px 14px 12px;gap:8px}
+  .read & .n{font-size:44px}
+  .read & .d{font-size:14px}
+  .read & .s{font-size:10.5px}
+  .read & .qs{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:16px}
+  .read & .qq span{font-size:14px}
+}
